@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 r9760"
+   width="477.94223"
+   height="318.92657"
+   sodipodi:docname="UploadExample.svg">
+  <metadata
+     id="metadata8">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs6" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1360"
+     inkscape:window-height="710"
+     id="namedview4"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="672.25148"
+     inkscape:cy="77.19963"
+     inkscape:window-x="-3"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <image
+     width="480"
+     height="319"
+     xlink:href="file:///media/VERDE/sbes2012/figuras/sources/UploadExample/fundo.png"
+     id="image10"
+     x="-0.023342513"
+     y="-0.0086730793" />
+  <text
+     xml:space="preserve"
+     style="font-size:10.7532177px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="24.923742"
+     y="15.675521"
+     id="text3840"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3842"
+       x="24.923742"
+       y="15.675521">Add Crosscutting Framework Families</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:10.7532177px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="14.725722"
+     y="43.837479"
+     id="text3840-3"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3842-3"
+       x="14.725722"
+       y="43.837479">Path of the model.xml file</tspan><tspan
+       sodipodi:role="line"
+       x="14.725722"
+       y="56.848873"
+       id="tspan3017">(from FeatureIDE)</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:10.7532177px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="14.594457"
+     y="88.935768"
+     id="text3840-3-8"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       x="14.594457"
+       y="88.935768"
+       id="tspan3017-5">Framework's Name:</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:10.7532177px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="14.594457"
+     y="136.8598"
+     id="text3840-3-8-5"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       x="14.594457"
+       y="136.8598"
+       id="tspan3017-5-2">Framework's Author(s)</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:10.7532177px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="14.594457"
+     y="198.90068"
+     id="text3840-3-8-5-6"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       x="14.594457"
+       y="198.90068"
+       id="tspan3017-5-2-7">Framework's Description:</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="165.5705"
+     y="44.208405"
+     id="text3087"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3089"
+       x="165.5705"
+       y="44.208405">/Users/rafaeldurelli/Documents/r</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="163.56999"
+     y="66.188019"
+     id="text3087-2"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3089-9"
+       x="163.56999"
+       y="66.188019">/Users/.../ProjectName</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="164.43629"
+     y="89.134804"
+     id="text3087-2-3"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3089-9-7"
+       x="164.43629"
+       y="89.134804">Persistence</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="161.92281"
+     y="110.86707"
+     id="text3087-2-3-1"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3089-9-7-3"
+       x="161.92281"
+       y="110.86707">Crosscutting Framework of &quot;Concern&quot;</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="163.96439"
+     y="137.35574"
+     id="text3087-2-3-1-1"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3089-9-7-3-6"
+       x="163.96439"
+       y="137.35574">Valter</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="162.09282"
+     y="161.20761"
+     id="text3087-2-3-1-1-5"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3089-9-7-3-6-4"
+       x="162.09282"
+       y="161.20761">Name1, Name2 ...</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:11px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="167.51143"
+     y="182.93352"
+     id="text3087-2-3-1-1-2"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       x="167.51143"
+       y="182.93352"
+       id="tspan3213">This CFF provides a full set of features </tspan><tspan
+       sodipodi:role="line"
+       x="167.51143"
+       y="196.24352"
+       id="tspan6941">related to persistence.</tspan><tspan
+       sodipodi:role="line"
+       x="167.51143"
+       y="209.55351"
+       id="tspan6939">It currently supports ﬁve diﬀerent Database </tspan><tspan
+       sodipodi:role="line"
+       x="167.51143"
+       y="222.86353"
+       id="tspan6943">Management System Connection Protocols.</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:10.69948006px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="378.68661"
+     y="42.155712"
+     id="text3844"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3846"
+       x="378.68661"
+       y="42.155712">browser</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:10.69948006px;font-style:normal;font-weight:normal;line-height:121.00000381%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     x="381.7406"
+     y="283.11798"
+     id="text3844-9"
+     sodipodi:linespacing="121%"><tspan
+       sodipodi:role="line"
+       id="tspan3846-0"
+       x="381.7406"
+       y="283.11798">Upload</tspan></text>
+</svg>

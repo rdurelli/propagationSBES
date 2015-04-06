@@ -1,0 +1,19 @@
+%!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
+\section{Proof-of-Concept Implementation}
+
+We devised a Eclipse plug-in named Modernization-Integrated Environment (MIE) which is split in three layers, as follows: (\textit{i}) Core Framework, (\textit{ii}) Tool Core, and (\textit{iii}) Graphical User Interface (GUI). This plugin was devised on the top of the Eclipse Platform; The first layer we used both Java and Groovy as programming language. Moreover, the Core Framework layer contains a set of Eclipse plug-ins on which our environment is based on, such as MoDisco and Eclipse Modeling Framework (EMF)\footnote{http://www.eclipse.org/modeling/emf/}. We used MoDisco\footnote{http://www.eclipse.org/MoDisco/} once it is an extensible framework to develop model-driven tools to support use-cases of existing software modernization and provides an Application Programming Interface - (API) to easily access the KDM model. Also, EMF was used to load and navigate KDM models that were generated with MoDisco. The second layer, the Tool Core, is where the steps presented in Section~\ref{sec:the_approach} were implemented. Herein, we work intensively with KDM models, which are XML files. Therefore, we use XPath to handle those types of files, to mine the affected metaclasses, ATL to perform the refactoring and to propagated them. Finally, the third layer is the Graphical User Interface (GUI) that consists of a set of SWT windows with several options to perform the refactorings based on the KDM model.
+
+
+
+
+% Figure~\ref{fig:architecture} depicts the architecture of this environment. As shown in this figure, the first layer is the Core Framework. This layer represents that  we devised the  environment on the top of the Eclipse Platform. In this layer it is also possible to see that we used both Java and Groovy as programming language. Moreover, this layer contains Eclipse Plugins on which our environment is based on, such as MoDisco and EMF. We used MoDisco\footnote{http://www.eclipse.org/MoDisco/} once it is an extensible framework to develop model-driven tools to support use-cases of existing software modernization and provides an Application Programming Interface - (API) to easily access the KDM model. Also, Eclipse Modeling Framework (EMF)\footnote{http://www.eclipse.org/modeling/emf/} was used to load and navigate KDM models that were generated with MoDisco. 
+
+%\begin{figure}[!ht]
+%\centering
+  % Requires \usepackage{graphicx}
+ % \includegraphics[scale=0.6]{FIGURAS_DA_REFATORACAO/Arquitetura}
+%\caption{Architecture of the proof-of-concept implementation.}
+%\label{fig:architecture}
+%\end{figure}  
+
+%The second layer, the Tool Core, is where all refactorings provided by our environment were implemented. It works intensively with KDM models, which are XML files. Therefore, we use Groovy to handle those types of files because of the simplicity of its syntax and fully integrated with Java.  After the engineer to realize all refactorings a forward engineering must be carried out - then the source code of the refactored target system is generated. Finally, the top layer is the Graphical User Interface (GUI) that consists of a set of SWT windows with several options to perform the refactorings based on the KDM model.
