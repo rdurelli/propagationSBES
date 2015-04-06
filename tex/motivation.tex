@@ -1,0 +1,72 @@
+%!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
+\section{Motivating  scenario} % (fold)
+\label{sec:motivation_and_running_example}
+Considering the system described earlier it is possible to highlight some problem or even to add new requirements. For instance, a problem that can be noticed is that both classes \texttt{Student} and \texttt{Instructor} should be contained in \texttt{Model} package not in \texttt{GUI} package, respectively. In order to fix this problem, one should apply a refactoring - for instance, \textit{Move Class}.
+%
+
+%
+
+Regarding to a new requirement let's pretend someone has identified that the class \texttt{Student} is doing work that should be done by two classes - it contains attributes to hold informations upon student's addresses. In order to fulfill this new requirement one should apply the refactoring \textit{Extract Class} and creates a new class named Address (which is a POJO and also an ORM) and move all student's attributes related to address to this new class.
+
+%The action of this refactoring should propagate throughout other KDM's levels, such as the data level\footnote{The KDM's level that contains information on data base schema, table, column, primary key, etc}. 
+
+However, in both described refactoring it is necessary a skilled domain expert into KDM to identify all the metaclasses in the system which involve/reference the classes aforementioned and correct them respectively in all KDM packages, i.e., propagate all refactoring's impact throughout all KDM's packages. 
+
+For instance, considering the refactoring \textit{Move Class} (move \texttt{Student} and \texttt{Instructor} from \texttt{GUI} package to \texttt{Model} package) changes should be propagated to the Structure Package and to the Conceptual Package to maintain the model synchronized. For instance, the \texttt{density}, i.e., aggregation relation ship between the layer \texttt{View} and the layer \texttt{Controller} would change from 4 to 2 - once the primitives relationships \texttt{Create} and \texttt{Extends} would no longer exist from the package \texttt{GUI} to the package \texttt{CTR}. On the other hand, the resulting of this refactoring would update the density between the layer \texttt{Model} and \texttt{Controller}, instead of 2 it should be 4, as \texttt{Creates} and \texttt{Extends} were also moved along with its classes, \texttt{Student} and \texttt{Instructor}. Concerning to the Conceptual package, the  RuleUnit\_1.1 that is associated with \texttt{Student} should also be moved to ScenarioUnit\_3. 
+
+Regarding to the refactoring \textit{Extract Class}, the extracted class \texttt{Address} would be a POJO (it would be contained in Model package) and it would also be an ORM - therefore, the action of this refactoring should be propagated throughout  the Data package, i.e., the instance of \texttt{Address} should be associated with a metaclass \texttt{RelationalTable}, and its attributes should be associated with  of \texttt{ColumnSet}.
+
+%, i.e., the relationship among the layers should be propagated automatically. Similarly, considering the refactoring \textit{Extract Class}, where a new POJO and ORM class is created, the data's level also should be propagated.
+
+These propagation seen to be easy to apply, however, in a complex system comprising all kdm's packages/levels, propagate all changes after a refactoring is a difficult and error-prone task. Even identifying the affected parts of the KDM's packages/levels is not an easy and straightforward process. In order to fulfill this limitation and create an automatized process we have devised Propagation-Aware Refactorings (PARef) that contains three main steps. The first step is the identification of all dependent elements related to a specific refactoring. In the second step the refactoring of all identified elements are performed using a model-to-model transformation language - the third step is the propagation of changes in order to keep all the dependent models synchronized. %In the following sections we show in detail that change propagation in KDM is a complex process that can be solved semi-automatically and, hence, efficiently and precisely if we provide a rigorous theoretical background. 
+In the following sections we show the theoretical background need to fully understand our approach. Then, our approach is presented in Section~\ref{sec:the_approach}.
+ 
+
+
+
+
+\subsection{Change Propagation in KDM} % (fold)
+\label{sub:change_propagation_in_kdm}
+
+In our previous work~\cite{IRIDurelliCatalogo}, we introduced a refactoring catalogue for KDM for managing evolution of a software system. This paper served as a starting point to investigate how the changes affect the KDM's levels. For instance, depending on the refactoring a set of metaclasses must to be create, updated and even removed, these operations may cause minor or major changes to be propagated into other KDM's metaclasses. In order to explain the propagation of changes in KDM consider the Figure~\ref{fig:allKDMLayers}. This figure depicts the corresponding, though simplified KDM instance of system depicts in Figure~\ref{fig:system}. It illustrates a KDM instance as a UML object diagram for the sake of simplicity. Notice that due space limitations some elements are not depicted in this figure.
+
+As we can see, a KDM's instance can be understood as a tree where we have a specially node called the root of the tree. Then the remaining nodes are partitioned into $\textit{M} >= 0$ joint sets $T_{1}, T_{2}, ..., T_{n}$, and each of these sets is a subtree.  Each nodes represent a metaclass that make up the system depicted in Figure~\ref{fig:system}. The edges represent the relationship between the metaclasses.
+
+
+%each KDM's levels/packages can be partitioned both horizontally and vertically; in both cases its metaclasses are closely related and interconnected. %The relations form the key concept of modernization by means of KDM, since they invoke the needs for change propagation. 
+%
+The root is the metaclass \texttt{Segment}. There are four subtrees rooted at \texttt{StructureModel}, \texttt{CodeModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
+The tree rooted at \texttt{StructureModel} has three \texttt{Layers}, \texttt{CONTROLLER}, \texttt{VIEW}, and \texttt{MODEL} - they are connected by the metaclasses \texttt{AggregatedRelationship} (see Figure~\ref{fig:system} and Figure~\ref{fig:allKDMLayers}).
+
+The tree rooted at \texttt{CodeModel} has three instance of the metaclass \texttt{Package} - \texttt{CRT}, \texttt{GUI}, and \texttt{MODEL}, respectively. Further, each package contains a set of classes, for instance, the package \texttt{MODEL} has two instance of the metaclass \texttt{ClassUnit}, \texttt{Researcher}, and \texttt{Secretary}, respectively.
+
+The tree rooted at \texttt{ConceptualModel} also has three subtree - herein represented by the metaclass \texttt{ScenarioUnit}. Further, each node of a tree is the root of a \texttt{RuleUnit}. Finally, the \texttt{DataModel} has one subtree - \texttt{RelationalSchema}, which represent the system's data base schema. It contains four subtree - \texttt{Secretary}, \texttt{Researcher}, \texttt{Instructor}, and \texttt{Student}, where each node is an instance of the metaclass \texttt{RelationalTable}. 
+
+
+%If we consider the horizontal partitioning, we can identify four branches. Each branches represents a KDM's levels/packages just as in the Figure~\ref{fig:system}. The lower branch, \texttt{StructureModel}
+
+% However, in this Figure, each KDM's levels/packages are grouped by its root elements. For instance, the node labeled \texttt{StructureModel} is the root metaclass for all architecture elements.  
+
+
+%on the lower level it is possible to see the metaclasse \texttt{StrutureModel} that is the root metaclasses of all architecture elements. As can be seen it contains three Layers where each bounded dashed lines shape represents a KDM's levels/package.
+
+
+
+% . Each package is used to represent an specific artifact, such as, source-code, structure elements, databases, and conceptual elements. As stated in Section~\ref{sec:background} KDM is organized into four layers. In Figure~\ref{fig:allKDMLayers} three of them is shown. The squiggle (leftmost) part represents the Abstract Layer, which defines a set of meta-model elements that represent domain-specific and application-specific abstractions. The stipple (middle) part represents the Resource Layer, which describes common patterns for representing the operating environment of existing software systems. Finally, the highlighted in grey (rightmost) defines a large set of meta-model elements whose purpose is to provide a language-independent intermediate representation for various constructs determined by common programming languages.
+ 
+
+%Further, if we consider the horizontal partitioning, we can identify four levels, each representing a different view of an system instantiated in KDM. The lowest level represents all the physical artifacts owned in a system. Its parent level, called KDM's metaclasses, represents the particular KDM's metaclasses, which conforms to an specific artifact. The level above represents the system specification. Finally, the highest level represent all the KDM's models, each model defines a set of metaclasses to represent the physical and logical elements of software as well as their relationships at various levels of abstraction.
+
+%In order to cope with propagation of the refactoring changes across any KDM's subtree dependent abstraction levels, keeping all models synchronized
+
+In the context of model-driven refactoring, if any change occurs at any KDM's subtree the change should be propagated to other elements.
+%
+%These levels indicate problems related to KDM propagation of changes. 
+%
+For instance, when the elements of \texttt{CodeModel} suffer any kind of changes (e.g., are refactored), its instances, i.e., \texttt{ClassUnits}, \texttt{MethodUnits}, \texttt{StorableUnits}, etc, and related elements must be adapted accordingly so that their validity and correctness is preserved respectively. In addition, if we want to preserve others parts of KDM, like the system's structure and the business rules the  \texttt{StructureModel} and \texttt{ConceptualModel} also need to adapt, respectively. %What is more, as we have mentioned, in practice there are usually at least one instance of each KDM's model applied in a single system, e.g., the system architecture conforms to Structure Model, the source-code conforms to Code Model, etc. 
+In general, a change at one KDM's model should trigger a cascade of changes at other models. We call such sequences of adaptations change propagation.
+
+As we can see in Figure~\ref{fig:allKDMLayers}, there are not only horizontally relations between the models, but the elements of the system can also be vertical related across the vertical partitions. A few examples are denoted by the red/blue dashed arrows. For instance, there is a relation between a \texttt{CodeModel} (its respective metaclasses) with the \texttt{StructureModel} - which means that a change in one of the ends of the relation can influences the other.
+
+Considering these KDM's models leads to evolution of each affected model separately. However, this is a highly time- consuming and error-prone solution since we need a domain expert who is able to identify all the affected models and propagate the changes. Following we present our approach to detect and propagate all the changes throughout all KDM's levels.
+
