@@ -71,7 +71,7 @@ Therefore, firstly a query must be executed to get the root elements in KDM. Thi
      \label{alg:death1}
    \end{algorithm}
 
-Algorithm~\ref{alg:death1} depicts the depth-first search algorithm that is used to mine all the affected metaclasses. It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that will be refactored in Step [B] (e.g., for the refactoring \texttt{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package) depicted in Figure~\ref{fig:queriesXPath}. A diagram of how our depth-first search algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses.
+Algorithm~\ref{alg:death1} depicts the depth-first search algorithm that is used to mine all the affected metaclasses. It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that will be refactored in Step [B] (e.g., for the refactoring \textit{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package) depicted in Figure~\ref{fig:queriesXPath}. A diagram of how our depth-first search algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses.
 
 More specifically, the algorithm works as: first it is necessary to pick a starting point, i.e., the metaclass \texttt{Segment}. Visit the \texttt{Segment}, push it onto a stack, and mark it as visited. Then it is necessary to go to the next metaclass that is unvisited, verify if it has an association named \texttt{implementation}. If yes, it verifies if this association contains references to any element's used in the refactoring, if yes - push it on the stack, and mark it. This continues until you reach the last metaclass. Then you check to see if the \texttt{Segment} has any unvisited adjacent metaclass. If it does not, then you pop it off the stack and check the next metaclass. If you find one, you start visiting adjacent metaclasses until there are no more, check for more unvisited adjacent metaclasses, and continue the process always verifying the association named implementation. When you finally reach the last metaclass on the stack and there are no more adjacent, unvisited metaclasses that contains the association \texttt{implementation} without check , our algorithm should show a list of all affected metaclasses. 
 %
@@ -164,7 +164,7 @@ More specifically, the algorithm works as: first it is necessary to pick a start
 \subsection{Apply Refactoring} % (fold)
 \label{sub:apply_refactoring}
 
-In the step [B] the engineer must apply the refactoring. A natural way of implementing refactoring in models is by means of \textit{in-place transformations} as describe in Section~\ref{sec:background}. %This kind of transformations are used for rewriting a model by creating, deleting, and updating elements in the input model, e.g., in a KDM's instance. 
+In the step [B] the engineer must apply the refactoring. A natural way of implementing refactoring in models is by means of \textit{in-place transformations}\footnote{We have devised a repository where a set of \textit{in-place transformations} (i.e., refactoring) is available. The repository can be accessed in www.site.com.br. It aims is to share refactoring to be applied into KDM's instances.} as describe in Section~\ref{sec:background}. %This kind of transformations are used for rewriting a model by creating, deleting, and updating elements in the input model, e.g., in a KDM's instance. 
 Going into more details, applying these transformations/refactoring into a KDM's instance can introduce incompatibilities and inconsistencies which can not be easily resolved. In fact, we can classified these transformations by their corrupting or non-corrupting effects:%\cite{towardssynchronizing07}:
 
 \begin{itemize}
@@ -203,9 +203,18 @@ To express a transformation in our approach, the user must specify mapping rules
 \end{figure}
 
 
-By inspecting this transformation/refactoring we can see important informations. For instance, lines 1 to 5 illustrate which KDM's level/packages are be affected by this transformation.  
+By inspecting this transformation/refactoring we can see important informations. For instance, lines 1 to 5 illustrate which KDM's level/packages are be affected by this transformation.  After, in line 6 it is possible to see the name of our transformation, \texttt{moveClasses}. Lines 7 and 8 represent the output and input models that conform to the KDM, e.g., the model used during the transformation/refactoring. 
+%
+With the \texttt{refining} mode (see Line 8 of Figure~\ref{fig:ATLRefactoring}), the ATL engine can focus on the ATL code dedicated to the generation of modified target elements. Other KDM elements (e.g. those that remain unchanged) are implicitly processed by the ATL engine.
 
-it becomes evident that the first lines are used to setup 
+%The keyword \texttt{refining} means informs to the ATL engine that  to the ATL engine that this transformation is \textit{in-place}
+
+Line 11 a matched rule is defined. In fact, this rule represents the refactoring \textit{Move Class}. Occurrences of the input pattern may be filtered by introducing a \textit{guard}, a boolean condition that KDM model must satisfy (e.g., line 13). Lines 14 though 19 the refactoring \textit{Move Class} is actually defined. As can be seen, we are moving a set of \texttt{ClassUnit} by means of the helper (defined in lines 21 and 22). 
+Almost all refactorings need some input parameters that should be properly instantiated by the user. For instance, consider the chuck of code written in ATL depicted in Figure~\ref{fig:ATLRefactoring}, lines 13, 16, and 17 (\texttt{\#parameter}). Therefore, before to apply the refactoring, the user should set the parameters. Considering our running example (depicted in Figure~\ref{fig:system}) the parameters would be: \texttt{Model}, \texttt{Student}, and \texttt{Instructor}, respectively. Afterward, this ATL is ready to be applied into a KDM instance.
+
+
+%It is important to highlight that this chuck of code in written in ATL is not total functional - the engineer should set the parameters (\texttt{\#parameter}) 
+
 %Refactorings are implemented by specifying its actions that have to be executed for applying the change. Most of them need also some input parameters that should be properly instantiated by the user. For instance, consider the chuck of code written in ATL depicted in Figure~\ref{fig:ATLRefactoring} 
 
 
