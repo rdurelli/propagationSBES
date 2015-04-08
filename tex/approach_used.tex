@@ -217,11 +217,12 @@ Almost all refactorings need some input parameters that should be properly insta
 
 %Refactorings are implemented by specifying its actions that have to be executed for applying the change. Most of them need also some input parameters that should be properly instantiated by the user. For instance, consider the chuck of code written in ATL depicted in Figure~\ref{fig:ATLRefactoring} 
 
-
-
-
 \subsection{Propagate Changes} % (fold)
 \label{sub:apply_refactoring}
+
+In this step, all propagating is implemented. In fact, this step is performed along with the step [B].
+
+In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
 
 
 
