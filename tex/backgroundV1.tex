@@ -3,7 +3,9 @@
 \section{Background} % (fold)
 \label{sec:background}
 
-In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). Further, we describe in detail why change propagation in KDM is a complex process.
+In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). 
+
+%Further, we describe in detail why change propagation in KDM is a complex process.
 
 \subsection{ADM and KDM}
 
@@ -15,12 +17,13 @@ ADM is the concept of modernizing existing systems with a focus on all aspects o
 
 Figure~\ref{fig:ADM_shorseshoe} depicts the horseshoe model (i.e., horseshoe is basically a left-hand
 side, a right-hand side and a bridge between the sides) which was adapted to ADM. %Please note that it contains all the traditional phases and some MDD's keywords, such as PSM and  PIM. The traditional phases adapted to ADM are:
+As can be seen, this horseshoe model contains three main phases:
 
 \begin{itemize}
 
-\item \textbf{Reverse Engineering}: herein a reverse engineering is realized, it takes a legacy system to be modernized as input, then the knowledge is extracted and a PSM is generated. In addition the PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM;
+\item \textbf{Reverse Engineering}: it takes a legacy system to be modernized as input, then the knowledge is extracted and a Platform-Specific Model (PSM) is generated. In addition the PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM;
 
-\item \textbf{Restructuring}: in this phase a set of restructuring/refactoring can be applied into a KDM's instance by means of M2M transformations;
+\item \textbf{Restructuring}: in this phase a set of restructuring/refactoring can be applied into a model's instance by means of model transformations;
 
 \item \textbf{Forward Engineering}: then a forward engineering is carried out and the source code of the modernized target system is generated.
 
@@ -44,12 +47,12 @@ In order to perform a systematic modernization as depicted in Figure~\ref{fig:AD
 KDM is an OMG specification adopted as ISO/IEC 19506 by the International Standards Organization for representing information related to existing software systems. 
 The goal of the KDM standard is to define a metamodel to represent all the different legacy software artifacts involved in a legacy information system (e.g. source code, user interfaces, databases, business rules, etc.). %The metamodel of the KDM standard provides a comprehensive high-level view of the behavior, structure and data of legacy information systems by means of a set of facts. 
 
-KDM contains twelve packages and it is structured in a hierarchy of four layers: (\textit{i}) Infrastructure Layer, (\textit{ii}) Program Elements Layer, (\textit{iii}) Runtime Resource Layer, and (\textit{iv}) Abstractions Layer. These layers are created automatically, semi-automatically or manually through the application of various techniques of extraction of knowledge, analysis and transformations~\cite{1686216}. Figure~\ref{fig:kdmLayers} depicts the architecture of KDM. By observing this figure it is fairly evident that each layer is based on the previous layer, thus, they are organized into packages that define a set of metamodel, whose purpose is to represent a specific and independent interest of knowledge related to legacy systems, e.g. source code, user interfaces, databases, business rules, etc.
+KDM contains twelve packages and it is structured in a hierarchy of four layers: (\textit{i}) Infrastructure Layer, (\textit{ii}) Program Elements Layer, (\textit{iii}) Runtime Resource Layer, and (\textit{iv}) Abstractions Layer. These layers can be instantiated automatically, semi-automatically or manually through the application of various techniques of extraction of knowledge, analysis and transformations~\cite{1686216}. Figure~\ref{fig:kdmLayers} depicts the architecture of KDM and its layers. By observing this figure it is fairly evident that each layer is based on the previous layer. They are organized into packages that define a set of metamodel, whose purpose is to represent a specific and independent interest of knowledge related to legacy systems, e.g. source code, user interfaces, databases, business rules, etc.
 
 \begin{figure}[!ht]
 \centering
   % Requires \usepackage{graphicx}
- \includegraphics[scale=0.46]{figuras/kdm_layer}
+ \includegraphics[width=3.3in]{figuras/camadas_kdm}
 \caption{KDM Architecture.}
 \label{fig:kdmLayers}
 \end{figure}
@@ -111,12 +114,12 @@ In order to show how KDM and its metaclasses can be used to represent a system, 
 	\label{fig:system}
 \end{figure*}
  
-This toy system is based on a well know Model View Controller (MVC) design pattern. As noted in Figure~\ref{fig:system} it is split in four KDM levels/packages, which are illustrated in the figure bounded by dashed lines shape. Following is described each KDM levels/packages and its meaning regarding to the illustrated system.
+This toy system is based on a well know Model View Controller (MVC) design pattern. As noted in Figure~\ref{fig:system} it is split in four KDM levels/packages, which are illustrated in the figure bounded by dashed lines shape. %Following is described each KDM levels/packages and its meaning regarding to the illustrated system.
 
 The \texttt{Code Package} represents the source-code (physical artifacts). In Figure~\ref{fig:system} is is possible to see three packages: (\textit{i}) \texttt{GUI} \ding{182}, (\textit{ii}) \texttt{CTR} \ding{183}, and (\textit{iii}) \texttt{Model} \ding{184}. Each of them contains a specific number of classes. %The first one, \texttt{GUI}, contains four classes, \texttt{StudentGUI}, \texttt{InstructorGUI}, \texttt{Student}, and \texttt{Instructor}. The second package contains three classes: \texttt{StudentCTR}, \texttt{UtilCon}, \texttt{InstructorCTR}. Then, the third one owns two classes, \texttt{Secretary} and \texttt{Researcher}. 
-Further, these classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc, emphasized in Figure~\ref{fig:system} by the symbol \ding{72};
+Further, these classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc -  emphasized in Figure~\ref{fig:system} by the symbol \ding{72};
 
-Next, the \texttt{Structure Package} illustrates the system's architecture, herein the system is based on MVC. As noted in Figure~\ref{fig:system} each rectangle depicts a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}. %For the first layer, we have associated \texttt{View} with the package \texttt{GUI}. In KDM this kind of association is done by means of the meta-attribute \texttt{implementation}, which are depicted by the dashed arrows. Similarly, \texttt{Controller} was associated with the package \texttt{CTR}, and the layer \texttt{Model} was associated with the package \texttt{Model}, respectively. 
+Furthermore, the \texttt{Structure Package} illustrates the system's architecture. As aforementioned the system is based on MVC - each rectangle depicts in Figure~\ref{fig:system} represents a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}. %For the first layer, we have associated \texttt{View} with the package \texttt{GUI}. In KDM this kind of association is done by means of the meta-attribute \texttt{implementation}, which are depicted by the dashed arrows. Similarly, \texttt{Controller} was associated with the package \texttt{CTR}, and the layer \texttt{Model} was associated with the package \texttt{Model}, respectively. 
 The View layer is realized in source-code level by the package GUI; the Model layer is realized by the package Model and the layer Controller by the CTR package. These realizations are represented in KDM by the \texttt{implementation} relationship, represented in the figure by dashed arrows. Regarding to the relationships among the layers, it is possible to visualize pipes between two layers (see Figure~\ref{fig:system}. These pipes represents the corresponding \texttt{AggregatedRelationship}\footnote{A metaclass in KDM used to represent relationship among KDM entities.}, which represents the number summing all primitive relationships among layers. For instance, the \texttt{AggregatedRelationship} between the layer \texttt{View} and the layer \texttt{Controller} are represented by the relationships: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, and another \texttt{Calls} from the Code Package. Summing up these relationships the density value is 4. Following the same idea the relationship between the layer \texttt{Controller} and layer \texttt{Model} is 2;  
   
 Then the \texttt{Conceptual Package} illustrates the system's business rules domain. Note that this system owns three scenarios, each of them are associated with a package from Code Package by means of the association \texttt{implementation}, see the dashed arrows. Further, each scenario contains a rule except the last one. In it turn, each rule is associated with a class from Code package, again using the association \texttt{implementation};
@@ -131,14 +134,14 @@ Finally, the \texttt{Data Package} depicts the system's database and its tables.
 	\label{fig:allKDMLayers}
 \end{figure}
 
-The system described can be realized in KDM. For instance, the Figure~\ref{fig:allKDMLayers} depicts the corresponding, though simplified KDM instance of system depicts in Figure~\ref{fig:system}. It illustrates a KDM instance as a UML object diagram for the sake of simplicity. Notice that due space limitations some elements are not depicted in this figure.
+The system described can be realized in KDM as shown in Figure~\ref{fig:allKDMLayers}. This figure depicts the corresponding, though simplified KDM instance of system illustrated in Figure~\ref{fig:system}. We have chosen to use a KDM instance as a UML object diagram for the sake of simplicity. However, it is important to notice that due space limitations some elements are not depicted in this figure.
 
 A KDM's instance can be understood as a tree where we have a specially node called the root of the tree. Then the remaining nodes are partitioned into $\textit{M} >= 0$ joint sets $T_{1}, T_{2}, ..., T_{n}$, and each of these sets is a subtree.  Each nodes represent a metaclass that make up the system depicted in Figure~\ref{fig:system}. The edges represent the relationship between the metaclasses.
-
-
+%
+%
 %each KDM's levels/packages can be partitioned both horizontally and vertically; in both cases its metaclasses are closely related and interconnected. %The relations form the key concept of modernization by means of KDM, since they invoke the needs for change propagation. 
 %
-The root is the metaclass \texttt{Segment}. There are four subtrees rooted at \texttt{StructureModel}, \texttt{CodeModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
+The root is the metaclass \texttt{Segment}, then, there are four subtrees rooted at \texttt{StructureModel}, \texttt{CodeModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
 The tree rooted at \texttt{StructureModel} has three \texttt{Layers}, \texttt{CONTROLLER}, \texttt{VIEW}, and \texttt{MODEL} - they are connected by the metaclasses \texttt{AggregatedRelationship} (see Figure~\ref{fig:system} and Figure~\ref{fig:allKDMLayers}).
 
 The tree rooted at \texttt{CodeModel} has three instance of the metaclass \texttt{Package} - \texttt{CRT}, \texttt{GUI}, and \texttt{MODEL}, respectively. Further, each package contains a set of classes, for instance, the package \texttt{MODEL} has two instance of the metaclass \texttt{ClassUnit}, \texttt{Researcher}, and \texttt{Secretary}, respectively.
@@ -154,9 +157,43 @@ The tree rooted at \texttt{ConceptualModel} also has three subtree - herein repr
 
 %Furthermore, it is possible to notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: ``Student'', ``Instructor'', ``Secretary'', and ``Researcher''. All of these POJOS are also Object Relational Mapping (ORM).
 
-%\subsection{Model-to-Model Transformations}\label{sec:m2m}
+\subsection{Model Transformations}\label{sec:m2m}
 
-%Models are neither isolated nor static entities. As part of an MDA process, models can be refactored (to improve their internal structure). Refactorings in the context of MDA are implemented as model transformations, i.e., Model-to-Model (M2M). 
+Kleppe et al.~\cite{Kleppe:2003} provide the following definition of model transformation. \textit{A
+transformation is the automatic generation of a target model from a source
+model, according to a transformation definition}. 
+However, according to Mens and Van~\cite{Mens:2006:TMT:1706639.1706924} model transformations can be classified as either endogenous or exogenous. 
+
+Endogenous transformations are transformations between
+models expressed in the same language. Exogenous transformations are
+transformations between models expressed using different languages. Further, we can classify the transformation as: (\textit{i}) horizontal, and (\textit{ii}) vertical. A horizontal transformation
+is a transformation where the source and target models reside at the same abstraction
+level. A typical example is \textit{refactoring}. A vertical transformation is a transformation where the source and target
+models reside at different abstraction levels.
+
+\begin{table}[h]
+\centering
+\caption{Orthogonal dimensions of model transformations.}
+\label{tab:orthogonal}
+\begin{tabular}{lllll}
+\cline{1-3}
+\multicolumn{1}{|l|}{Classification} & \multicolumn{1}{l|}{horizontal}                                                 & \multicolumn{1}{l|}{vertical}          &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{endogenous}     & \multicolumn{1}{l|}{\cellcolor[HTML]{9B9B9B}{\color[HTML]{000000} Refactoring}} & \multicolumn{1}{l|}{Formal refinement} &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{exogenous}      & \multicolumn{1}{l|}{Language migration}                                         & \multicolumn{1}{l|}{Code generation}   &  &  \\ \cline{1-3}
+                                     &                                                                                 &                                        &  & 
+\end{tabular}
+\end{table}
+
+ Table~\ref{tab:orthogonal} illustrates that the dimensions horizontal versus vertical and endogenous
+versus exogenous are truly orthogonal, by giving a concrete example of all
+possible combinations. As can be seen in this table our approach focus in endogenous and horizontal transformations.
+
+
+
+
+
+% models are neither isolated nor static entities. Models are part of an MDA process, and they can be refactored (to improve their internal structure). Refactorings in the context of MDA are implemented as model transformations, i.e., Model-to-Model (M2M). 
+
 
 %A natural way of implementing refactoring in models is by means of \textit{in-place transformations}, which is illustrated in Figure~\ref{fig:endogenous_inplace}. This kind of transformations are used for rewriting a model by creating, deleting, and updating elements in the input model, e.g., in a KDM's instance. %Going into more details, applying these transformations/refactoring into a KDM's instance can introduce incompatibilities and inconsistencies which can not be easily resolved. In fact, we can classified these transformations by their corrupting or non-corrupting effects~\cite{towardssynchronizing07}:
 

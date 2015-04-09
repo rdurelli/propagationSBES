@@ -3,14 +3,10 @@
 \section{Propagation-Aware Refactorings} % (fold)
 \label{sec:the_approach}
 
-In order to fulfill the limitation pointed out, we introduce an approach that aims to propagate all the changes throughout the KDM's levels. It ensures that whenever a change/refactoring is performed in any KDM's level, it is correctly propagated to affected KDM's levels and vice versa. So it make certain that the consistency between the KDM's levels when they are refactored. 
+In order to fulfill the limitation pointed out, we introduce an approach that aims to propagate all the changes throughout the KDM's levels. This approach ensures that when a change/refactoring is performed in any KDM's level, it is correctly propagated to the affected KDM's levels and vice versa. So it make certain that the consistency between the KDM's levels when they are refactored. 
+The described problem presented in Section~\ref{sec:motivation_and_running_example} can, in our view, be split into three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}. 
 
-According to the literature, there are two possibilities to perform such propagation in models (colocar ref). One possibility
-is to mark the modifications on the source KDM's model without actually commiting them until the end of
-the transformation, so that expression evaluation can occur on the original source KDM's model by ignoring
-the modifications. Another possibility is to first compute the set of basic operations to perform,
-storing this set in an external artifact representation and then apply all the changes at once. Our
-approach follows the second possibility and it is divided in three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}.
+%According to the literature, there are two possibilities to perform propagation in models (colocar ref). One possibility is to mark the modifications on the source KDM's model without actually commiting them until the end of the transformation, so that expression evaluation can occur on the original source KDM's model by ignoring the modifications. Another possibility is to first compute the set of basic operations to perform, storing this set in an external artifact representation and then apply all the changes at once. Our approach follows the second possibility and it is divided in three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}.
 
 
 \begin{figure}[h]
@@ -21,12 +17,12 @@ approach follows the second possibility and it is divided in three steps, which 
 	\label{fig:approach}
 \end{figure}
 
-In the step [A], Mine Affected Metaclasses, we developed a mechanism which shows all metaclasses that need to be updated after applying any changes/refactoring. These metaclasses are those that have some dependence on the metaclass to be modified by the refactoring. This step is totally based on a set of queries that works on a KDM instance. In fact, this step uses depth-first search algorithm to identify all affected metaclasses along with a set of queries.
+In the step [A], \textit{Mine Affected Metaclasses}, we developed a mechanism which shows all metaclasses that need to be updated after applying any changes/refactoring. These metaclasses are those that have some dependence on the metaclass to be modified by the refactoring. This step is totally based on a set of queries that works on a KDM instance. In fact, this step uses depth-first search algorithm to identify all affected metaclasses along with a set of queries.
 
-In step [B], Apply Refactoring, the software engineer should perform a set of refactorings.  In this step, new metaclasses can be created, updated, and removed. %The most frequent modification to the KDM instances in this scenario will be, intuitively, creating new metaclasses. However, updating existing metaclasses with their relationship will be frequent as well. In simpler cases, updating means changing properties of existing metaclasses. In more complex cases, updating means removing metaclasses and replacing them with new and refactored ones.
-In this step we have used model-to-model (M2M) transformation language to perform the refactorings.
+In step [B], \textit{Apply Refactoring}, here the software modernizer has to choose an appropriate refactoring to be applied into the KDM. In this step, new metaclasses can be created, updated, and removed. Also it is necessary to gather all the needed parameters for applying the refactoring. %that the software modernizer inputs all the needs parameters for applying the refactoring is gathered.  %The most frequent modification to the KDM instances in this scenario will be, intuitively, creating new metaclasses. However, updating existing metaclasses with their relationship will be frequent as well. In simpler cases, updating means changing properties of existing metaclasses. In more complex cases, updating means removing metaclasses and replacing them with new and refactored ones.
+This step uses M2M transformation language to perform the refactorings.
 
-In step [C], Propagate Changes, involves updating the elements identified in the step [A].  As in step [B], in this step we also have used M2M to update all KDM's instances. 
+In step [C], \textit{Propagate Changes}, involves updating the elements identified in the step [A].  As in step [B], in this step we also have used M2M to update all KDM's instances. 
 More details on each step are provided in the next sections.
 
 \subsection{Mine Affected Metaclasses} % (fold)
@@ -36,12 +32,12 @@ The step [A] starts with a depth-first search algorithm that aims to show all me
 
 Let us consider the running example depicted in Figure~\ref{fig:system}. In this example, the engineer aims to apply the refactoring \textit{Move Class} - both classes \texttt{Student} and \texttt{Instructor} should not longer be contained in the package \texttt{View}. These classes should be allocated into the package \texttt{Model}. Considering the refactoring \textit{Move Class}, three elements (\texttt{Student}, \texttt{Instructor}, and their package) need to be investigated throughout the KDM's instance in order to identify propagation scenarios of changes. 
 
-Therefore, firstly a query must be executed to get the root elements in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the metaclass \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} line 2 to 5. The returned elements of these queries are used as input in our depth-first search algorithm.
+Therefore, firstly a query must be executed to get the root elements in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the metaclass \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our depth-first search algorithm.
 
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.455]{figuras/queries}
+	\includegraphics[scale=0.479]{figuras/queiresANDATLSBESNew}
 	\caption{Xpath used to return the KDM's root element, Segment.}
 	\label{fig:queriesXPath}
 \end{figure}
@@ -71,9 +67,9 @@ Therefore, firstly a query must be executed to get the root elements in KDM. Thi
      \label{alg:death1}
    \end{algorithm}
 
-Algorithm~\ref{alg:death1} depicts the depth-first search algorithm that is used to mine all the affected metaclasses. It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that will be refactored in Step [B] (e.g., for the refactoring \textit{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package) depicted in Figure~\ref{fig:queriesXPath}. A diagram of how our depth-first search algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses.
+Algorithm~\ref{alg:death1} depicts the depth-first search algorithm that is used to mine all the affected metaclasses. It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that will be refactored in Step [B] (e.g., for the refactoring \textit{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package) depicted in Figure~\ref{fig:queriesXPath}. A diagram of how our depth-first search algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses - the node A represents the \texttt{Segment} and K, H, E and B illustrate \texttt{CodeModel}, \texttt{StructureModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
 
-More specifically, the algorithm works as: first it is necessary to pick a starting point, i.e., the metaclass \texttt{Segment}. Visit the \texttt{Segment}, push it onto a stack, and mark it as visited. Then it is necessary to go to the next metaclass that is unvisited, verify if it has an association named \texttt{implementation}. If yes, it verifies if this association contains references to any element's used in the refactoring, if yes - push it on the stack, and mark it. This continues until you reach the last metaclass. Then you check to see if the \texttt{Segment} has any unvisited adjacent metaclass. If it does not, then you pop it off the stack and check the next metaclass. If you find one, you start visiting adjacent metaclasses until there are no more, check for more unvisited adjacent metaclasses, and continue the process always verifying the association named implementation. When you finally reach the last metaclass on the stack and there are no more adjacent, unvisited metaclasses that contains the association \texttt{implementation} without check , our algorithm should show a list of all affected metaclasses. 
+More specifically, the algorithm works as follows: first it is necessary to pick a starting point, i.e., the metaclass \texttt{Segment}. Visit the \texttt{Segment}, push it onto a stack, and mark it as visited. Then it is necessary to go to the next metaclass that is unvisited, verify if it has an association named \texttt{implementation}. If yes, it verifies if this association contains references to any element's used in the refactoring, if yes - push it on the stack, and mark it. This continues until the algorithm reachs the last metaclass. Then the algorithm checks to see if the \texttt{Segment} has any unvisited adjacent metaclass. If it does not, then it is necessary to pop it off the stack and check the next metaclass. If the algorithm finds one (unvisited metaclass), it starts visiting adjacent metaclasses until there are no more, check for more unvisited adjacent metaclasses, and continue the process always verifying the association named implementation. When the algorithm finally reach the last metaclass on the stack and there are no more adjacent, unvisited metaclasses that contains the association \texttt{implementation} without check , our algorithm should show a list of all affected metaclasses. 
 %
 %
 %
