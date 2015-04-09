@@ -216,9 +216,22 @@ Almost all refactorings need some input parameters that should be properly insta
 \subsection{Propagate Changes} % (fold)
 \label{sub:apply_refactoring}
 
-In this step, all propagating is implemented. In fact, this step is performed along with the step [B].
+In this step, all propagations regarding the refactoring \textit{Move Class} are implemented. In fact, this step is performed along with the step [B] using a set of rules defined in ATL. In Figure~\ref{fig:ATLPropagation} the ATL used to propagate the changes regarding the refactoring \textit{Move Class} is presented. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package, respectively. The first rule is responsible to propagate the changes throughout the \texttt{Structure Package}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL [17] guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of the refactoring \textit{Move Class}.
 
-In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
+\begin{figure}[h]	
+	\centering
+	% Requires \usepackage{graphicx}
+	\includegraphics[scale=0.47]{figuras/propagationATLFormatted}
+	\caption{Chunk of code in ATL to perform the propagation after the application of refactoring \textit{Move Class}.}
+	\label{fig:ATLPropagation}
+\end{figure}
+
+The rule defined in lines 33 to 43 propagates the changes throughout the \texttt{Conceptual Package}. For instance,  the \texttt{RuleUnit 1.1} that is associated with \texttt{Instructor} should also be moved to corresponding scenario, i.e, the scenario that is associated with the package that contains now the class \texttt{Instructor} - \texttt{ScenarioUnit 3}. 
+
+ Finally, the rule defined in lines 44 - 65 aims to propagate the change to the \texttt{Data Package}. For each moved \texttt{ClassUnit}, a \texttt{RelationalTable} instance has to be created. Their names have to correspond. The \texttt{itemUnit} %(a collection that contains \texttt{ColumnSet}) 
+reference set has to contain all \texttt{ColumnSet} that have been created for each \texttt{StorableUnit} (metaclass that represent all the attributes that a class holds) as well as its types.
+
+%In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
 
 
 
