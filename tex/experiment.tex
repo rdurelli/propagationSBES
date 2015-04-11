@@ -1,5 +1,111 @@
 %!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
 
 \section{Evaluation}\label{sec:evaluation}
+This section describes the experiment used to evaluate the change propagation effectiveness of our approach. In fact, two experiment were conducted. The first experiment is called ''Mining Study`` and was planned to identify the effectiveness of our  mining algorithm. Therefore, we have compared its result with an oracle in order to verify its correctness. The second experiment is referred as ''Propagation Study`` and was planned to evaluated the correctness of the propagation given a set of refactorings. 
 
-To evaluate how our approach supports important maintenance tasks, we carried out a case study, where users had to identify code locations affected by typical change requests. For the case study, we implemented our approach for QVT-O under Eclipse.2
+%Moreover, this experiment also evaluate the devised Eclipse plug-in, which was earlier described. Specifically, we investigate the following research questions:
+
+\textbf{RQ$_{1}$}: Given some specific elements to be refactored, is the mining algorithm able to identify correctly all the dependent KDM elements?
+
+\textbf{RQ$_{2}$}: Given a specific refactoring R, are all dependent elements identified in the oracle correctly refactored?
+ 
+%To evaluate these questions we we carried out two steps. Firstly, we have evaluated our mining algorithm. Therefore, we have compared its result with an oracle in order to verify its correctness. Similarly, we have evaluated the correctness of a set of refactorings. Thus,  we have also compared its results to the same oracle mentioned previously.
+
+\subsection{Goal Definiton}\label{sec:goal_definition}
+
+We use the organization proposed by the Goal/Question/Metric (GQM) paradigm, it describes experimental goals in five parts, as follows:  (\textit{i}) \textbf{object of study:} the object of study is our approach; (\textit{ii}) \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our approach, i.e, our mining affected metaclasses and the propagation of changes; (\textit{iii}) \textbf{perspective:} this experiment is run from the standpoint of a researcher; (\textit{iv}) \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm and a set of refactorings; (\textit{v}) \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
+
+Our experiment can be defined as: \textbf{Analyze} the effectiveness of change propagating of our approach , \textbf{for the purpose of} evaluation, \textbf{with respect to} precision and recall, \textbf{from the point of view of} the researcher, \textbf{in the context of} a subject program. 
+
+\subsection{Hypothesis Formulation}\label{hypothesis_formulation}	
+In order to accomplish our set goal, we explored the formalization of our research questions into the following hypotheses:
+
+%Our research questions were formalized into hypotheses so that statistical tests can be performed. 
+
+
+\begin{table}[h]
+\centering
+\caption{Hypotheses for the Mining Study\label{tab:hypotheses}}
+~~\\
+\begin{tabularx}{
+.46\textwidth}{|c|X|}
+%There is no difference between using our tool and using an ad-hoc reuse process in terms of productivity (time) to couple sucessfully a CF with an application.
+\hline \cellcolor[gray]{\shadow} H$_0$ & \footnotesize{ There is no difference in pattern recognition before and after to apply our mining affected metaclasses algorithm into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as: 
+
+\textbf{H$_{0}$: $\mu_{P_{Bf}} = \mu_{P_{Af}}$ and $\mu_{R_{Bf}} = \mu_{R_{Af}}$}}
+\\
+\hline \cellcolor[gray]{\shadow} H$_1$ & \footnotesize{There is a significant difference in pattern recognition before and after to apply our mining affected metaclasses algorithm into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as: 
+
+\textbf{H$_{1}$: $\mu_{P_{Bf}} \neq \mu_{P_{Af}}$ and $\mu_{R_{Bf}} \neq \mu_{R_{Af}}$}}
+\\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Hypotheses for the Propagation Study\label{tab:hypotheses}}
+~~\\
+\begin{tabularx}{
+.46\textwidth}{|c|X|}
+%There is no difference between using our tool and using an ad-hoc reuse process in terms of productivity (time) to couple sucessfully a CF with an application.
+\hline \cellcolor[gray]{\shadow} H$_0$ & \footnotesize{ There is no difference in propagation of changes before and after to apply a refactoring into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as: 
+
+\textbf{H$_{0}$: $\mu_{P_{Bf}} = \mu_{P_{Af}}$ and $\mu_{R_{Bf}} = \mu_{R_{Af}}$}}
+\\
+\hline \cellcolor[gray]{\shadow} H$_1$ & \footnotesize{There is a significant difference in propagation of changes before and after to apply a refactoring into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as:  
+
+\textbf{H$_{1}$: $\mu_{P_{Bf}} \neq \mu_{P_{Af}}$ and $\mu_{R_{Bf}} \neq \mu_{R_{Af}}$}}
+\\
+\hline
+\end{tabularx}
+\end{table}
+
+%\textbf{Null hypothesis, H$_{0}$}: There is no difference in pattern recognition before and after to apply our mining affected metaclasses algorithm into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as: 
+
+%\textbf{H$_{0}$: $\mu_{P_{Bf}} = \mu_{P_{Af}}$ and $\mu_{R_{Bf}} = \mu_{R_{Af}}$}
+
+%\textbf{Alternative hypothesis, H$_{1}$}: There is a significant difference in pattern recognition before and after to apply our mining affected metaclasses algorithm into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as: 
+
+%\textbf{H$_{1}$: $\mu_{P_{Bf}} \neq \mu_{P_{Af}}$ and $\mu_{R_{Bf}} \neq \mu_{R_{Af}}$}
+
+%\textbf{Null hypothesis, H$_{0}$}: there is no difference in propagation of changes before and after to apply a refactoring into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as: 
+
+%\textbf{H$_{0}$: $\mu_{P_{Bf}} = \mu_{P_{Af}}$ and $\mu_{R_{Bf}} = \mu_{R_{Af}}$}
+
+%\textbf{Alternative hypothesis, H$_{1}$}: there is a significant difference in propagation of changes before and after to apply a refactoring into the KDM model (measured in terms of the metric precision (P) and recall (R)) which can be formalized as:  
+
+%\textbf{H$_{1}$: $\mu_{P_{Bf}} \neq \mu_{P_{Af}}$ and $\mu_{R_{Bf}} \neq \mu_{R_{Af}}$}
+ 
+There are two variables shown on each table: 'P` and 'R`. 'P` stands for Precision which is the ratio of the number of true positives retrieved/identified to the total number of irrelevant and relevant code elements retrieved/propagated. It is usually expressed as a percentage, see equation 1. R denotes Recall which is the ratio of the number of true positives retrieved/propagated to the total number of relevant code elements in the
+source code. It is usually expressed as a percentage, see equation 2. 
+
+\begin{equation}
+P=\frac{True Positives}{True Positives + False Positives}
+\end{equation}
+
+\begin{equation}
+R=\frac{True Positives}{True Positives + False Negatives}
+\end{equation}
+
+\subsection{Experiment Desing}
+
+For our evaluation, we need firstly transform a system into a KDM instance to apply our approach. However, due to the scarcity of complete KDM instances in the public domain, we adopted a reverse engineering approach and generated KDM instance from one system developed in Java by using MoDisco. This system is called LabSys (Laboratory System) and it is currently used by Federal University of Tocantins (UFT) for. It is used to control the use of laboratories in the entire university. %LabSys is able to allocate time to use the classes in their respective physical spaces, treat the internal communication during laboratories reservation, such as availability reports, viability, unforeseen, acceptance of a reservation, manages the equipments of laboratories, generate reports and memos about the processes.
+%
+%
+LabSys  was defined using the MVC architectural pattern. It contains a total of X packages and Y classes. It is composed by three layers: \texttt{model}, \texttt{view}, and \texttt{controller}. Layer \texttt{model} owns the  DTO (Data Transfer Objects) and DAOs (Data Access Objects), which is represented by \texttt{Data Package}. DTO represents domain entities such as laboratories, equipments, reservations, etc. DAO is the classes that performs the database access. Layer controller is responsible for the business rules that communicates directly with model layer. Finally, view layer is the part of the software system that performs direct interaction with the user and uses the resources of controller layer.
+
+Currently, MoDisco only generates the KDM code package, other KDM packages are extremely important to evaluate our approach. Therefore, we have manually instantiated the followings KDM packages: Structure Package, Data Package, and Conceptual Package.
+
+We selected three refactorings for our evaluation: \texttt{Extract Class}, \texttt{Move Class}, and \texttt{Extract Layer}. We applied each of the three refactorings to every possible location in KDM instance. It is worth to notice that all refactorings were applied completely automatically by means of our devised proof-of-concept tool. To deal with refactorings that go into infinite loops, we set three minutes timeout interval.
+
+
+% More specifically, we applied the Extract ClassUnit to every class that had more than 300 LOC (Line of Code); we applied the Push Down MethodUnit to every method of a class that had a subclass that was not from a library using every such subclass as the target of the push- down; and we applied the refactoring Pull up MethodUnit to every method of a class that had a superclass that was not from a library, using every such superclass as the target of the pull-up. Then after applied all refactorings we counted whether them were successful, i.e., if the intended refactoring could be performed, and how many constraints were generated on the model and on the code side after to apply the refactorings. We also measured both software quality metrics Cohesion Amongst the Methods of a Class (CAMC) and Similarity- based Class Cohesion (SCC)4 before applying the refactoring on the KDM models and after applying the refactoring on the KDM models. Notice that in this case we actually measured these metrics in the code instead of the KDM model. This was possible as our proof-of-concept tool provides support for the generating of the code after one finishes to apply the refactorings.
+
+\subsection{Analysis of Data and Interpretation}\label{analysis_of_data}
+
+%This section presents the experimental findings. The analysis is divided into two subsections: (1) descriptive statistics and (2) hypothesis testing.
+
+%\subsubsection{Descriptive Statistics:} This subsection provides descriptive statistics of the experiment datas. 
+
+The data of the first study is found on Table X
