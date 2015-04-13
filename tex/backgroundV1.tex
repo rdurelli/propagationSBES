@@ -103,14 +103,14 @@ Figure~\ref{fig:system} shows schematically the potential of KDM for representin
 %
 %In order to show how KDM and its metaclasses can be used to represent a system, please considerer a toy system, which is depicted in Figure~\ref{fig:system}. Note that this system is also used along this paper as a running example. 
 %
-\begin{figure*}
+\begin{figure}
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.58]{figuras/NewSystemVersion}
-	\caption{Motivation and running example.}
+	\includegraphics[scale=0.5]{figuras/NovoSystemSBES}
+	\caption{System example.}
 	\label{fig:system}
-\end{figure*}
- %
+\end{figure}
+ % 
 %This toy system is based on a well know Model View Controller (MVC) design pattern. As noted in Figure~\ref{fig:system} it is split in four KDM levels/packages, which are illustrated in the figure bounded by dashed lines shape. %Following is described each KDM levels/packages and its meaning regarding to the illustrated system.
 %
 \texttt{Code View} is the most primitive view, representing the source-code of the system. It contains three packages. In Figure~\ref{fig:system} is is possible to see these packages: (\textit{i}) \texttt{VIEW} \ding{182}, (\textit{ii}) \texttt{CONTROLLER} \ding{183}, and (\textit{iii}) \texttt{MODEL} \ding{184}. Each of them contains a specific number of classes. %The first one, \texttt{GUI}, contains four classes, \texttt{StudentGUI}, \texttt{InstructorGUI}, \texttt{Student}, and \texttt{Instructor}. The second package contains three classes: \texttt{StudentCTR}, \texttt{UtilCon}, \texttt{InstructorCTR}. Then, the third one owns two classes, \texttt{Secretary} and \texttt{Researcher}. 
@@ -137,14 +137,13 @@ The \texttt{Conceptual Package} represents the business rules view of the system
 
 Finally, the \texttt{Data Package} depicts the system's database and its tables. Herein, it is possible to notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: Student, Instructor, Secretary, and Researcher. All of these POJOS are also Object Relational Mapping (ORM), i.e., they are mapped to the Data package using the metaclasse RelationalTable. 
 
-\begin{figure}
+\begin{figure*}
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.52]{figuras/TreeNewJoint}
+	\includegraphics[scale=0.88]{figuras/TreeNewJoint_FER}
 	\caption{A bird's eye view of a KDM's instance.}
 	\label{fig:allKDMLayers}
-\end{figure}
-
+\end{figure*}
 The schematic representation of the system shown in Figure~\ref{fig:system} can be realized in KDM as it is shown in Figure~\ref{fig:allKDMLayers}. 
 
 %The system described can be realized in KDM as shown in Figure~\ref{fig:allKDMLayers}. This figure depicts the corresponding, though simplified KDM instance of system illustrated in Figure~\ref{fig:system}. We have chosen to use a KDM instance as a UML object diagram for the sake of simplicity. However, it is important to notice that due space limitations some elements are not depicted in this figure.

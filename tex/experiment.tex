@@ -1,7 +1,7 @@
 %!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
 
 \section{Evaluation}\label{sec:evaluation}
-This section describes the experiment used to evaluate the change propagation effectiveness of our approach. In fact, two experiment were conducted. The first experiment is called ''Mining Study`` and was planned to identify the effectiveness of our  mining algorithm. Therefore, we have compared its result with an oracle in order to verify its correctness. The second experiment is referred as ''Propagation Study`` and was planned to evaluated the correctness of the propagation given a set of refactorings. 
+This section describes the experiment used to evaluate the change propagation effectiveness of our approach. In fact, two experiment were conducted. The first experiment is called ''Mining Study`` and was planned to identify the effectiveness of our  mining algorithm. Therefore, we have compared its result with an oracle in order to verify its correctness. The second experiment is referred as ``Propagation Study'' and was planned to evaluated the correctness of the propagation given a set of refactorings. In addition, we have worked out two research questions, as follows:
 
 %Moreover, this experiment also evaluate the devised Eclipse plug-in, which was earlier described. Specifically, we investigate the following research questions:
 
@@ -13,15 +13,29 @@
 
 \subsection{Goal Definiton}\label{sec:goal_definition}
 
-We use the organization proposed by the Goal/Question/Metric (GQM) paradigm, it describes experimental goals in five parts, as follows:  (\textit{i}) \textbf{object of study:} the object of study is our approach; (\textit{ii}) \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our approach, i.e, our mining affected metaclasses and the propagation of changes; (\textit{iii}) \textbf{perspective:} this experiment is run from the standpoint of a researcher; (\textit{iv}) \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm and a set of refactorings; (\textit{v}) \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
-
-Our experiment can be defined as: \textbf{Analyze} the effectiveness of change propagating of our approach , \textbf{for the purpose of} evaluation, \textbf{with respect to} precision and recall, \textbf{from the point of view of} the researcher, \textbf{in the context of} a subject program. 
+We use the organization proposed by the Goal/Question/Metric (GQM) paradigm, it describes experimental goals in five parts, as follows:
+%
+%\begin{itemize}
+%
+%\item \textbf{object of study:} the object of study is our approach; 
+%
+%\item \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our approach, i.e, our mining affected metaclasses and the propagation of changes;
+%
+%\item \textbf{perspective:} this experiment is run from the standpoint of a researcher;
+%
+%\item \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm and a set of refactorings; 
+%
+%\item  \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
+%\end{itemize}
+%
+%
+(\textit{i}) \textbf{object of study:} the object of study is our approach; (\textit{ii}) \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our approach, i.e, our mining affected metaclasses and the propagation of changes; (\textit{iii}) \textbf{perspective:} this experiment is run from the standpoint of a researcher; (\textit{iv}) \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm and a set of refactorings; (\textit{v}) \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
+The experiment can be defined as: \textbf{Analyze} the effectiveness of both the change propagating of our approach and the mining affected metaclasses, \textbf{for the purpose of} evaluation, \textbf{with respect to} precision and recall, \textbf{from the point of view of} the researcher, \textbf{in the context of} a subject program. 
 
 \subsection{Hypothesis Formulation}\label{hypothesis_formulation}	
-In order to accomplish our set goal, we explored the formalization of our research questions into the following hypotheses:
+In order to accomplish our goal, we explored the formalization of our research questions into the following hypotheses:
 
 %Our research questions were formalized into hypotheses so that statistical tests can be performed. 
-
 
 \begin{table}[h]
 \centering
