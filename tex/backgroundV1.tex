@@ -1,27 +1,27 @@
 %!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
 
-\section{Background} % (fold)
+\section{Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM)} % (fold)
 \label{sec:background}
 
-In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). 
+%In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). 
 
 %Further, we describe in detail why change propagation in KDM is a complex process.
 
-\subsection{ADM and KDM}
+%\subsection{ADM and KDM}
 
-The growing interest in using Model-Driven Development (MDD) to manage software evolution~\cite{Heckel2008, Andrade:2005, Reus:2006} 
+The growing interest in using MDA to manage software evolution~\cite{Heckel2008, Andrade:2005, Reus:2006} 
 %
 %
 %is mainly focused on the reengineering or modernization of legacy systems. Several software migration projects have been carried out with model-driven approaches~\cite{Heckel2008, Andrade:2005, Reus:2006}. %In addition, the 
 %This interest 
-motived OMG to define the ADM initiative~\cite{1686216} which advocates carrying out the reengineering process considering MDD principles. 
+motived OMG to define the Architecture-Driven Modernization (ADM) initiative~\cite{1686216} which advocates carrying out the reengineering process considering models. 
 
-ADM is the concept of modernizing existing systems with a focus on all aspects of the current systems architecture and the ability to transform current architectures to target architectures by using all principles of MDD~\cite[p.~60]{Ulrich:2010:IST:1841736}. 
+%ADM is the concept of modernizing existing systems with a focus on all aspects of the current systems architecture and the ability to transform current architectures to target architectures by using all principles of MDD~\cite[p.~60]{Ulrich:2010:IST:1841736}. 
 
 
 Figure~\ref{fig:ADM_shorseshoe} depicts the horseshoe model (i.e., horseshoe is basically a left-hand
-side, a right-hand side and a bridge between the sides) which was adapted to ADM. %Please note that it contains all the traditional phases and some MDD's keywords, such as PSM and  PIM. The traditional phases adapted to ADM are:
-As can be seen, this horseshoe model contains three main phases. The first one is the \textbf{Reverse Engineering} that takes a legacy system to be modernized as input.  Further the knowledge is extracted and a Platform-Specific Model (PSM) is generated. In addition the PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM. The second phase is the \textbf{Restructuring}, in which a set set of reengineering/refactoring can be applied into a model's instance by means of model transformations. The third phase is the \textbf{Forward Engineering} where a forward engineering is carried out and the source code of the modernized target system is generated.
+side, a right-hand side and a bridge between the sides) adapted to ADM. %Please note that it contains all the traditional phases and some MDD's keywords, such as PSM and  PIM. The traditional phases adapted to ADM are:
+This horseshoe model contains three main phases. The first one is the \textbf{Reverse Engineering} that takes a legacy system to be modernized as input.  Further the knowledge is extracted and a Platform-Specific Model (PSM) is generated. Next, this PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM. The second phase is the \textbf{Restructuring}, in which a set set of reengineering/refactoring can be applied into a KDM's instance by means of model transformations. The third phase is the \textbf{Forward Engineering} where a forward engineering is carried out and the source code of the modernized target system is generated.
 
 %Figure~\ref{horseshoe} depicts the ADM modernization domain model where the left side of the horseshoe is the current state of a busines/it architecture ``as is'' and the right side is what we want to get after the modernization ``to-be''. %One common path followed by IT is to focus on the technical architecture. Generally, the cost of this approach is lower and project duration shorter because the data and application architectures remain largely intact but there is almost no impact or value to the business. 
 
@@ -31,15 +31,15 @@ As can be seen, this horseshoe model contains three main phases. The first one i
 \begin{figure}[!ht]
 \centering
   % Requires \usepackage{graphicx}
- \includegraphics[scale=0.55]{figuras/horseshoes}
-\caption{Horseshoe Modernization Model. This figure is adapted from~\cite{OMG_ADM}.}
+ \includegraphics[scale=0.42]{figuras/processoDaFerramenta}
+\caption{Horseshoe Modernization Model~\cite{OMG_ADM}.}
 \label{fig:ADM_shorseshoe}
 \end{figure}
 
-In order to perform a systematic modernization as depicted in Figure~\ref{fig:ADM_shorseshoe}, ADM introduces several modernization standards, among them there is the Knowledge Discovery Metamodel (KDM).
+To perform a systematic modernization as depicted in Figure~\ref{fig:ADM_shorseshoe}, ADM introduces several modernization standards, among them there is the Knowledge Discovery Metamodel (KDM).
 %However, herein we focus on KDM because it is the key cornerstone of ADM and the main ideas of our research. 
 KDM is an OMG specification adopted as ISO/IEC 19506 by the International Standards Organization for representing information related to existing software systems. 
-The goal of the KDM standard is to define a metamodel to represent all the different legacy software artifacts involved in a legacy information system (e.g. source code, user interfaces, databases, business rules, etc.). %The metamodel of the KDM standard provides a comprehensive high-level view of the behavior, structure and data of legacy information systems by means of a set of facts. 
+The goal of the KDM standard is to define a metamodel to represent all the different legacy software artifacts involved in a legacy information system (e.g. Code, Architecture, Business Rules, Data, Events, etc.). %The metamodel of the KDM standard provides a comprehensive high-level view of the behavior, structure and data of legacy information systems by means of a set of facts. 
 
 KDM contains twelve packages and it is structured in a hierarchy of four layers: (\textit{i}) Infrastructure Layer, (\textit{ii}) Program Elements Layer, (\textit{iii}) Runtime Resource Layer, and (\textit{iv}) Abstractions Layer. These layers can be instantiated automatically, semi-automatically or manually through the application of various techniques of extraction of knowledge, analysis and transformations~\cite{1686216}. Figure~\ref{fig:kdmLayers} depicts the architecture of KDM and its layers. %By observing this figure it is fairly evident that each layer is based on the previous layer. 
 They are organized into packages that define a set of metamodel, whose purpose is to represent a specific and independent interest of knowledge related to legacy systems, e.g. source code, user interfaces, databases, business rules, etc.
@@ -106,7 +106,7 @@ Figure~\ref{fig:system} shows schematically the potential of KDM for representin
 \begin{figure}
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.5]{figuras/NovoSystemSBES}
+	\includegraphics[scale=0.5]{figuras/NovoSystem2}
 	\caption{System example.}
 	\label{fig:system}
 \end{figure}
@@ -117,7 +117,13 @@ Figure~\ref{fig:system} shows schematically the potential of KDM for representin
 The classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc -  represented by the symbol \ding{72};
 
 The \texttt{Structure Package} represents the architectural view of the system. In this example the system is MVC-based and each rectangle represents a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}.
-
+\begin{figure*}
+	\centering
+	% Requires \usepackage{graphicx}
+	\includegraphics[width=7.1in, height=2.7in]{figuras/TreeNewJointRafael}
+	\caption{A bird's eye view of a KDM's instance.}
+	\label{fig:allKDMLayers}
+\end{figure*}
 
 
 %illustrates the system's architecture. As aforementioned the system is based on MVC - each rectangle depicts in Figure~\ref{fig:system} represents a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}. %For the first layer, we have associated \texttt{View} with the package \texttt{GUI}. In KDM this kind of association is done by means of the meta-attribute \texttt{implementation}, which are depicted by the dashed arrows. Similarly, \texttt{Controller} was associated with the package \texttt{CTR}, and the layer \texttt{Model} was associated with the package \texttt{Model}, respectively. 
@@ -137,18 +143,12 @@ The \texttt{Conceptual Package} represents the business rules view of the system
 
 Finally, the \texttt{Data Package} depicts the system's database and its tables. Herein, it is possible to notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: Student, Instructor, Secretary, and Researcher. All of these POJOS are also Object Relational Mapping (ORM), i.e., they are mapped to the Data package using the metaclasse RelationalTable. 
 
-\begin{figure*}
-	\centering
-	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.88]{figuras/TreeNewJoint_FER}
-	\caption{A bird's eye view of a KDM's instance.}
-	\label{fig:allKDMLayers}
-\end{figure*}
-The schematic representation of the system shown in Figure~\ref{fig:system} can be realized in KDM as it is shown in Figure~\ref{fig:allKDMLayers}. 
 
+A simplified and schematic representation of the system shown in Figure~\ref{fig:system} can be realized in KDM as it is shown in Figure~\ref{fig:allKDMLayers}. 
+%
 %The system described can be realized in KDM as shown in Figure~\ref{fig:allKDMLayers}. This figure depicts the corresponding, though simplified KDM instance of system illustrated in Figure~\ref{fig:system}. We have chosen to use a KDM instance as a UML object diagram for the sake of simplicity. However, it is important to notice that due space limitations some elements are not depicted in this figure.
-
-A KDM's instance can be understood as a tree where we have a specially node called the root of the tree. %Then the remaining nodes are partitioned into $\textit{M} >= 0$ joint sets $T_{1}, T_{2}, ..., T_{n}$, and each of these sets is a subtree.  
+% 
+As noted, a KDM's instance can be understood as a tree where we have a specially node called the root of the tree. %Then the remaining nodes are partitioned into $\textit{M} >= 0$ joint sets $T_{1}, T_{2}, ..., T_{n}$, and each of these sets is a subtree.  
 Each nodes represent a metaclass that make up the system depicted in Figure~\ref{fig:system}. The edges represent the relationship between the metaclasses.
 %
 %
