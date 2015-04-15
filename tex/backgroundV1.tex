@@ -15,19 +15,12 @@ The growing interest in using MDA to manage software evolution~\cite{Heckel2008,
 %is mainly focused on the reengineering or modernization of legacy systems. Several software migration projects have been carried out with model-driven approaches~\cite{Heckel2008, Andrade:2005, Reus:2006}. %In addition, the 
 %This interest 
 motived OMG to define the Architecture-Driven Modernization (ADM) initiative~\cite{1686216} which advocates carrying out the reengineering process considering models. 
-
+%
 %ADM is the concept of modernizing existing systems with a focus on all aspects of the current systems architecture and the ability to transform current architectures to target architectures by using all principles of MDD~\cite[p.~60]{Ulrich:2010:IST:1841736}. 
-
-
+%
+%
 Figure~\ref{fig:ADM_shorseshoe} depicts the horseshoe model (i.e., horseshoe is basically a left-hand
 side, a right-hand side and a bridge between the sides) adapted to ADM. %Please note that it contains all the traditional phases and some MDD's keywords, such as PSM and  PIM. The traditional phases adapted to ADM are:
-This horseshoe model contains three main phases. The first one is the \textbf{Reverse Engineering} that takes a legacy system to be modernized as input.  Further the knowledge is extracted and a Platform-Specific Model (PSM) is generated. Next, this PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM. The second phase is the \textbf{Restructuring}, in which a set set of reengineering/refactoring can be applied into a KDM's instance by means of model transformations. The third phase is the \textbf{Forward Engineering} where a forward engineering is carried out and the source code of the modernized target system is generated.
-
-%Figure~\ref{horseshoe} depicts the ADM modernization domain model where the left side of the horseshoe is the current state of a busines/it architecture ``as is'' and the right side is what we want to get after the modernization ``to-be''. %One common path followed by IT is to focus on the technical architecture. Generally, the cost of this approach is lower and project duration shorter because the data and application architectures remain largely intact but there is almost no impact or value to the business. 
-
-%On the other hand, a modernization which seeks to provide value to the business, would need to change the application and data architecture, which in turn would rely on an analysis of requirements stemming from shifts to the business architecture. These types of projects are of a longer duration, require more investment, and deliver significantly more value to the business.
-
-
 \begin{figure}[!ht]
 \centering
   % Requires \usepackage{graphicx}
@@ -35,6 +28,14 @@ This horseshoe model contains three main phases. The first one is the \textbf{Re
 \caption{Horseshoe Modernization Model~\cite{OMG_ADM}.}
 \label{fig:ADM_shorseshoe}
 \end{figure}
+This horseshoe model contains three main phases. The first one is the \textbf{Reverse Engineering} that takes a legacy system to be modernized as input.  Further the knowledge is extracted and a Platform-Specific Model (PSM) is generated. Next, this PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM. The second phase is the \textbf{Restructuring}, in which a set set of reengineering/refactoring can be applied into a KDM's instance by means of model transformations. The third phase is the \textbf{Forward Engineering} where a forward engineering is carried out and the source code of the modernized target system is generated.
+
+%Figure~\ref{horseshoe} depicts the ADM modernization domain model where the left side of the horseshoe is the current state of a busines/it architecture ``as is'' and the right side is what we want to get after the modernization ``to-be''. %One common path followed by IT is to focus on the technical architecture. Generally, the cost of this approach is lower and project duration shorter because the data and application architectures remain largely intact but there is almost no impact or value to the business. 
+
+%On the other hand, a modernization which seeks to provide value to the business, would need to change the application and data architecture, which in turn would rely on an analysis of requirements stemming from shifts to the business architecture. These types of projects are of a longer duration, require more investment, and deliver significantly more value to the business.
+
+
+
 
 To perform a systematic modernization as depicted in Figure~\ref{fig:ADM_shorseshoe}, ADM introduces several modernization standards, among them there is the Knowledge Discovery Metamodel (KDM).
 %However, herein we focus on KDM because it is the key cornerstone of ADM and the main ideas of our research. 

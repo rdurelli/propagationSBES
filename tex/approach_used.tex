@@ -1,5 +1,5 @@
 %!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
-
+%
 \section{Propagation-Aware Refactorings} % (fold)
 \label{sec:the_approach}
 
@@ -30,7 +30,7 @@ More details on each step are provided in the next sections.
 \subsection{Apply Refactoring} % (fold)
 \label{sub:apply_refactoring}
 
-In the step [A] the engineer must apply a refactoring. A natural way of implementing refactoring in models is by means of \textit{in-place transformations}\footnote{We have devised a repository where a set of \textit{in-place transformations} (i.e., refactoring) is available. The repository can be accessed in www.site.com.br. It aims is to share refactoring to be applied into KDM's instances.} as describe in Section~\ref{sec:background}. %This kind of transformations are used for rewriting a model by creating, deleting, and updating elements in the input model, e.g., in a KDM's instance. 
+In the step [A] the engineer must apply a refactoring. A natural way of implementing refactoring in models is by means of \textit{in-place transformations}\footnote{We have devised a repository where a set of \textit{in-place transformations} (i.e., refactoring) is available. The repository can be accessed in www.site.com.br. It aims is to share refactoring to be applied into KDM's instances.}. %as describe in Section~\ref{sec:background}. %This kind of transformations are used for rewriting a model by creating, deleting, and updating elements in the input model, e.g., in a KDM's instance. 
 Going into more details, applying these transformations/refactoring into a KDM's instance can introduce incompatibilities and inconsistencies which can not be easily resolved. In fact, we can classified these transformations by their corrupting or non-corrupting effects:%\cite{towardssynchronizing07}:
 
 \begin{itemize}
@@ -43,8 +43,8 @@ Going into more details, applying these transformations/refactoring into a KDM's
 \end{itemize} 
 % In the context of this paper, we are only considering the \textit{non-breaking changes} and \textit{breaking and resolvable changes automatically}. 
 %
-These transformations can be performed by means of rule-based languages. Our approach uses ATL Transformation Language (ATL). The main advantage of using one ATL is that the transformation logic can be expressed at a high level of abstraction thus enhancing maintainability and understandability. 
-
+These transformations can be performed by means of rule-based languages. Our approach uses ATL Transformation Language (ATL). %The main advantage of using one ATL is that the transformation logic can be expressed at a high level of abstraction thus enhancing maintainability and understandability. 
+%
 To express a transformation in our approach, the user must specify mapping rules that describe how KDM's elements model can be refactored. Further, the users should inform some input parameters that should be properly instantiated. For example, considering the refactoring \textit{Move Class}, an ATL transformation that could perform this task is depicted in Figure~\ref{fig:ATLRefactoring}.
 
 
@@ -87,11 +87,11 @@ Almost all refactorings need some input parameters that should be properly insta
 \subsection{Mine Affected Metaclasses} % (fold)
 \label{sub:mine_affected_metaclasses}
 
-The step [B] starts with our DI Algorithm that aims to identify all metaclasses and its relationships that use somehow the metaclass(es) that were refactored in step [A]. As input all the metaclasses that were used to apply an specific refactoring is needed. In addition, our DI Algorithm uses a set of queries that are performed on the KDM's instance to mine all the affected/linked metaclasses. All the queries were created using XPath. We have decided to use XPath because it is a well-know and well-documented language. 
+The step [B] starts with our DI Algorithm that aims to identify all metaclasses and its relationships that use somehow the metaclass(es) that were refactored in step [A]. As input all the metaclasses that were used to apply an specific refactoring is needed. In addition, our DI Algorithm uses a set of queries that are performed on the KDM's instance to mine all the affected/linked metaclasses. All the queries were created using XPath. %We have decided to use XPath because it is a well-know and well-documented language. 
 
 Concerning the running example depicted in Figure~\ref{fig:system} the engineer aimed to apply the refactoring \textit{Move Class} - both classes \texttt{Student} and \texttt{Instructor} should not longer be contained in the package \texttt{View}. These classes should be allocated into the package \texttt{Model}. Considering the refactoring \textit{Move Class}, three elements (\texttt{Student}, \texttt{Instructor}, and their package) need to be investigated throughout the KDM's instance in order to identify which other metaclasses can be affected. 
 
-Therefore, firstly a query must be executed to get the root element in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the metaclass \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our depth-first search algorithm.
+Therefore, firstly a query must be executed to get the root element in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the metaclass \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our DI Algorithm.
 
 \begin{figure}[h]
 	\centering
@@ -128,7 +128,7 @@ Therefore, firstly a query must be executed to get the root element in KDM. This
 
 Algorithm~\ref{alg:death1} depicts the DI Algorithm that is used to mine all the affected metaclasses. It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that were refactored in Step [A] (e.g., for the refactoring \textit{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package). %A diagram of how our DI Algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses - the node A represents the \texttt{Segment} and K, H, E and B illustrate \texttt{CodeModel}, \texttt{StructureModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
 
-More specifically, the algorithm works as follows: first it is necessary to pick a starting point, i.e., the metaclass \texttt{Segment}. Visit the \texttt{Segment}, push it onto a stack, and mark it as visited. Then it is necessary to go to the next metaclass that is unvisited, verify if it has an association named \texttt{implementation}. If yes, it verifies if this association contains references to any element's used in the refactoring, if yes - push it on the stack, and mark it. This continues until the algorithm reachs the last metaclass. Then the algorithm checks to see if the \texttt{Segment} has any unvisited adjacent metaclass. If it does not, then it is necessary to pop it off the stack and check the next metaclass. If the algorithm finds one (unvisited metaclass), it starts visiting adjacent metaclasses until there are no more, check for more unvisited adjacent metaclasses, and continue the process always verifying the association named implementation. When the algorithm finally reach the last metaclass on the stack and there are no more adjacent, unvisited metaclasses that contains the association \texttt{implementation} without check , our algorithm should show a list of all affected metaclasses. 
+More specifically, the algorithm works as follows: first it is necessary to pick a starting point, i.e., the metaclass \texttt{Segment}. Visit the \texttt{Segment}, push it onto a stack, and mark it as visited. Then it is necessary to go to the next metaclass that is unvisited, verify if it has an association named \texttt{implementation}. If yes, it verifies if this association contains references to any element's used in the refactoring, if yes - push it on the stack, and mark it. This continues until the algorithm reachs the last metaclass. Then the algorithm checks to see if the \texttt{Segment} has any unvisited adjacent metaclass. If it does not, then it is necessary to pop it off the stack and check the next metaclass. If the algorithm finds one (unvisited metaclass), it starts visiting adjacent metaclasses until there are no more, check for more unvisited adjacent metaclasses, and continue the process always verifying the association named \texttt{implementation}. When the algorithm finally reach the last metaclass on the stack and there are no more adjacent, unvisited metaclasses that contains the association \texttt{implementation} without check, our algorithm should show a list of all affected metaclasses that is further used to propagated all changes throughout the KDM packages. 
 %
 %
 %
