@@ -3,32 +3,41 @@
 \section{Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM)} % (fold)
 \label{sec:background}
 
+According to OMG, ADM ``is the process of understanding and evolving existing software assets~\cite{1686216}''. ADM solves the problems of traditional reengineering since it carries out reengineering processes taking model-driven principles into account. However, ADM does not replace reengineering, but ADM improves it. A typical ADM process involves three main phases: Reverse Engineering, Refactorings and Optimizations and Forward Engineering.  In reverse engineering phase, a legacy system is abstracted in a KDM instance. Next, some refactorings and optimizations can be applied over the KDM instance and, in the last phase, the modernized source code is generated. The focus of this paper is on the refactorings to be applied over KDM instances.  
+
+KDM is the most important metamodel of ADM (ISO/IEC 19506) and its goal is being able to represent most of the software artifacts and views into a unique place; this is very different form conventional model-driven development techniques we have found on literature~\cite{7051941, Perez-Castillo:2011:KDM}. KDM contains twelve packages organized in a hierarchy of four layers: (i) Infrastructure Layer, (ii) Program Elements Layer, (iii) Runtime Resource Layer, and (iv) Abstractions Layer.
+
+These layers can be instantiated automatically, semi-automatically or manually through the application of various techniques of extraction of knowledge, analysis and transformations~\cite{OMGADM}. Notice the slight difference between the terms ``view'' and ``package'' we are using in this paper. Using the KDM terminology, we can say the Code package allows the creation/existence of a view to represent the source code. At the same way, the Structure package allows the creation of an architectural view of the system. 
+
+One of the main KDM characteristics is the power to represent different abstractions of the same system and also to retain/make evident the dependencies among these abstractions. This is done thanks to its twelve internal metamodels/packages, since each one is devoted to represent a particular view. In fact, KDM is a set of internal metamodels. 
+
+%----------------------------------------------------------------------
+
 %In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). 
 
 %Further, we describe in detail why change propagation in KDM is a complex process.
 
 %\subsection{ADM and KDM}
 
-The growing interest in using MDA to manage software evolution~\cite{Heckel2008, Andrade:2005, Reus:2006} 
+%The growing interest in using MDA to manage software evolution~\cite{Heckel2008, Andrade:2005, Reus:2006} 
 %
 %
 %is mainly focused on the reengineering or modernization of legacy systems. Several software migration projects have been carried out with model-driven approaches~\cite{Heckel2008, Andrade:2005, Reus:2006}. %In addition, the 
 %This interest 
-motived OMG to define the Architecture-Driven Modernization (ADM) initiative~\cite{1686216} which advocates carrying out the reengineering process considering models. 
+%motived OMG to define the Architecture-Driven Modernization (ADM) initiative~\cite{1686216} which advocates carrying out the reengineering process considering models. 
 %
 %ADM is the concept of modernizing existing systems with a focus on all aspects of the current systems architecture and the ability to transform current architectures to target architectures by using all principles of MDD~\cite[p.~60]{Ulrich:2010:IST:1841736}. 
 %
 %
-Figure~\ref{fig:ADM_shorseshoe} depicts the horseshoe model (i.e., horseshoe is basically a left-hand
-side, a right-hand side and a bridge between the sides) adapted to ADM. %Please note that it contains all the traditional phases and some MDD's keywords, such as PSM and  PIM. The traditional phases adapted to ADM are:
-\begin{figure}[!ht]
-\centering
+%Figure~\ref{fig:ADM_shorseshoe} depicts the horseshoe model (i.e., horseshoe is basically a left-hand side, a right-hand side and a bridge between the sides) adapted to ADM. %Please note that it contains all the traditional phases and some MDD's keywords, such as PSM and  PIM. The traditional phases adapted to ADM are:
+%\begin{figure}[!ht]
+%\centering
   % Requires \usepackage{graphicx}
- \includegraphics[scale=0.42]{figuras/processoDaFerramenta}
-\caption{Horseshoe Modernization Model~\cite{OMG_ADM}.}
-\label{fig:ADM_shorseshoe}
-\end{figure}
-This horseshoe model contains three main phases. The first one is the \textbf{Reverse Engineering} that takes a legacy system to be modernized as input.  Further the knowledge is extracted and a Platform-Specific Model (PSM) is generated. Next, this PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM. The second phase is the \textbf{Restructuring}, in which a set set of reengineering/refactoring can be applied into a KDM's instance by means of model transformations. The third phase is the \textbf{Forward Engineering} where a forward engineering is carried out and the source code of the modernized target system is generated.
+% \includegraphics[scale=0.42]{figuras/processoDaFerramenta}
+%\caption{Horseshoe Modernization Model~\cite{OMG_ADM}.}
+%\label{fig:ADM_shorseshoe}
+%\end{figure}
+%This horseshoe model contains three main phases. The first one is the \textbf{Reverse Engineering} that takes a legacy system to be modernized as input.  Further the knowledge is extracted and a Platform-Specific Model (PSM) is generated. Next, this PSM serves as the basis for the generation of a Platform-Independent Language (PIM), which is called KDM. The second phase is the \textbf{Restructuring}, in which a set set of reengineering/refactoring can be applied into a KDM's instance by means of model transformations. The third phase is the \textbf{Forward Engineering} where a forward engineering is carried out and the source code of the modernized target system is generated.
 
 %Figure~\ref{horseshoe} depicts the ADM modernization domain model where the left side of the horseshoe is the current state of a busines/it architecture ``as is'' and the right side is what we want to get after the modernization ``to-be''. %One common path followed by IT is to focus on the technical architecture. Generally, the cost of this approach is lower and project duration shorter because the data and application architectures remain largely intact but there is almost no impact or value to the business. 
 
@@ -37,23 +46,21 @@ This horseshoe model contains three main phases. The first one is the \textbf{Re
 
 
 
-To perform a systematic modernization as depicted in Figure~\ref{fig:ADM_shorseshoe}, ADM introduces several modernization standards, among them there is the Knowledge Discovery Metamodel (KDM).
-%However, herein we focus on KDM because it is the key cornerstone of ADM and the main ideas of our research. 
-KDM is an OMG specification adopted as ISO/IEC 19506 by the International Standards Organization for representing information related to existing software systems. 
-The goal of the KDM standard is to define a metamodel to represent all the different legacy software artifacts involved in a legacy information system (e.g. Code, Architecture, Business Rules, Data, Events, etc.). %The metamodel of the KDM standard provides a comprehensive high-level view of the behavior, structure and data of legacy information systems by means of a set of facts. 
+%To perform a systematic modernization as depicted in Figure~\ref{fig:ADM_shorseshoe}, ADM introduces several modernization standards, among them there is the Knowledge Discovery Metamodel (KDM).
+%However, herein we focus on KDM because it is the key cornerstone of ADM and the main ideas of our research.  KDM is an OMG specification adopted as ISO/IEC 19506 by the International Standards Organization for representing information related to existing software systems. The goal of the KDM standard is to define a metamodel to represent all the different legacy software artifacts involved in a legacy information system (e.g. Code, Architecture, Business Rules, Data, Events, etc.). %The metamodel of the KDM standard provides a comprehensive high-level view of the behavior, structure and data of legacy information systems by means of a set of facts. 
 
-KDM contains twelve packages and it is structured in a hierarchy of four layers: (\textit{i}) Infrastructure Layer, (\textit{ii}) Program Elements Layer, (\textit{iii}) Runtime Resource Layer, and (\textit{iv}) Abstractions Layer. These layers can be instantiated automatically, semi-automatically or manually through the application of various techniques of extraction of knowledge, analysis and transformations~\cite{1686216}. Figure~\ref{fig:kdmLayers} depicts the architecture of KDM and its layers. %By observing this figure it is fairly evident that each layer is based on the previous layer. 
-They are organized into packages that define a set of metamodel, whose purpose is to represent a specific and independent interest of knowledge related to legacy systems, e.g. source code, user interfaces, databases, business rules, etc.
+%KDM contains twelve packages and it is structured in a hierarchy of four layers: (\textit{i}) Infrastructure Layer, (\textit{ii}) Program Elements Layer, (\textit{iii}) Runtime Resource Layer, and (\textit{iv}) Abstractions Layer. These layers can be instantiated automatically, semi-automatically or manually through the application of various techniques of extraction of knowledge, analysis and transformations~\cite{1686216}. Figure~\ref{fig:kdmLayers} depicts the architecture of KDM and its layers. %By observing this figure it is fairly evident that each layer is based on the previous layer. 
+%They are organized into packages that define a set of metamodel, whose purpose is to represent a specific and independent interest of knowledge related to legacy systems, e.g. source code, user interfaces, databases, business rules, etc.
 
-\begin{figure}[!ht]
-\centering
+%\begin{figure}[!ht]
+%\centering
   % Requires \usepackage{graphicx}
- \includegraphics[width=3.3in]{figuras/camadas_kdm}
-\caption{KDM Architecture.}
-\label{fig:kdmLayers}
-\end{figure}
+ %\includegraphics[width=3.3in]{figuras/camadas_kdm}
+%\caption{KDM Architecture.}
+%\label{fig:kdmLayers}
+%\end{figure}
 
-Although KDM is a metamodel to represent a whole system, its main purpose is not the representation of models related strictly to the source code nature such as Unified Modeling Language (UML). While UML can be used to generate new code in a top-down manner, an ADM-based process using KDM starts from the different legacy software artifacts and builds higher-abstraction level models in a bottom-up manner through reverse engineering techniques. %KDM can be seen from different perspectives, as follows: (\textit{i}) KDM can be considered as a metamodel to represent legacy knowledge models, (\textit{ii}) most of the KDM specification is a definition of a language- and platform-independent ontology of legacy information systems and (\textit{iii}) KDM is a common interchange format that makes the interoperability between the reverse engineering tools and modernization tools possible.
+%Although KDM is a metamodel to represent a whole system, its main purpose is not the representation of models related strictly to the source code nature such as Unified Modeling Language (UML). While UML can be used to generate new code in a top-down manner, an ADM-based process using KDM starts from the different legacy software artifacts and builds higher-abstraction level models in a bottom-up manner through reverse engineering techniques. %KDM can be seen from different perspectives, as follows: (\textit{i}) KDM can be considered as a metamodel to represent legacy knowledge models, (\textit{ii}) most of the KDM specification is a definition of a language- and platform-independent ontology of legacy information systems and (\textit{iii}) KDM is a common interchange format that makes the interoperability between the reverse engineering tools and modernization tools possible.
 
 %KDM specification owns some KDM domain, each domain defines an architectural viewpoint. In order to define the catalogue of refactoring for the KDM we need to focus just on the Program Element Layer - more specifically  in the Code Package, which represents the code elements of a program (classes, fields and methods) and their associations. %We are interested in the Code Package once our catalogue is based on fine-grained refactorings, i.e., refactorings to be applied into classes, fields and methods. 
 %Therefore, it is important to dig a little deeper in the Code Package.
@@ -100,10 +107,11 @@ Although KDM is a metamodel to represent a whole system, its main purpose is not
  %As can be seen in Figure~\ref{fig:programLayer} the root metaclass is \textit{ComputationalObject} which has two sub-metaclasses, i.e., \textit{DataElement} and \textit{ControlElement}. The former sub-metaclass, \textit{DataElement}, is a generic modeling element that defines the common properties of several concrete classes that represent the named data items of existing software systems, for example, global and local variables, record files, and formal parameters. \textit{DataElement} has five sub-metaclasses - \textit{StorableUnit}, \textit{IndexUnit}, \textit{ItemUnit}, \textit{ParameterUnit} and \textit{MemberUnit}. \textit{StorableUnit} is a concrete  sub-metaclass of the \textit{StorableElement} meta-class that represents variables of the existing software system. \textit{IndexUnit} class is a concrete subclass of the \textit{DataElement} class that represents an index of an array datatype. Instances of \textit{ItemUnit} class are endpoints of KDM data relations which describes access to complex datatypes. \textit{ParameterUnit} class is a concrete subclass of the \textit{DataElement} class that represents a formal parameter; for example, a formal parameter of a procedure. \textit{MemberUnit} class is a concrete subclass of the \textit{DataElement} class that represents a member of a class type. Finally, the latter, \textit{ControlElement} is a sub-metaclass that contains two sub-metaclasses - \textit{MethodUnit} and \textit{CallableUnit}. \textit{MethodUnit} element represents member functions owned by a \textit{ClassUnit}, including user-defined operators, constructors and destructors. The \textit{CallableUnit} represents a basic stand-alone element that can be called, such as a procedure or a function. %As can be seen below the dashed line in Figure~\ref{fig:programLayer} there are also the following enumerations: ``\textit{ExportKind}'', ``\textit{StorableKind}'', ``\textit{CallableKind}'', ``\textit{MethodKind}'', which are sets os literals used as properties of the metaclasses.
  
 
-Figure~\ref{fig:system} shows schematically the potential of KDM for representing four views of an Academic Management System: \texttt{Code View}, \texttt{Architecture View}, \texttt{Data View} and \texttt{Conceptual View}.
-%
-%In order to show how KDM and its metaclasses can be used to represent a system, please considerer a toy system, which is depicted in Figure~\ref{fig:system}. Note that this system is also used along this paper as a running example. 
-%
+Figure~\ref{fig:system} shows schematically the potential of KDM for representing three views of part of an Academic Management System: \texttt{Code View}, \texttt{Architecture View} and \texttt{Data View}. The entire figure represents a KDM model, i.e., an instance of KDM composed by three other internal instances - each big rectangle (packages/views) represents an instance of a internal metamodel/package. Besides, each smaller internal element (classes, packages, layers, relationships, etc) are instances of KDM metaclasses. Notice that we are using the notation ``instance:Type'' at every element so that the name of KDM metaclasses can be seen.
+As this is a MVC-based system, the \texttt{Code View} contains three instances of the \texttt{Package} metaclass: (i) \texttt{VIEW}, (ii) \texttt{CONTROLLER}, and (iii) \texttt{MODEL}. Each of them involving a specific number of \texttt{ClassUnit} instances. The classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc.
+
+\texttt{Architecture View} represents the system architecture. In this example each rectangle represents an instance of the \texttt{Layer} metaclass, i.e., \texttt{View}, \texttt{Controller}, and \texttt{Model}. Between Layes and Packages there is a relationship called \texttt{Implementation}, whose intention is to denote that a specific higher level abstraction is realized by one or more code elements. In this way, the \texttt{Layer View} is realized in source-code level by the package \texttt{VIEW}; the \texttt{Model} layer is realized by the package \texttt{Model} and the layer \texttt{Controller} by the \texttt{Controller} package.
+
 \begin{figure}
 	\centering
 	% Requires \usepackage{graphicx}
@@ -111,54 +119,61 @@ Figure~\ref{fig:system} shows schematically the potential of KDM for representin
 	\caption{System example.}
 	\label{fig:system}
 \end{figure}
+
+KDM also possesses a relationship type called \texttt{AggregatedRelationship} whose aim is to represent dependencies between architectural elements from \texttt{Structure Package}. Using this relationship it is possible to put together several primitive relationships in a unique ``channel''. For example, in Figure~\cite{fig:system}, it is possible to see big ``channel'' (represented by directional arrows) between the layers schematically representing the \texttt{AggregatedRelationship}. The \texttt{AggregatedRelationship} between the layer \texttt{View} and the layer \texttt{Controller} group the following relationships: two \texttt{Calls}, one \texttt{Creates} and one \texttt{Extends}. The number aside the \texttt{AggregatedRelationship} ``channel'' is its ``density'', that represents the amount of primitive relationships the \texttt{AggregatedRelationship} involves. Summing up these relationships the ``density'' value is 4. Following the same idea the relationship between the layer \texttt{Controller} and layer \texttt{Model} is ``density'' value is 2. %The Conceptual Package represents the business rules view of the system. In this case, the system owns three scenarios named X, Y and Z, each of them associated with a package from Code Package by using the implementation relationship (dashed arrows). Further, each scenario contains a rule except the last one. Then, each rule is associated with a class from Code package, again using the association implementation; 
+
+Finally, the \texttt{Data Package} depicts the system's database and its tables. Herein, it is possible to notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: \texttt{Student,} \texttt{Instructor}, \texttt{Secretary}, and \texttt{Researcher}. All of these POJOS are also Object Relational Mapping (ORM), i.e., they are mapped to the \texttt{Data package} using the metaclass \texttt{RelationalTable} and its columns are mapped using the metaclasses \texttt{UniqueKey} and \texttt{ColumnSet}.
+
+%shows schematically the potential of KDM for representing four views of an Academic Management System: \texttt{Code View}, \texttt{Architecture View}, \texttt{Data View} and \texttt{Conceptual View}.
+%
+%In order to show how KDM and its metaclasses can be used to represent a system, please considerer a toy system, which is depicted in Figure~\ref{fig:system}. Note that this system is also used along this paper as a running example. 
+%
  % 
 %This toy system is based on a well know Model View Controller (MVC) design pattern. As noted in Figure~\ref{fig:system} it is split in four KDM levels/packages, which are illustrated in the figure bounded by dashed lines shape. %Following is described each KDM levels/packages and its meaning regarding to the illustrated system.
 %
-\texttt{Code View} is the most primitive view, representing the source-code of the system. It contains three packages. In Figure~\ref{fig:system} is is possible to see these packages: (\textit{i}) \texttt{VIEW} \ding{182}, (\textit{ii}) \texttt{CONTROLLER} \ding{183}, and (\textit{iii}) \texttt{MODEL} \ding{184}. Each of them contains a specific number of classes. %The first one, \texttt{GUI}, contains four classes, \texttt{StudentGUI}, \texttt{InstructorGUI}, \texttt{Student}, and \texttt{Instructor}. The second package contains three classes: \texttt{StudentCTR}, \texttt{UtilCon}, \texttt{InstructorCTR}. Then, the third one owns two classes, \texttt{Secretary} and \texttt{Researcher}. 
-The classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc -  represented by the symbol \ding{72};
+%\texttt{Code View} is the most primitive view, representing the source-code of the system. It contains three packages. In Figure~\ref{fig:system} is is possible to see these packages: (\textit{i}) \texttt{VIEW} \ding{182}, (\textit{ii}) \texttt{CONTROLLER} \ding{183}, and (\textit{iii}) \texttt{MODEL} \ding{184}. Each of them contains a specific number of classes. %The first one, \texttt{GUI}, contains four classes, \texttt{StudentGUI}, \texttt{InstructorGUI}, \texttt{Student}, and \texttt{Instructor}. The second package contains three classes: \texttt{StudentCTR}, \texttt{UtilCon}, \texttt{InstructorCTR}. Then, the third one owns two classes, \texttt{Secretary} and \texttt{Researcher}. 
+%The classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc -  represented by the symbol \ding{72};
 
-The \texttt{Structure Package} represents the architectural view of the system. In this example the system is MVC-based and each rectangle represents a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}.
-\begin{figure*}
-	\centering
+%The \texttt{Structure Package} represents the architectural view of the system. In this example the system is MVC-based and each rectangle represents a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}.
+%\begin{figure*}
+%	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[width=7.1in, height=2.7in]{figuras/TreeNewJointRafael}
-	\caption{A bird's eye view of a KDM's instance.}
-	\label{fig:allKDMLayers}
-\end{figure*}
+%	\includegraphics[width=7.1in, height=2.7in]{figuras/TreeNewJointRafael}
+%	\caption{A bird's eye view of a KDM's instance.}
+%	\label{fig:allKDMLayers}
+%\end{figure*}
 
 
 %illustrates the system's architecture. As aforementioned the system is based on MVC - each rectangle depicts in Figure~\ref{fig:system} represents a layer, i.e., \texttt{View} \ding{185}, \texttt{Controller} \ding{186}, and \texttt{Model} \ding{186}. %For the first layer, we have associated \texttt{View} with the package \texttt{GUI}. In KDM this kind of association is done by means of the meta-attribute \texttt{implementation}, which are depicted by the dashed arrows. Similarly, \texttt{Controller} was associated with the package \texttt{CTR}, and the layer \texttt{Model} was associated with the package \texttt{Model}, respectively. 
-The \texttt{View} layer is realized in source-code level by the package \texttt{VIEW}; the \texttt{Model} layer is realized by the package \texttt{Model} and the layer \texttt{Controller} by the \texttt{Controller} package. These realizations are represented in KDM by a relationship called \texttt{implementation}, represented in the figure by dashed arrows. KDM possesses a relationship type called \texttt{AggregatedRelationship} whose aim is to represent dependencies between architectural elements of from Structure Package. With this relationship is possible to put together several primitive relationships in a unique channel/pine. For example, in Figure~\ref{fig:system}, it is possible to see big  pipes between the layers schematically representing the \texttt{AggregatedRelationship}. 
+%The \texttt{View} layer is realized in source-code level by the package \texttt{VIEW}; the \texttt{Model} layer is realized by the package \texttt{Model} and the layer \texttt{Controller} by the \texttt{Controller} package. These realizations are represented in KDM by a relationship called \texttt{implementation}, represented in the figure by dashed arrows. KDM possesses a relationship type called \texttt{AggregatedRelationship} whose aim is to represent dependencies between architectural elements of from Structure Package. With this relationship is possible to put together several primitive relationships in a unique channel/pine. For example, in Figure~\ref{fig:system}, it is possible to see big  pipes between the layers schematically representing the \texttt{AggregatedRelationship}. 
 %
 %
 %
 %
 %
 %Regarding to the relationships among the layers, it is possible to visualize pipes between two layers (see Figure~\ref{fig:system}. These pipes represents the corresponding \texttt{AggregatedRelationship}\footnote{A metaclass in KDM used to represent relationship among KDM entities.}, which represents the number summing all primitive relationships among layers. 
-The \texttt{AggregatedRelationship} between the layer \texttt{View} and the layer \texttt{Controller} group the following relationships: two \texttt{Calls}, one \texttt{Creates} and one \texttt{Extends}. The number aside the \texttt{AggregatedRelationship} pipe is its ''density``, that represents the amount of primitive relationships the \texttt{AggregatedRelationship} involves. 
+%The \texttt{AggregatedRelationship} between the layer \texttt{View} and the layer \texttt{Controller} group the following relationships: two \texttt{Calls}, one \texttt{Creates} and one \texttt{Extends}. The number aside the \texttt{AggregatedRelationship} pipe is its ''density``, that represents the amount of primitive relationships the \texttt{AggregatedRelationship} involves. 
 %
 %are represented by the relationships: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, and another \texttt{Calls} from the Code Package. 
-Summing up these relationships the ''density`` value is 4. Following the same idea the relationship between the layer \texttt{Controller} and layer \texttt{Model} is ''density`` value is 2;  
+%Summing up these relationships the ''density`` value is 4. Following the same idea the relationship between the layer \texttt{Controller} and layer \texttt{Model} is ''density`` value is 2;  
   
-The \texttt{Conceptual Package} represents the business rules view of the system. In this case, the system owns three scenarios named \textbf{X, Y and Z}, each of them associated with a package from Code Package by using the \texttt{implementation} relationship (dashed arrows). Further, each scenario contains a rule except the last one. Then, each rule is associated with a class from Code package, again using the association \texttt{implementation};
+%The \texttt{Conceptual Package} represents the business rules view of the system. In this case, the system owns three scenarios named \textbf{X, Y and Z}, each of them associated with a package from Code Package by using the \texttt{implementation} relationship (dashed arrows). Further, each scenario contains a rule except the last one. Then, each rule is associated with a class from Code package, again using the association \texttt{implementation};
 
-Finally, the \texttt{Data Package} depicts the system's database and its tables. Herein, it is possible to notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: Student, Instructor, Secretary, and Researcher. All of these POJOS are also Object Relational Mapping (ORM), i.e., they are mapped to the Data package using the metaclasse RelationalTable. 
+%Finally, the \texttt{Data Package} depicts the system's database and its tables. Herein, it is possible to notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: Student, Instructor, Secretary, and Researcher. All of these POJOS are also Object Relational Mapping (ORM), i.e., they are mapped to the Data package using the metaclasse RelationalTable. 
 
 
-A simplified and schematic representation of the system shown in Figure~\ref{fig:system} can be realized in KDM as it is shown in Figure~\ref{fig:allKDMLayers}. 
+%A simplified and schematic representation of the system shown in Figure~\ref{fig:system} can be realized in KDM as it is shown in Figure~\ref{fig:allKDMLayers}. 
 %
 %The system described can be realized in KDM as shown in Figure~\ref{fig:allKDMLayers}. This figure depicts the corresponding, though simplified KDM instance of system illustrated in Figure~\ref{fig:system}. We have chosen to use a KDM instance as a UML object diagram for the sake of simplicity. However, it is important to notice that due space limitations some elements are not depicted in this figure.
 % 
-As noted, a KDM's instance can be understood as a tree where we have a specially node called the root of the tree. %Then the remaining nodes are partitioned into $\textit{M} >= 0$ joint sets $T_{1}, T_{2}, ..., T_{n}$, and each of these sets is a subtree.  
-Each nodes represent a metaclass that make up the system depicted in Figure~\ref{fig:system}. The edges represent the relationship between the metaclasses.
+%As noted, a KDM's instance can be understood as a tree where we have a specially node called the root of the tree. %Then the remaining nodes are partitioned into $\textit{M} >= 0$ joint sets $T_{1}, T_{2}, ..., T_{n}$, and each of these sets is a subtree.  Each nodes represent a metaclass that make up the system depicted in Figure~\ref{fig:system}. The edges represent the relationship between the metaclasses.
 %
 %
 %each KDM's levels/packages can be partitioned both horizontally and vertically; in both cases its metaclasses are closely related and interconnected. %The relations form the key concept of modernization by means of KDM, since they invoke the needs for change propagation. 
 %
-The root is the metaclass \texttt{Segment}, then, there are four subtrees rooted at \texttt{StructureModel}, \texttt{CodeModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
-The tree rooted at \texttt{StructureModel} has three instance of the metaclass \texttt{Layer}, \texttt{CONTROLLER}, \texttt{VIEW}, and \texttt{MODEL} - they are connected by the metaclasses \texttt{AggregatedRelationship} (see Figure~\ref{fig:system} and Figure~\ref{fig:allKDMLayers}). The tree rooted at \texttt{CodeModel} represents all elements of source-code. It contains three instance of the metaclass \texttt{Package} - \texttt{CONTROLLER}, \texttt{VIEW}, and \texttt{MODEL}, respectively. Each package contains a set of classes, for instance, the package \texttt{MODEL} has two instance of the metaclass \texttt{ClassUnit}, \texttt{Researcher}, and \texttt{Secretary}, respectively.
+%The root is the metaclass \texttt{Segment}, then, there are four subtrees rooted at \texttt{StructureModel}, \texttt{CodeModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. The tree rooted at \texttt{StructureModel} has three instance of the metaclass \texttt{Layer}, \texttt{CONTROLLER}, \texttt{VIEW}, and \texttt{MODEL} - they are connected by the metaclasses \texttt{AggregatedRelationship} (see Figure~\ref{fig:system} and Figure~\ref{fig:allKDMLayers}). The tree rooted at \texttt{CodeModel} represents all elements of source-code. It contains three instance of the metaclass \texttt{Package} - \texttt{CONTROLLER}, \texttt{VIEW}, and \texttt{MODEL}, respectively. Each package contains a set of classes, for instance, the package \texttt{MODEL} has two instance of the metaclass \texttt{ClassUnit}, \texttt{Researcher}, and \texttt{Secretary}, respectively.
 
-The tree rooted at \texttt{ConceptualModel} also has three subtree - herein represented by the metaclass \texttt{ScenarioUnit}. Further, each node of a tree is the root of a \texttt{RuleUnit}. Finally, the \texttt{DataModel} has one subtree - \texttt{RelationalSchema}, which represent the system's data base schema. It contains four subtree - \texttt{Secretary}, \texttt{Researcher}, \texttt{Instructor}, and \texttt{Student}, where each node is an instance of the metaclass \texttt{RelationalTable}.
+%The tree rooted at \texttt{ConceptualModel} also has three subtree - herein represented by the metaclass \texttt{ScenarioUnit}. Further, each node of a tree is the root of a \texttt{RuleUnit}. Finally, the \texttt{DataModel} has one subtree - \texttt{RelationalSchema}, which represent the system's data base schema. It contains four subtree - \texttt{Secretary}, \texttt{Researcher}, \texttt{Instructor}, and \texttt{Student}, where each node is an instance of the metaclass \texttt{RelationalTable}.
 
 %(\textit{i}) Code Package, which represents the source-code (physical artefacts), (\textit{ii}) Structure Package, that illustrates the system's architecture, herein the system is based on MVC, (\textit{iii}) Data Package, which depicts the system's database and its tables, and (\textit{iv}) Conceptual Package, which is intended to be the basis for formal and detailed natural language declarative description of a complex entity, such as a business
 
