@@ -11,6 +11,13 @@ These layers can be instantiated automatically, semi-automatically or manually t
 
 One of the main KDM characteristics is the power to represent different abstractions of the same system and also to retain/make evident the dependencies among these abstractions. This is done thanks to its twelve internal metamodels/packages, since each one is devoted to represent a particular view. In fact, KDM is a set of internal metamodels. 
 
+\begin{figure}
+	\centering
+	% Requires \usepackage{graphicx}
+	\includegraphics[scale=0.5]{figuras/NovoSystem2}
+	\caption{System example.}
+	\label{fig:system}
+\end{figure}
 %----------------------------------------------------------------------
 
 %In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). 
@@ -112,13 +119,7 @@ As this is a MVC-based system, the \texttt{Code View} contains three instances o
 
 \texttt{Architecture View} represents the system architecture. In this example each rectangle represents an instance of the \texttt{Layer} metaclass, i.e., \texttt{View}, \texttt{Controller}, and \texttt{Model}. Between Layes and Packages there is a relationship called \texttt{Implementation}, whose intention is to denote that a specific higher level abstraction is realized by one or more code elements. In this way, the \texttt{Layer View} is realized in source-code level by the package \texttt{VIEW}; the \texttt{Model} layer is realized by the package \texttt{Model} and the layer \texttt{Controller} by the \texttt{Controller} package.
 
-\begin{figure}
-	\centering
-	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.5]{figuras/NovoSystem2}
-	\caption{System example.}
-	\label{fig:system}
-\end{figure}
+
 
 KDM also possesses a relationship type called \texttt{AggregatedRelationship} whose aim is to represent dependencies between architectural elements from \texttt{Structure Package}. Using this relationship it is possible to put together several primitive relationships in a unique ``channel''. For example, in Figure~\cite{fig:system}, it is possible to see big ``channel'' (represented by directional arrows) between the layers schematically representing the \texttt{AggregatedRelationship}. The \texttt{AggregatedRelationship} between the layer \texttt{View} and the layer \texttt{Controller} group the following relationships: two \texttt{Calls}, one \texttt{Creates} and one \texttt{Extends}. The number aside the \texttt{AggregatedRelationship} ``channel'' is its ``density'', that represents the amount of primitive relationships the \texttt{AggregatedRelationship} involves. Summing up these relationships the ``density'' value is 4. Following the same idea the relationship between the layer \texttt{Controller} and layer \texttt{Model} is ``density'' value is 2. %The Conceptual Package represents the business rules view of the system. In this case, the system owns three scenarios named X, Y and Z, each of them associated with a package from Code Package by using the implementation relationship (dashed arrows). Further, each scenario contains a rule except the last one. Then, each rule is associated with a class from Code package, again using the association implementation; 
 
