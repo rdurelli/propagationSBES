@@ -61,12 +61,12 @@
 
 \begin_layout Standard
 
-\size scriptsize
+\size footnotesize
 \begin_inset Tabular
 <lyxtabular version="3" rows="10" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="2cm">
-<column alignment="left" valignment="middle" width="5cm">
+<column alignment="center" valignment="top" width="5cm">
 <column alignment="center" valignment="top" width="4cc">
 <row>
 <cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
@@ -74,18 +74,18 @@
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Refactoring
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Extract Class
 \end_layout
 
@@ -96,7 +96,7 @@ Extract Class
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 P.
  C?
 \end_layout
@@ -110,18 +110,18 @@ P.
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Code Package
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Create an instance of ClassUnit that represent the new Class
 \end_layout
 
@@ -132,7 +132,7 @@ Create an instance of ClassUnit that represent the new Class
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Yes
 \end_layout
 
@@ -149,12 +149,12 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Move all StorableUnits to the new ClassUnit
 \end_layout
 
@@ -165,7 +165,7 @@ Move all StorableUnits to the new ClassUnit
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Yes
 \end_layout
 
@@ -182,12 +182,12 @@ Yes
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Move all MethodUnit to the new ClassUnit
 \end_layout
 
@@ -198,7 +198,7 @@ Move all MethodUnit to the new ClassUnit
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Yes
 \end_layout
 
@@ -220,7 +220,7 @@ Yes
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Create an intance of HasType, which represent an association between the
  new ClassUnit and the old ClassUnit
 \end_layout
@@ -232,7 +232,7 @@ Create an intance of HasType, which represent an association between the
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Yes
 \end_layout
 
@@ -245,18 +245,18 @@ Yes
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Structure Package
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Not Applied
 \end_layout
 
@@ -267,7 +267,7 @@ Not Applied
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Not Applied
 \end_layout
 
@@ -280,18 +280,18 @@ Not Applied
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Data Package
 \end_layout
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Create a instance of RelationalTable owning the name of the new ClassUnit.
  Create a implementation relationship betwenn the ClassUnit and this RelationalT
 able
@@ -304,41 +304,7 @@ able
 
 \begin_layout Plain Layout
 
-\size scriptsize
-Yes
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
-For each StorableUnit it is necessary to create a ItemUnit, which represent
- the RelationaTable’s columns.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\size scriptsize
+\size footnotesize
 Yes
 \end_layout
 
@@ -360,7 +326,41 @@ Yes
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
+For each StorableUnit it is necessary to create a ItemUnit, which represent
+ the RelationaTable’s columns.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Yes
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size footnotesize
 Create an instance of UniqueKey that represent the primary key of the Relational
 Table.
 \end_layout
@@ -372,7 +372,7 @@ Table.
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Yes
 \end_layout
 
@@ -385,7 +385,7 @@ Yes
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Conceptual Package
 \end_layout
 
@@ -396,7 +396,7 @@ Conceptual Package
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Not Applied
 \end_layout
 
@@ -407,7 +407,7 @@ Not Applied
 
 \begin_layout Plain Layout
 
-\size scriptsize
+\size footnotesize
 Not Applied
 \end_layout
 

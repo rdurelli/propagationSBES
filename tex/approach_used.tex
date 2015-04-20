@@ -4,7 +4,7 @@
 \label{sec:the_approach}
 
 In order to fulfill the limitation pointed out, we introduce an approach that aims to propagate all the changes throughout the KDM's levels. This approach ensures that when a change/refactoring is performed in any KDM's level, it is correctly propagated to the affected KDM's levels and vice versa. So it make certain that the consistency between the KDM's levels when they are refactored. 
-The described problem presented in Section~\ref{sec:motivation_and_running_example} can, in our view, be split into three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}. 
+Our approach is called Propagation-Aware Refactoring (PARef) and it is split into three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}. 
 
 %According to the literature, there are two possibilities to perform propagation in models (colocar ref). One possibility is to mark the modifications on the source KDM's model without actually commiting them until the end of the transformation, so that expression evaluation can occur on the original source KDM's model by ignoring the modifications. Another possibility is to first compute the set of basic operations to perform, storing this set in an external artifact representation and then apply all the changes at once. Our approach follows the second possibility and it is divided in three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}.
 
@@ -19,11 +19,11 @@ The described problem presented in Section~\ref{sec:motivation_and_running_examp
 
 
 In step [A], \textit{Apply Refactoring}, here the software modernizer has to choose an appropriate refactoring to be applied into the KDM. In this step, new metaclasses can be created, updated, and removed. Also it is necessary to gather all the needed parameters for applying the refactoring. %that the software modernizer inputs all the needs parameters for applying the refactoring is gathered.  %The most frequent modification to the KDM instances in this scenario will be, intuitively, creating new metaclasses. However, updating existing metaclasses with their relationship will be frequent as well. In simpler cases, updating means changing properties of existing metaclasses. In more complex cases, updating means removing metaclasses and replacing them with new and refactored ones.
-This step uses M2M transformation language to perform the refactorings.
+This step uses model-to-model (M2M) transformation language to perform the refactorings.
 
-In the step [B], \textit{Mine Affected Metaclasses}, we developed a mechanism which shows all metaclasses that need to be updated after applying any changes/refactoring. These metaclasses are those that have some dependence on the metaclass to be modified by the refactoring. This step is totally based on a set of queries that works on a KDM instance. In fact, this step uses depth-first search algorithm\footnote{From here on in Dependents Identification Algorithm (DI Algorithm)} to identify all affected metaclasses along with a set of queries. 
+In the step [B], \textit{Mine Affected Metaclasses}, we developed a mechanism which shows all metaclasses that need to be updated/propagated after applying any changes/refactoring. These metaclasses are those that have some dependence on the metaclass to be modified by the refactoring. This step is totally based on a set of queries that works on a KDM instance. In fact, this step uses depth-first search algorithm\footnote{From here on in Dependents Identification Algorithm (DI Algorithm)} to identify all affected metaclasses along with a set of queries. 
 
-In step [C], \textit{Propagate Changes}, involves updating the elements identified in the step [B].  As in step [A], in this step we also have used M2M to update all KDM's instances. 
+In step [C], \textit{Propagate Changes}, involves updating the elements identified in the step [B].  As in step [A], in this step we also have used M2M to update/propagate all KDM's instances. 
 More details on each step are provided in the next sections.
 
 
@@ -77,7 +77,8 @@ With the \texttt{refining} mode (see line 8), the ATL engine can focus on the AT
 
 Line 11 a matched rule is defined. %In fact, this rule represents the refactoring \textit{Move Class}. 
 Occurrences of the input pattern may be filtered by introducing a \textit{guard}, a boolean condition that KDM model must satisfy (e.g., line 13). Lines 14 though 19 the refactoring \textit{Move Class} is actually defined. As can be seen, we are moving a set of \texttt{ClassUnit} by means of the helper (defined in lines 21 and 22), i.e., helpers in ATL are like methods/procedures in programing languages. 
-Almost all refactorings need some input parameters that should be properly instantiated by the user. For instance, consider the chuck of code written in ATL depicted in Figure~\ref{fig:ATLRefactoring}, lines 13, 16, and 17 (\texttt{\#parameter}). Therefore, before to apply the refactoring, the engineer should specify all the parameters. Considering our running example (depicted in Figure~\ref{fig:system}) the parameters would be: \texttt{Model}, \texttt{Student}, and \texttt{Instructor}, respectively. Afterward, this ATL is ready to be applied into a KDM instance. We have devised an Eclipse plugin to help the engineer to specify these parameters.
+Almost all refactorings need some input parameters that should be properly instantiated by the user. For instance, consider the chuck of code written in ATL depicted in Figure~\ref{fig:ATLRefactoring}, lines 13, 16, and 17 (\texttt{\#parameter}). Therefore, before to apply the refactoring, the engineer should specify all the parameters. For instance, he(she) should specify the source Package and two classes to be moved. 
+Afterward, this ATL is ready to be applied into a KDM instance. We have devised an Eclipse plugin to help the engineer to specify these parameters.
 
 
 %It is important to highlight that this chuck of code in written in ATL is not total functional - the engineer should set the parameters (\texttt{\#parameter}) 
@@ -87,11 +88,12 @@ Almost all refactorings need some input parameters that should be properly insta
 \subsection{Mine Affected Metaclasses} % (fold)
 \label{sub:mine_affected_metaclasses}
 
-The step [B] starts with our DI Algorithm that aims to identify all metaclasses and its relationships that use somehow the metaclass(es) that were refactored in step [A]. As input all the metaclasses that were used to apply an specific refactoring is needed. In addition, our DI Algorithm uses a set of queries that are performed on the KDM's instance to mine all the affected/linked metaclasses. All the queries were created using XPath. %We have decided to use XPath because it is a well-know and well-documented language. 
+The step [B] starts with our DI Algorithm that aims to identify all metaclasses and its relationships that use somehow the metaclass(es) that were refactored in step [A]. As input all the metaclasses that were used to apply an specific refactoring is needed. For example, in the case of the refactoring \textit{Move Class} it is necessary as input a package and a set of classes that were moved. Further, our DI Algorithm uses a set of queries that are performed on the KDM's instance to mine all the affected/linked metaclasses. All the queries were created using XPath. %We have decided to use XPath because it is a well-know and well-documented language. 
 
-Concerning the running example depicted in Figure~\ref{fig:system} the engineer aimed to apply the refactoring \textit{Move Class} - both classes \texttt{Student} and \texttt{Instructor} should not longer be contained in the package \texttt{View}. These classes should be allocated into the package \texttt{Model}. Considering the refactoring \textit{Move Class}, three elements (\texttt{Student}, \texttt{Instructor}, and their package) need to be investigated throughout the KDM's instance in order to identify which other metaclasses can be affected. 
+%Concerning the refactoring \textit{Move Class} the engineer should specify a set of classes that no longer are contained into a package \texttt{View}. These classes should be allocated into the package \texttt{Model}. 
+%Considering the refactoring \textit{Move Class}, three elements (\texttt{Student}, \texttt{Instructor}, and their package) need to be investigated throughout the KDM's instance in order to identify which other metaclasses can be affected. 
 
-Therefore, firstly a query must be executed to get the root element in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the metaclass \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our DI Algorithm.
+Firstly a query must be executed to get the root element in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the metaclass \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our DI Algorithm as all the metaclasses that were used to apply the refactoring in Step [A].
 
 \begin{figure}[h]
 	\centering
@@ -126,8 +128,8 @@ Therefore, firstly a query must be executed to get the root element in KDM. This
      \label{alg:death1}
    \end{algorithm}
 
-Algorithm~\ref{alg:death1} depicts the DI Algorithm that is used to mine all the affected metaclasses. It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that were refactored in Step [A] (e.g., for the refactoring \textit{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package). %A diagram of how our DI Algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses - the node A represents the \texttt{Segment} and K, H, E and B illustrate \texttt{CodeModel}, \texttt{StructureModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
-
+Algorithm~\ref{alg:death1} depicts the DI Algorithm that is used to mine all the affected metaclasses. %It takes as input a KDM's instance, a \texttt{Segment}, and a set of elements that were refactored in Step [A] (e.g., for the refactoring \textit{Move Class} three affected elements - \texttt{Student}, \texttt{Instructor}, and their package). %A diagram of how our DI Algorithm works is shown in Figure~\ref{fig:algWorks2}. Each node represents a metaclass and the edges represent the relationship among the metaclasses - the node A represents the \texttt{Segment} and K, H, E and B illustrate \texttt{CodeModel}, \texttt{StructureModel}, \texttt{ConceptualModel}, and \texttt{DataModel}, respectively. 
+%
 More specifically, the algorithm works as follows: first it is necessary to pick a starting point, i.e., the metaclass \texttt{Segment}. Visit the \texttt{Segment}, push it onto a stack, and mark it as visited. Then it is necessary to go to the next metaclass that is unvisited, verify if it has an association named \texttt{implementation}. If yes, it verifies if this association contains references to any element's used in the refactoring, if yes - push it on the stack, and mark it. This continues until the algorithm reachs the last metaclass. Then the algorithm checks to see if the \texttt{Segment} has any unvisited adjacent metaclass. If it does not, then it is necessary to pop it off the stack and check the next metaclass. If the algorithm finds one (unvisited metaclass), it starts visiting adjacent metaclasses until there are no more, check for more unvisited adjacent metaclasses, and continue the process always verifying the association named \texttt{implementation}. When the algorithm finally reach the last metaclass on the stack and there are no more adjacent, unvisited metaclasses that contains the association \texttt{implementation} without check, our algorithm should show a list of all affected metaclasses that is further used to propagated all changes throughout the KDM packages. 
 %
 %
@@ -221,7 +223,11 @@ More specifically, the algorithm works as follows: first it is necessary to pick
 \subsection{Propagate Changes} % (fold)
 \label{sub:apply_refactoring}
 
-In this step, all propagations regarding an specific refactoring, e.g., \textit{Move Class}, are implemented. Similarly to the step [A], this step is also defined by means of a set of ATL rules. Figure~\ref{fig:ATLPropagation} shows an ATL used to propagate the changes regarding the refactoring \textit{Move Class}. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package, respectively. The first rule is responsible to propagate the changes throughout the \texttt{Structure Package}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of the refactoring \textit{Move Class}.
+This step is a decoupled module that can be coupled to existing refactorings. In this way, existing users can write KDM refactorings in ATL without worrying about the change propagation. The only task is to provide for our component all the parameters it needs to conduct the propagation. In our approach these parameters are identified automatically in Step [B].
+%
+%
+ %all propagations regarding an specific refactoring, e.g., \textit{Move Class}, are implemented. 
+Similarly to the step [A], the step [C] is also defined by a set of generic ATL rules. Figure~\ref{fig:ATLPropagation} shows a code snippet written in ATL that is used to propagate the changes. Due space limitation the whole ATL it is not presented. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package, respectively. The first rule is responsible to propagate the changes throughout the \texttt{Structure Package}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of a refactoring, i.e, \textit{Move Class}.
 
 \begin{figure}[h]	
 	\centering
@@ -231,9 +237,14 @@ In this step, all propagations regarding an specific refactoring, e.g., \textit{
 	\label{fig:ATLPropagation}
 \end{figure}
 
-The rule defined in lines 33 to 43 propagates the changes throughout the \texttt{Conceptual Package}. For instance,  the \texttt{RuleUnit 1.1} that is associated with \texttt{Instructor} should also be moved to corresponding scenario, i.e, the scenario that is associated with the package that contains now the class \texttt{Instructor} - \texttt{ScenarioUnit 3}. 
+If the \textit{Move Classes} refactoring is applied to transfer the class C1 to package P2, a natural propagation is to transfer the business rule B1 to another scenario. As defined in the second rule (lines 33 to 43) - this rule is used to propagate the changes throughout the \texttt{Conceptual Package}.
 
- Finally, the rule defined in lines 44 - 65 aims to propagate the change to the \texttt{Data Package}. For each moved \texttt{ClassUnit}, a \texttt{RelationalTable} instance has to be created. Their names have to correspond. The \texttt{itemUnit} %(a collection that contains \texttt{ColumnSet}) 
+%The rule defined in lines 33 to 43 propagates the changes throughout the \texttt{Conceptual Package}. If the \textit{Move Classes} refactoring is applied to transfer the class C1 to package P2, a natural propagation is to transfer the business rule B1 to another scenario.
+
+
+% For instance, Line 36 shows the specific propagation that is ne the \texttt{RuleUnit 1.1} that is associated with \texttt{Instructor} should also be moved to corresponding scenario, i.e, the scenario that is associated with the package that contains now the class \texttt{Instructor} - \texttt{ScenarioUnit 3}. 
+
+ Finally, the rule defined in lines 44 - 65 aims to propagate the change to the \texttt{Data Package}. For each \texttt{ClassUnit}, a \texttt{RelationalTable} instance has to be created - their names have to correspond. The \texttt{itemUnit} %(a collection that contains \texttt{ColumnSet}) 
 reference set has to contain all \texttt{ColumnSet} that have been created for each \texttt{StorableUnit} (metaclass that represent all the attributes that a class holds) as well as its types.
 
 %In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
