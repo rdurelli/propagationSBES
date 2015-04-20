@@ -1,0 +1,40 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{array}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+{\footnotesize{}}%
+\setlength{\tabcolsep}{0.0em}
+{\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{|>{\centering}p{2cm}|>{\raggedright}p{5cm}|>{\centering}p{4cc}|}
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Remove Class}} & {\footnotesize{P.C?}}\tabularnewline
+\hline 
+\hline 
+{\footnotesize{Code Package}} & {\footnotesize{Delete the selected instance of a ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Structure Package}} & {\footnotesize{If the removed ClassUnit was contained into a specific
+Structure element then summing up all primitive relationship and overwrite
+the meta-attribute density}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Data Package}} & {\footnotesize{If the removed ClassUnit was associated with an instance
+of RelationalTable, then it should also be removed}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{If the removed ClassUnit is associated to any conceptual
+elements by means of the association implementation these conceptual
+elements should be removed }} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+\end{tabular}}
+\end{document}

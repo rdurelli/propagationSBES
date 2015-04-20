@@ -1,0 +1,108 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{array}
+\usepackage{multirow}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+{\footnotesize{}}%
+\setlength{\tabcolsep}{0.0em}
+{\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{|>{\centering}p{2cm}|>{\raggedright}p{5cm}|>{\centering}p{4cc}|}
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Extract Class}} & {\footnotesize{P. C?}}\tabularnewline
+\hline 
+\hline 
+\multirow{4}{2cm}{{\footnotesize{Code Package}}} & {\footnotesize{Create an instance of ClassUnit that represent the
+new Class}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move all StorableUnits to the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move all MethodUnit to the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an intance of HasType, which represent an association
+between the new ClassUnit and the old ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Structure Package}} & {\footnotesize{Not Applied}} & {\footnotesize{Not Applied}}\tabularnewline
+\hline 
+\multirow{3}{2cm}{{\footnotesize{Data Package}}} & {\footnotesize{Create a instance of RelationalTable owning the name
+of the new ClassUnit. Create a implementation relationship betwenn
+the ClassUnit and this RelationalTable}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{For each StorableUnit it is necessary to create a ItemUnit,
+which represent the RelationaTable’s columns.}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an instance of UniqueKey that represent the
+primary key of the RelationalTable.}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{Not Applied}} & {\footnotesize{Not Applied}}\tabularnewline
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Move Class}} & {\footnotesize{P.C?}}\tabularnewline
+\hline 
+{\footnotesize{Code Package}} & {\footnotesize{Move an specific ClassUnti from a source Package to
+a target Package}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Structure Package}} & {\footnotesize{If the target Package is associated to an architectural
+elements by means of the association implementation the value of meta-attribute
+named density should be propagated }} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Data Package}} & {\footnotesize{Not applied}} & {\footnotesize{Not applied}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{If the moved class is associated to any conceptual
+elements by means of the association implementation this conceptual
+elements should be moved to a correspondent associated element of
+the target Package. }} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Extract Layer}} & {\footnotesize{P.C?}}\tabularnewline
+\hline 
+\multirow{2}{2cm}{{\footnotesize{Code Package}}} & {\footnotesize{Create an instance of Package}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move a the selected ClassUnit from a Package to the
+new Package}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+\multirow{4}{2cm}{{\footnotesize{Structure Package}}} & {\footnotesize{Create an instance of Layer }} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an instance of AggregationRelationship between
+the new Layer and the old one}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Associate the new Layer by means of the association
+implementation with the new Package}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Summing up all primitive relationship to compute the
+meta-attribute density}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Data Package}} & {\footnotesize{Not applied}} & {\footnotesize{Not applied}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{If the moved classes are associated to any conceptual
+elements by means of the association implementation these conceptual
+elements should be moved to a correspondent associated element of
+the target Package. }} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Remove Class}} & {\footnotesize{P.C?}}\tabularnewline
+\hline 
+{\footnotesize{Code Package}} & {\footnotesize{Delete the selected instance of a ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Structure Package}} & {\footnotesize{If the removed ClassUnit was contained into a specific
+Structure element then summing up all primitive relationship and overwrite
+the meta-attribute density}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Data Package}} & {\footnotesize{If the removed ClassUnit was associated with an instance
+of RelationalTable, then it should also be removed}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{If the removed ClassUnit is associated to any conceptual
+elements by means of the association implementation these conceptual
+elements should be removed }} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+\end{tabular}}
+\end{document}

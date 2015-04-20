@@ -1,0 +1,91 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{array}
+\usepackage{multirow}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+\begin{table}
+\centering
+\caption{Propagation for Extract Class.}
+ \begin{minipage}{.5\linewidth}
+{\footnotesize{}}%
+\setlength{\tabcolsep}{0.0em}
+{\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{|>{\centering}p{2cm}|>{\raggedright}m{5cm}|>{\centering}p{4cc}|}
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Extract Class}} & {\footnotesize{P. C?}}\tabularnewline
+\hline 
+\hline 
+\multirow{4}{2cm}{{\footnotesize{Code Package}}} & {\footnotesize{Create an instance of ClassUnit that represent the
+new Class}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move all StorableUnits to the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move all MethodUnit to the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an intance of HasType, which represent an association
+between the new ClassUnit and the old ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Structure Package}} & {\footnotesize{Not Applied}} & {\footnotesize{Not Applied}}\tabularnewline
+\hline 
+\multirow{3}{2cm}{{\footnotesize{Data Package}}} & {\footnotesize{Create a instance of RelationalTable owning the name
+of the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{For each StorableUnit it is necessary to create a ItemUnit,
+which represent the RelationaTable columns.}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an instance of UniqueKey that represent the
+primary key of the RelationalTable.}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{Not Applied}} & {\footnotesize{Not Applied}}\tabularnewline
+\hline 
+\end{tabular}}
+\end{minipage}%
+ \begin{minipage}{.5\linewidth}
+{\footnotesize{}}%
+\setlength{\tabcolsep}{0.0em}
+{\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{|>{\centering}p{2cm}|>{\raggedright}m{5cm}|>{\centering}p{4cc}|}
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Extract Class}} & {\footnotesize{P. C?}}\tabularnewline
+\hline 
+\hline 
+\multirow{4}{2cm}{{\footnotesize{Code Package}}} & {\footnotesize{Create an instance of ClassUnit that represent the
+new Class}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move all StorableUnits to the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move all MethodUnit to the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an intance of HasType, which represent an association
+between the new ClassUnit and the old ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Structure Package}} & {\footnotesize{Not Applied}} & {\footnotesize{Not Applied}}\tabularnewline
+\hline 
+\multirow{3}{2cm}{{\footnotesize{Data Package}}} & {\footnotesize{Create a instance of RelationalTable owning the name
+of the new ClassUnit}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{For each StorableUnit it is necessary to create a ItemUnit,
+which represent the RelationaTable columns.}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an instance of UniqueKey that represent the
+primary key of the RelationalTable.}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{Not Applied}} & {\footnotesize{Not Applied}}\tabularnewline
+\hline 
+\end{tabular}}
+\end{minipage}%
+\end{table}
+\end{document}

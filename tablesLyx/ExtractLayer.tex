@@ -1,0 +1,51 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{array}
+\usepackage{multirow}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+{\footnotesize{}}%
+\setlength{\tabcolsep}{0.0em}
+{\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{|>{\centering}p{2cm}|>{\raggedright}p{5cm}|>{\centering}p{4cc}|}
+\hline 
+{\footnotesize{Refactoring}} & {\footnotesize{Extract Layer}} & {\footnotesize{P.C?}}\tabularnewline
+\hline 
+\hline 
+\multirow{2}{2cm}{{\footnotesize{Code Package}}} & {\footnotesize{Create an instance of Package}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Move a the selected ClassUnit from a Package to the
+new Package}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+\multirow{4}{2cm}{{\footnotesize{Structure Package}}} & {\footnotesize{Create an instance of Layer }} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Create an instance of AggregationRelationship between
+the new Layer and the old one}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Associate the new Layer by means of the association
+implementation with the new Package}} & {\footnotesize{Yes}}\tabularnewline
+\cline{2-3} 
+ & {\footnotesize{Summing up all primitive relationship to compute the
+meta-attribute density}} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+{\footnotesize{Data Package}} & {\footnotesize{Not applied}} & {\footnotesize{Not applied}}\tabularnewline
+\hline 
+{\footnotesize{Conceptual Package}} & {\footnotesize{If the moved classes are associated to any conceptual
+elements by means of the association implementation these conceptual
+elements should be moved to a correspondent associated element of
+the target Package. }} & {\footnotesize{Yes}}\tabularnewline
+\hline 
+\end{tabular}}
+\end{document}
