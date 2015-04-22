@@ -11,13 +11,13 @@ These layers can be instantiated automatically, semi-automatically or manually t
 
 One of the main KDM characteristics is the power to represent different abstractions of the same system and also to retain/make evident the dependencies among these abstractions. This is done thanks to its twelve internal metamodels/packages, since each one is devoted to represent a particular view. In fact, KDM is a set of internal metamodels. 
 
-\begin{figure}
+\begin{figure*}
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.5]{figuras/NovoSystem3}
+	\includegraphics[scale=0.8]{figuras/NovoSystem3}
 	\caption{System example.}
 	\label{fig:system}
-\end{figure}
+\end{figure*}
 %----------------------------------------------------------------------
 
 %In this section we provide a brief background to Architecture-Driven Modernization (ADM) and Knowledge Discovery Metamodel (KDM). 
@@ -117,7 +117,7 @@ One of the main KDM characteristics is the power to represent different abstract
 Figure~\ref{fig:system} shows schematically the potential of KDM for representing three views of part of an Academic Management System: \texttt{Code View}, \texttt{Architecture View} and \texttt{Data View}. The entire figure represents a KDM model, i.e., an instance of KDM composed by three other internal instances - each big rectangle (packages/views) represents an instance of a internal metamodel/package. Besides, each smaller internal element (classes, packages, layers, relationships, etc) are instances of KDM metaclasses. Notice that we are using the notation ``instance:Type'' at every element so that the name of KDM metaclasses can be seen.
 As this is a MVC-based system, the \texttt{Code View} contains three instances of the \texttt{Package} metaclass: (i) \texttt{VIEW}, (ii) \texttt{CONTROLLER}, and (iii) \texttt{MODEL}. Each of them involving a specific number of \texttt{ClassUnit} instances. The classes are related to each other by means of primitive relationships, such as: \texttt{Calls}, \texttt{Creates}, \texttt{Extends}, etc.
 
-\texttt{Architecture View} represents the system architecture. In this example each rectangle represents an instance of the \texttt{Layer} metaclass, i.e., \texttt{View}, \texttt{Controller}, and \texttt{Model}. Between Layes and Packages there is a relationship called \texttt{Implementation}, whose intention is to denote that a specific higher level abstraction is realized by one or more code elements. In this way, the \texttt{Layer View} is realized in source-code level by the package \texttt{VIEW}; the \texttt{Model} layer is realized by the package \texttt{Model} and the layer \texttt{Controller} by the \texttt{Controller} package.
+\texttt{Architecture View} represents the system architecture. In this example each rectangle represents an instance of the \texttt{Layer} metaclass, i.e., \texttt{VIEW}, \texttt{CONTROLLER}, and \texttt{MODEL}. Between Layes and Packages there are a set of relationship called \texttt{Implementation}, which are represented in Figure~\ref{fig:system} by the symbol \foobarMeu. The aim of this relationship is to denote that a specific higher level abstraction is realized by one or more code elements. In this way, the \texttt{Layer View} is realized in source-code level by the package \texttt{VIEW}; the \texttt{Model} layer is realized by the package \texttt{Model} and the layer \texttt{Controller} by the \texttt{Controller} package.
 
 
 
