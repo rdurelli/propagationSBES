@@ -3,8 +3,19 @@
 \section{Propagation-Aware Refactorings} % (fold)
 \label{sec:the_approach}
 
-In order to fulfill the limitation pointed out, we introduce an approach that aims to propagate all the changes throughout the KDM's levels. This approach ensures that when a change/refactoring is performed in any KDM's level, it is correctly propagated to the affected KDM's levels and vice versa. So it make certain that the consistency between the KDM's levels when they are refactored. 
-Our approach is called Propagation-Aware Refactoring (PARef) and it is split into three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}. 
+In order to fulfill the limitation pointed out, we introduce a tool/approach, called Propagation-Aware Refactoring (PARef),  that aims propagating changes throughout all the KDM's levels during a refactoring in order to keep all the views synchronized. The intention is to keep the consistency among all the KDM's views during refactoring activities.
+
+Figure~\ref{fig:approach} shows where our approach fits in. The Refactoring activity, see [A], is a normal and conventional model refactoring activity, where one develops model refactoring (in ATL, for example) and apply them into a KDM model. In this phase, a number of model elements can be modified, created or removed.
+
+Our two-steps approach acts as a module that can be plugged over existing refactorings in order to propagate the changes. The first step, called \textit{Identifying Points to Propagate}, aims to gather all the KDM elements that need to be updated as a result of a refactoring. The output of this step are metaclasses that possesses dependencies with the elements to be refactored. The second step, called \textit{Performing Propagation}, objectives to effectively perform the changes/updates. The input for this steps are the elements to be changed (provided by the first step) and the output is the KDM model updated. 
+
+The first step, is technically supported by an Identification Engine whose the core is a depth-first search algorithm along with a set of queries that are performed over a KDM model. This step can also be conducted in two distinct moments, before or after the refactoring application. Usually, the Identification of the Points To Be Propagated is easier to be done after the refactoring, because it is possible to detect the already changed elements making a diff between the source and refactored model. When the identification process should be done before the refactoring application, all the model elements involved in the refactoring need to be extracted and passed as parameters to the Identification Engine. This will require more implementation effort.
+
+
+The second step is technically supported by a Propagation Engine, whose core is a set of pre-defined transformation rules devised with ATL. Herein all the transformation rules act as a chain of transformations that are executed together in order to update/propagate all the changes throughout KDM's views. More details on each step are provided in the next sections.
+
+
+%This approach ensures that when a change/refactoring is performed in any KDM's level, it is correctly propagated to the affected KDM's levels and vice versa. So it make certain that the consistency between the KDM's levels when they are refactored. Our approach is called Propagation-Aware Refactoring (PARef) and it is split into three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}. 
 
 %According to the literature, there are two possibilities to perform propagation in models (colocar ref). One possibility is to mark the modifications on the source KDM's model without actually commiting them until the end of the transformation, so that expression evaluation can occur on the original source KDM's model by ignoring the modifications. Another possibility is to first compute the set of basic operations to perform, storing this set in an external artifact representation and then apply all the changes at once. Our approach follows the second possibility and it is divided in three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}.
 
@@ -18,13 +29,12 @@ Our approach is called Propagation-Aware Refactoring (PARef) and it is split int
 \end{figure}
 
 
-In step [A], \textit{Apply Refactoring}, here the software modernizer has to choose an appropriate refactoring to be applied into the KDM. In this step, new metaclasses can be created, updated, and removed. Also it is necessary to gather all the needed parameters for applying the refactoring. %that the software modernizer inputs all the needs parameters for applying the refactoring is gathered.  %The most frequent modification to the KDM instances in this scenario will be, intuitively, creating new metaclasses. However, updating existing metaclasses with their relationship will be frequent as well. In simpler cases, updating means changing properties of existing metaclasses. In more complex cases, updating means removing metaclasses and replacing them with new and refactored ones.
-This step uses model-to-model (M2M) transformation language to perform the refactorings.
+%In step [A], \textit{Apply Refactoring}, here the software modernizer has to choose an appropriate refactoring to be applied into the KDM. In this step, new metaclasses can be created, updated, and removed. Also it is necessary to gather all the needed parameters for applying the refactoring. %that the software modernizer inputs all the needs parameters for applying the refactoring is gathered.  %The most frequent modification to the KDM instances in this scenario will be, intuitively, creating new metaclasses. However, updating existing metaclasses with their relationship will be frequent as well. In simpler cases, updating means changing properties of existing metaclasses. In more complex cases, updating means removing metaclasses and replacing them with new and refactored ones. This step uses model-to-model (M2M) transformation language to perform the refactorings.
 
-In the step [B], \textit{Mine Affected Metaclasses}, we developed a mechanism which shows all metaclasses that need to be updated/propagated after applying any changes/refactoring. These metaclasses are those that have some dependence on the metaclass to be modified by the refactoring. This step is totally based on a set of queries that works on a KDM instance. In addition, this step uses depth-first search algorithm\footnote{From here on in Dependents Identification Algorithm (DI Algorithm)} to identify all affected metaclasses along with a set of queries. 
+%In the step [B], \textit{Mine Affected Metaclasses}, we developed a mechanism which shows all metaclasses that need to be updated/propagated after applying any changes/refactoring. These metaclasses are those that have some dependence on the metaclass to be modified by the refactoring. This step is totally based on a set of queries that works on a KDM instance. In addition, this step uses depth-first search algorithm\footnote{From here on in Dependents Identification Algorithm (DI Algorithm)} to identify all affected metaclasses along with a set of queries. 
 
-In step [C], \textit{Propagate Changes}, involves updating the elements identified in the step [B].  As in step [A], in this step we also have used M2M to update/propagate all KDM's instances. 
-More details on each step are provided in the next sections.
+%In step [C], \textit{Propagate Changes}, involves updating the elements identified in the step [B].  As in step [A], in this step we also have used M2M to update/propagate all KDM's instances. 
+
 
 
 \subsection{Apply Refactoring} % (fold)
@@ -251,5 +261,5 @@ reference set has to contain all \texttt{ColumnSet} that have been created for e
 
 %In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
 
-
+%The correctness of our Propagation Engine mainly relies on the compliance of the transformation result, which in turn can be ensured by showing that the transformation produces a consistent KDM model. Thus, it is important to support the consistency among all KDM views. To this end, we consider static consistency checks.
 
