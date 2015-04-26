@@ -3,16 +3,14 @@
 \section{Case Study}\label{sec:case_study}
 
 In this section we present a case study showing that our approach can be used to support the change propagation in KDM models. We have used a real-life legacy information system. 
-Notice that the case study was carried out following the protocol for planning, conducting and reporting case studies proposed by Brereton et al. in [17] improving the rigor and validity of the study. The next subsections show more details about the main phase defined in this protocol.
+Notice that the case study was carried out following the protocol for planning, conducting and reporting case studies proposed by Brereton et al. in~\cite{Brereton:2008} improving the rigor and validity of the study. The next subsections show more details about the main phase defined in this protocol.
 
 \subsection{Background}
 
-According to the protocol proposed by Brereton et al. in~\cite{Brereton:2008} firstly it is needed to identify previous research on the topic. Hence, in Section~\ref{sec:related_work} we stated some researches related to refactoring in models. To the best of our knowledge, up to this moment, there is no research concentrated on investigating change propagation in KDM. We are particularly focus on the propagation of changing in different views of a KDM model. Therefore, the object of this study is the proposed propagation changes approach, and the purpose of this study is the evaluation it related to its effectiveness and efficiency.
-
-Therefore, taking into account the object and purpose of the study, it was defined one research question, as follows:
+Firstly it is necessary to identify previous research on the topic~\cite{Brereton:2008}. Hence, in Section~\ref{sec:related_work} we stated some researches related to propagation of changes in models. To the best of our knowledge, up to this moment, there is no research concentrated on investigating change propagation in KDM. We are particularly focus on the propagation of changing in different views of a KDM model. The object of this study is the proposed propagation changes approach (PARef), and the purpose of this study is to evaluate the  effectiveness and efficiency of our approach. Taking into account the object and purpose of the study, it was defined one research question, as follows:
 
 \begin{itemize}
-\item \textbf{RQ$_1$}: Given a set of refactoring, can the proposed approach propagate all the changes effectively throughout all KDM levels?
+\item \textbf{RQ$_1$}: Given a set of refactoring, can the proposed approach propagate all the changes effectively throughout KDM levels?
 \end{itemize}
 
 
@@ -23,21 +21,21 @@ The described case study consist of a single case~\cite{Brereton:2008}. It was f
 \subsection{Case Selection}
 
 %In this section is described the suitable case that was chosen to be studied. 
-Some criteria were applied to select the suitable case, as follows: (i) it must be an enterprise system, (ii) it must be a Java-based system, (iii) it must be a legacy system and (iv) it must be of a size not less than 10 KLOC. After applying these criteria we have chosen LabSys (Laboratory System) that is currently used by Federal University of Tocantins (UFT). It is used to control the use of laboratories in the entire university. 
+Some criteria were applied to select the suitable case, as follows: (i) it must be an enterprise system, (ii) it must be a Java-based system, (iii) it must be a legacy system, and (iv) it must be of a size not less than 10 KLOC (Kilo of Lines of Code). After applying these criteria we have chosen LabSys (Laboratory System) that is currently used by Federal University of Tocantins (UFT) to control the use of laboratories in the entire university. 
 
 \subsection{Case Study Procedure}\label{sec:caseStudyProcedure}
 
 In this section is shown how the execution of the study was planned. Notice that the execution was aided by an Eclipse plug-in that we developed to support the proposed approach. The case study was carried out in a machine with an Intel Core I5 CPU 2.5GHz, 8GB of physical memory running Mac OS X 10.8.4.
 
-The proposed approach uses as initial artifact a KDM instance. Therefore, firstly we adopted a reverse engineering to  transform the LabSy source-code into a KDM instance to apply our approach. In this step we have used MoDisco\cite{Brunele20141012}, which is a parser that get as input java source-code and then return as output a KDM instance. Currently, MoDisco only generates the KDM \texttt{Code package}, other KDM packages are extremely important to evaluate our approach. Therefore, we have manually instantiated the followings KDM packages: \texttt{Structure Package}, \texttt{Data Package}, and \texttt{Conceptual Package}. After applying LabSys to MoDisco we gathered a KDM instance that contains 29,444 number of model elements (in this context KDM objects in the model) and the memory used on hard drive disk after XMI serialization is 7.639 MB. 
+The proposed approach uses as initial artifact a KDM instance. Therefore, firstly we adopted a reverse engineering to  transform the LabSy source-code into a KDM instance to apply our approach. In this step we have used MoDisco\cite{Brunele20141012}, which is a framework that get as input java source-code and then return as output a KDM instance. Currently, MoDisco only generates the KDM \texttt{Code package}, other KDM packages are extremely important to evaluate our approach. Therefore, we manually instantiated the followings KDM packages: \texttt{Structure Package}, \texttt{Data Package}, and \texttt{Conceptual Package}. After applying LabSys to MoDisco we gathered a KDM instance that contains 29,444 number of model elements (in this context KDM meta-classes in the model) and the memory used on hard drive disk after XMI serialization is 7.639 MB. 
 
 
-Furthermore, to perform the case study we selected four refactorings: \textit{Extract Class}, \textit{Move Class}, \textit{Extract Layer} and \textit{Remove Class}. %We applied each of the four refactorings to every possible location in KDM instance. 
-All refactorings were applied completely automatically by means of our devised proof-of-concept tool. To deal with refactorings that go into infinite loops, we set three minutes timeout interval. More specifically, we applied the \textit{Extract Class} to one class that had more than 300 LOC (Line of Code); we applied the \textit{Move Class} to a set of  class from a package to another package; we applied the \textit{Extract Layer} to a layer that contains at least 20 classes; finally we applied the \textit{Remove Class} to a class that contained at least 15 primitive relationships. After applied all refactorings we verify whether them were successful propagate throughout all KDM levels, i.e., if the intended refactoring could be performed, and if all the expected propagations were generated on the model. 
+To perform the case study we selected four refactorings: \textit{Extract Class}, \textit{Move Class}, \textit{Extract Layer} and \textit{Remove Class}. %We applied each of the four refactorings to every possible location in KDM instance. 
+All refactorings were applied completely automatically by means of our devised proof-of-concept tool. To deal with refactorings that go into infinite loops, we set three minutes timeout interval. More specifically, we applied the \textit{Extract Class} to classes that had more than 300 LOC (Line of Code); we applied the \textit{Move Class} to a set of class from a package to another package; we applied the \textit{Extract Layer} to a layer that contains at least 20 classes; finally we applied the \textit{Remove Class} to a class that contained at least 15 primitive relationships. After applied all refactorings we verify whether them were successfully propagate throughout KDM levels, i.e., if the intended refactoring could be performed and if all the expected propagations were generated on the KDM model. 
 
 \subsection{Data Collection and Interpretation}
 
-We verify, based on a set of oracle, whether all refactoring were successfully propagated throughout all KDM models. By using these information gathered we can draw conclusion and answer the \textbf{RQ$_1$}.
+We verify, based on a set of oracle, whether all refactoring were successfully propagated throughout KDM models. By using these information gathered we can draw conclusion and answer the \textbf{RQ$_1$}.
 
 %----------------------------------------------------
 
@@ -108,8 +106,22 @@ elements should be removed}} & {\footnotesize{Yes}}\tabularnewline
 %----------------------------------------------------
 
 
-Table~\ref{tab:prop} summaries the results related to each refactoring applied and its respective propagations. In such tables there are two abbreviations: (i) ``P.C?", and (ii) ``N.A". The first one stands for ``Propagation Corrected?" and the second acronym stands for ``Not Applied" . These tables show the propagation regarding to the followings KDM packages: \texttt{Structure Package}, \texttt{Data Package}, and \texttt{Conceptual Package}. As can be seen all the changes were effectively propagated throughout all KDM levels. Which means that in this case our approach could automatically execute truly relevant propagation throughout all KDM levels when dealing with the refactorings: \textit{Extract Class}, \textit{Move Class}, \textit{Extract Layer} and \textit{Remove Class}. 
+Table~\ref{tab:prop} summaries the results related to each refactoring applied and its respective propagations. In such tables there are two abbreviations: (i) ``P.C?" (``Propagation Corrected?") and (ii) ``N.A" (``Not Applied"). %The first one stands for ``Propagation Corrected?" and the second acronym stands for ``Not Applied" . 
+These tables show the propagation regarding to the followings KDM packages: \texttt{Structure Package}, \texttt{Data Package}, and \texttt{Conceptual Package}. As can be seen all the changes were effectively propagated throughout KDM levels. Which means that in this case our approach could automatically execute truly relevant propagation in all KDM levels when dealing with the selected refactorings: \textit{Extract Class}, \textit{Move Class}, \textit{Extract Layer}, and \textit{Remove Class}. Observing globally the data in Table~\ref{tab:prop} we can argue that the use of our approach in the context of these refactorings has been satisfactory. The data also show that our approach it is able to propagate changes in KDM levels in an effective way and it also yields concise propagation of changes. Thereby, the \textbf{RQ$_1$} can be answered as true, that is, the proposed approach can propagate changes effectively throughout all KDM levels.
 
-Globally, the use of our approach in the context of this refactoring case study has been a success. As a result of the process, approximately 60 K SLOC from the whole application were concerned and so automatically refactored. An effective performance gain and overall readability improvement of the modified KDM model parts have then been confirmed.  This shows that our approach to propagate changes in KDM levels is effective, and yields concise propagation of changes. Thereby, the \textbf{RQ$_1$} can be answered as true, that is, the proposed approach can propagate changes effectively throughout all KDM levels.
 
+
+
+ %As a result of the process the whole application were automatically refactored. An effective performance gain and overall readability improvement of the modified KDM model parts have then been confirmed.  
 %To summarize, using our approach to implement KDM refactoring solution to this case study has allowed us saving time and resources for the following main reasons:
+
+
+
+
+
+
+
+
+
+
+

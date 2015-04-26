@@ -6,7 +6,7 @@
 \begin{figure*}[t]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.545]{figuras/NewStepsApproach2}
+	\includegraphics[scale=0.545]{figuras/StepsApproach}
 	\caption{Propagation-Aware Refactorings steps.}
 	\label{fig:approach}
 \end{figure*}
@@ -189,7 +189,7 @@ This step is a decoupled module that can be coupled to existing refactorings. In
 %
 %
  %all propagations regarding an specific refactoring, e.g., \textit{Move Class}, are implemented. 
-Similarly to the step [A], where the modernizer has to define a set of model transformations rules to perform the model refactoring, here a set of generic and pre-established model transformations (written in ATL) are used. The difference is that in Step [A], the modernizer can either create or reuse a KDM refactoring, otherwise in Step [C] all rules were beforehand defined to perform the propagation of changes after the application of a KDM refactoring. In addition, these ATL rules (the propagations) require a set of  \textit{mininum} parameters that should be informed before realize all the propagations. As already mentioned these parameters are the output from Step [B], which is a list containing all KDM affected elements. 
+Similarly to the step [A], where the modernizer has to define a set of model transformations rules to perform the model refactoring, here a set of generic and pre-established model transformations (written in ATL) are used. The difference is that in Step [A], the modernizer can either create or reuse a KDM refactoring, otherwise in Step [C] all rules were beforehand defined to perform the propagation of changes (in a cascade way) after the application of a KDM refactoring. In addition, these ATL rules (the propagations) require a set of  \textit{mininum} parameters that should be informed before realize all the propagations. As already mentioned these parameters are the output from Step [B], which is a list containing all KDM affected elements. 
 
 In order to bound these parameters along with the output of Step [B] our approach performs a static analysis (parsing) of all generic ATL rules and identifies places that must be replaced in with the Step [B]'s output (KDM affected elements), i.e, all the places where parameters are needed. This is particularly necessary in our approach because ATL does not enforce type correctness, hence rules written in ATL may be ill-typed. Moreover, the creation of a suitable propagation %in this step 
 requires precise parameters (meta-classes) informations. It is important to highlight that this static analysis is done totally automatically and transparently by means of our Eclipse plug-in. The aim is having a decouple module of KDM propagation as simple as possible to facilitate the integration with any refactoring defined in ATL in the context of KDM model and also to promote the reuse. Therefore, the software modernizer does not have to worry about devising the propagation of changes, which usually is harder than just the creating of a KDM refactoring. 

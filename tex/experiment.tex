@@ -1,12 +1,12 @@
 %!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
 
 \section{Evaluation}\label{sec:evaluation}
-This section describes the experiment used to evaluate the effectiveness of our  mining algorithm, step [B] of our approach. Therefore, we have compared its result with an oracle in order to verify its correctness. %The second experiment is referred as ``Propagation Study'' and was planned to evaluated the correctness of the propagation given a set of refactorings. 
+This section describes the experiment used to evaluate the effectiveness of our DI Algorithm, step [B] of our approach. Therefore, we have compared its result with an oracle in order to verify its correctness. %The second experiment is referred as ``Propagation Study'' and was planned to evaluated the correctness of the propagation given a set of refactorings. 
 In addition, we have worked out one research question, as follows:
 
 %Moreover, this experiment also evaluate the devised Eclipse plug-in, which was earlier described. Specifically, we investigate the following research questions:
 
-\textbf{RQ$_{1}$}: Given some specific elements to be refactored, is the mining algorithm able to identify correctly all the dependent KDM elements?
+\textbf{RQ$_{1}$}: Given some specific elements to be refactored, is the DI Algorithm able to identify correctly all the dependent KDM elements?
 
 %\textbf{RQ$_{2}$}: Given a specific refactoring R, are all dependent elements identified in the oracle correctly refactored?
  
@@ -15,26 +15,25 @@ In addition, we have worked out one research question, as follows:
 \subsection{Goal Definiton}\label{sec:goal_definition}
 
 We use the organization proposed by the Goal/Question/Metric (GQM) paradigm, it describes experimental goals in five parts, as follows:
-
-\begin{itemize}
-
-\item \textbf{object of study:} the object of study is our approach; 
-
-\item \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our mining approach; %The experiment provides insight into how much effective can be our mining approach. It is also expected that the experimental results can be used to evaluate the impact of idenfiforking the execution of mutant methods in their own threads and weakly killing them have on the performance.
-
-\item \textbf{perspective:} this experiment is run from the standpoint of a researcher;
-
-\item \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm; 
-
-\item  \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
-\end{itemize}
-
 %
-%(\textit{i}) \textbf{object of study:} the object of study is our approach; (\textit{ii}) \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our  mining approach, i.e., step [B] of our whole approach; (\textit{iii}) \textbf{perspective:} this experiment is run from the standpoint of a researcher; (\textit{iv}) \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm; (\textit{v}) \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
+%\begin{itemize}
+%
+%\item \textbf{object of study:} the object of study is our approach; 
+%
+%\item \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our mining approach; %The experiment provides insight into how much effective can be our mining approach. It is also expected that the experimental results can be used to evaluate the impact of idenfiforking the execution of mutant methods in their own threads and weakly killing them have on the performance.
+%
+%\item \textbf{perspective:} this experiment is run from the standpoint of a researcher;
+%
+%\item \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the mining algorithm; 
+%
+%\item  \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
+%\end{itemize}
+%
+(\textit{i}) \textbf{object of study:} the object of study is our approach; (\textit{ii}) \textbf{purpose:} the purpose of this experiment is to evaluate the effectiveness of our DI Algorithm, i.e., step [B] of our whole approach; (\textit{iii}) \textbf{perspective:} this experiment is run from the standpoint of a researcher; (\textit{iv}) \textbf{quality focus:} the primary effect under investigation is the precision and recall after applying the DI Algorithm; (\textit{v}) \textbf{context:} this experiment was carried out using Eclipse 4.3.2 on a 2.5 GHz Intel Core i5 with 8GB of physical memory running Mac OS X 10.9.2.
 
-Our experiment can be summarized using Wohlin et al.'s template~\cite{Wohlin} as follows: 
+The experiment can be summarized using Wohlin et al.'s template~\cite{Wohlin} as follows: 
 
-\textbf{Analyze} the effectiveness of our mining algorithm
+\textbf{Analyze} the effectiveness of our DI Algorithm
 
 \textbf{for the purpose of} evaluation
 
@@ -48,9 +47,7 @@ Our experiment can be summarized using Wohlin et al.'s template~\cite{Wohlin} as
 
 \subsection{Effectiveness Analysis}\label{hypothesis_formulation}	
 
-Herein we present an effectiveness analysis aiming to determine the recall and precision of our approach. To do that, we have applied our mining approach, step [B], in one system and compared the results with oracles and an own manual analysis. 
-
-The system we have used as case studies was LabSys, the same system used in the case study. This analysisemploys the metrics Recall and Precision, which are described below:
+Herein we present an effectiveness analysis aiming to determine the recall and precision of our approach. To do that, we have applied our DI Algorithm, step [B], in one system and compared the results with oracles and a manual analysis. The system we have used as case studies was LabSys, the same system used in the case study. This analysis employs the metrics Recall and Precision, which are described below:
 
 \begin{itemize}
 \item Precision is the ratio of the number of true positives retrieved to the total number of irrelevant and relevant KDM elements retrieved/propagated. It is usually expressed as a percentage, see equation 1.
@@ -134,13 +131,13 @@ For our evaluation, we also used the same system described in Section~\ref{sec:c
 %
 %Currently, MoDisco only generates the KDM code package, other KDM packages are extremely important to evaluate our approach. Therefore, we have manually instantiated the followings KDM packages: Structure Package, Data Package, and Conceptual Package.
 %
-Furthermore, to evaluate our mining approach it was necessary to choose some refactoring. As a matter of fact, it is important to know its parameters once our mining algorithm uses them to identify all affected metaclasses. Therefore, we selected four refactorings and use its parameters as starting point of our mining approach. The chosen refactorings were: \textit{Extract Class}, \textit{Extract Layer}, \textit{Move Class}, and \textit{Remove Class}. %For the refactoring \textit{Extract Class} 
+Furthermore, to evaluate our DI Algorithm it was necessary to choose some refactoring. As a matter of fact, it is important to know its parameters once our DI Algorithm uses them to identify all affected meta-classes. Therefore, we selected four refactorings and use its parameters as starting point of our mining approach. The chosen refactorings were: \textit{Extract Class}, \textit{Extract Layer}, \textit{Move Class}, and \textit{Remove Class}. %For the refactoring \textit{Extract Class} 
 %
 %
 %We applied each of the three refactorings to every possible location in KDM instance. It is worth to notice that all refactorings were applied completely automatically by means of our devised proof-of-concept tool. To deal with refactorings that go into infinite loops, we set three minutes timeout interval. More specifically, we applied the \textit{Extract Class} to every class that had more than 300 LOC (Line of Code); we applied the \textit{Move Class} to every class from a package to another package; we applied the \textit{Pull up Method} to every method of a class that had a superclass that was not from a library, using every such superclass as the target of the pull-up. 
 %
-Then after applied our mining approach we counted whether all the affected metaclasses were successful identified.%, i.e., if the intended refactoring could be performed, and how many propagations were generated on the model. We also counted if our DI Algorithm was effectiveness to identify all affected metaclasses after applying a refactoring. 
-We also measured both software metrics precision and recall after applying the mining algorithm on the KDM models.
+Then after applied the DI Algorithm we counted whether all the affected meta-classes were successful identified.%, i.e., if the intended refactoring could be performed, and how many propagations were generated on the model. We also counted if our DI Algorithm was effectiveness to identify all affected metaclasses after applying a refactoring. 
+We also measured both software metrics precision and recall after applying the DI Algorithm on the KDM models.
 
 
 %  and on the code side after to apply the refactorings. We also measured both software quality metrics Cohesion Amongst the Methods of a Class (CAMC) and Similarity- based Class Cohesion (SCC)4 before applying the refactoring on the KDM models and after applying the refactoring on the KDM models. Notice that in this case we actually measured these metrics in the code instead of the KDM model. This was possible as our proof-of-concept tool provides support for the generating of the code after one finishes to apply the refactorings.
