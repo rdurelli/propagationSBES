@@ -11,7 +11,7 @@
 	\label{fig:system}
 \end{figure*}
 
-ADM is the process of understanding  and evolving existing software systems taking model-driven principles into account~\cite{1686216}. A typical ADM process involves three main phases: Reverse Engineering, Refactorings/Optimizations and Forward Engineering. In reverse engineering, a legacy system is abstracted in a KDM instance. Next, some refactorings and optimizations can be applied over the KDM instance and, in the last phase, the modernized source code is generated.
+ADM is the process of understanding  and evolving existing software systems taking model-driven principles into account~\cite{1686216}. A typical ADM process involves three main phases: Reverse Engineering, Refactorings/Optimizations and Forward Engineering. In reverse engineering, a legacy system is abstracted in a KDM instance. Next, some refactorings and optimizations can be applied over the KDM instance and, in the last phase, the modernized source code is generated. 
 
 KDM is the most important meta-model of ADM (ISO/IEC 19506), providing a comprehensive view of as-is application and data architectures, into a unique meta-model. This is different from conventional model-driven development techniques we have found on literature~\cite{7051941}, since many of them employs several meta-models, from different vendors, along the process~\cite{Perez-Castillo:2011:KDM}. KDM can be seen as a family of meta-models, as it contains twelve packages; each one representing a meta-model that concentrates on a different view of the system. Thus, by using its  meta-models, it is possible to have a number of views of a system. For example, it is possible to have a low level system representation, describing source-code details and several others views of the system, such as an architectural view, a data view, a business rule view, a behavioral view, etc. Moreover, as KDM groups a set of meta-models, all of them share the same terminology, i.e., all of the meta-models know the main meta-model elements, such as ClassUnit, KDMEntity and MethodUnit, etc.
 
@@ -38,7 +38,7 @@ An evident problem in this example is the presence of the classes \texttt{Studen
 \begin{figure}[h]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.516]{figuras/moveClassNewFormatted}
+	\includegraphics[scale=0.516]{figuras/moveClassRefactoringFormatted}
 	\caption{Chunk of code in ATL to perform the refactoring \textit{Move Class}.}
 	\label{fig:ATLRefactoring}
 \end{figure}

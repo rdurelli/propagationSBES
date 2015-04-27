@@ -3,9 +3,9 @@
 \section{Evaluation}\label{sec:evaluation}
 This section describes the experiment used to evaluate the effectiveness of our DI Algorithm, step [B] of our approach. Therefore, we have compared its result with an oracle in order to verify its correctness. %The second experiment is referred as ``Propagation Study'' and was planned to evaluated the correctness of the propagation given a set of refactorings. 
 In addition, we have worked out one research question, as follows:
-
+%
 %Moreover, this experiment also evaluate the devised Eclipse plug-in, which was earlier described. Specifically, we investigate the following research questions:
-
+%
 \textbf{RQ$_{1}$}: Given some specific elements to be refactored, is the DI Algorithm able to identify correctly all the dependent KDM elements?
 
 %\textbf{RQ$_{2}$}: Given a specific refactoring R, are all dependent elements identified in the oracle correctly refactored?
@@ -177,12 +177,12 @@ Table~\ref{table:precision_recall} presents both metrics: precision and recall. 
 	\label{fig:charPrecisionAndRecall}
 \end{figure}
 
-Observing  both Table~\ref{table:precision_recall} and Figure~\ref{fig:charPrecisionAndRecall}, it is possible to see that for the refactoring \textit{Extract Class}'s parameters we got 100\% of precision and recall; that is there are no false negatives or positives. However, notice we got 80\% of precision for the refactoring \textit{Extract Layer}'s parameters. This happened because our mining algorithm has recognized more similar metaclasses in \textit{Extract Layer} than in \textit{Extract Class} increasing the number of false positives, as most of these metaclasses had not relation with the parameters.
+Observing  both Table~\ref{table:precision_recall} and Figure~\ref{fig:charPrecisionAndRecall}, it is possible to see that for the refactoring \textit{Extract Class}'s parameters we got 100\% of precision and recall; that is there are no false negatives or positives. However, notice we got 80\% of precision for the refactoring \textit{Extract Layer}'s parameters. This happened because our mining algorithm has recognized more similar meta-classes in \textit{Extract Layer} than in \textit{Extract Class} increasing the number of false positives, as most of these meta-classes had not relation with the parameters.
 
-Obviously, our mining algorithm failed in some cases because although some metaclasses are similar, the semantic is completely different. For example, we could have two similar instance of an specific metaclass, therefore the algorithm would identify just one. %However, it also clustered correctly the variable oafee that is a persistence field. 
-As can be seen in Table~\ref{table:precision_recall} it is clear that our mining affected metaclasses algorithm helps to find metaclasses which are related with a particular refactoring but it is not foolproof. Nevertheless, empirically we can say that the algorithm add value to the whole solution.
+Obviously, our mining algorithm failed in some cases because although some meta-classes are similar, the semantic is completely different. For example, we could have two similar instance of an specific meta-class, therefore the algorithm would identify just one. %However, it also clustered correctly the variable oafee that is a persistence field. 
+As can be seen in Table~\ref{table:precision_recall} it is clear that our mining affected meta-classes algorithm helps to find meta-classes which are related with a particular refactoring but it is not foolproof. Nevertheless, empirically we can say that the algorithm add value to the whole solution.
 
-As can be seen in our analyses, good recall and precision values were obtained using our mining affected metaclasses algorithm. Therefore, this can enable other groups to proceed researching on data mining techniques. Clearly, we cannot guarantee the same level of recall and precision but maybe it is possible to keep improving these metrics by using other data mining techniques.
+As can be seen in our analyses, good recall and precision values were obtained using our mining affected meta-classes algorithm. Therefore, this can enable other groups to proceed researching on data mining techniques. Clearly, we cannot guarantee the same level of recall and precision but maybe it is possible to keep improving these metrics by using other data mining techniques.
 
 \subsection{Threats to Validity}
 
