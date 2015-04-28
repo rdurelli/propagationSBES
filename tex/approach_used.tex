@@ -6,7 +6,7 @@
 \begin{figure*}[t]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.545]{figuras/PropagationModule}
+	\includegraphics[scale=0.545]{figuras/ApproachLifeCicle2}
 	\caption{A ``bird's eye'' View of our Approach.}
 	\label{fig:approach}
 \end{figure*}
@@ -25,7 +25,9 @@ From this point onward, the step [B], called \textit{Mining Points to Perform th
 This step runs a depth-first search algorithm\footnote{From here on in Mining Dependents Identification Algorithm (MDI Algorithm)}. This algorithm uses as input the list that was obtained from the diff between the refactored KDM and original KDM instance (step [A]).
 Then, it also uses the refactored KDM instance to generate as output all KDM instances that possesses dependencies with the elements to be refactored. 
 
-The third step [C], called \textit{Applying Propagation}, objectives to effectively perform in a cascade way all the changes/updates in the KDM model. The input for this steps are the elements to be changed (provided by the step [B]) and the output is the KDM model updated/synchronized. 
+The third step [C], called \textit{Applying Propagation}, applies all the changes/updates in the KDM model. The inputs for this step are the meta-class instances to be changed (provided by the step [B]) and the output is the refactored KDM model.
+
+An important point is that this three-step sequence is repeated in a cascade way until no more elements need to be updated, which is represented by the dotted line that goes back to the first step or forward to the final state. This cycle is necessary because the refactored KDM model can still require propagations in other elements/views, so, each cycle concentrates just on the next level. The stop condition is when the mining algorithm returns an empty set, indicating that there are no more elements that depend on the modified ones.
 
 The step [A], is technically supported by the framework EMF Compare once it provides comparison and merge facility for any kind of model. EMF Compare was reused and extended to compare instances of KDM models. The step [B], is technically supported by an \textit{Identification Engine} whose the core is our MDI Algorithm along with a set of queries that are performed over a KDM model. %The \textit{Identification of the Points To Be Propagated} is easier to be done after the refactoring and the after performing the diff between , because it is possible to detect the already changed elements making a diff between the source and refactored model. %When the identification process should be done before the refactoring application, all the model elements involved in the refactoring need to be extracted and passed as parameters to the Identification Engine. This will require more implementation effort.
 
@@ -66,7 +68,7 @@ Firstly a query must be executed to get the root element in KDM. This query is r
 	\centering
 	% Requires \usepackage{graphicx}
 	\includegraphics[scale=0.479]{figuras/queiresANDATLSBESNew}
-	\caption{Xpath used to return the KDM's root element, Segment.}
+	\caption{Xpath used to return the KDM's elements.}
 	\label{fig:queriesXPath}
 \end{figure}
 
@@ -91,7 +93,7 @@ Firstly a query must be executed to get the root element in KDM. This query is r
 			}		
 	
 	}
-     \caption{DFS(G,u) - Depth-First Search Algorithm.}
+     \caption{MDI(G,u) - Mining Dependents Identification Algorithm.}
      \label{alg:death1}
    \end{algorithm}
 
