@@ -1,7 +1,6 @@
 %!TEX root = /Users/rafaeldurelli/Dropbox/Artigos Elaborados/KDM propagation_2015/sbes_2015_kdm_propagation/sbes2015_kdm_propagation.tex
 %
-\section{The Propagation Approach} % (fold)
-\label{sec:the_approach}
+
 
 \begin{figure*}[t]
 	\centering
@@ -11,27 +10,27 @@
 	\label{fig:approach}
 \end{figure*}
 
-In this section our approach is presented. It aims to propagate changes, in a cascade way, throughout the KDM's levels during a refactoring. The intention is to keep the consistency/synchronization among all the KDM's views during a refactoring activities.
-
+In this section our approach is presented. It propagates changes, in a cascade way, throughout the KDM's levels during a refactoring. The intention is to keep the consistency/synchronization among all the KDM's views during a refactoring activities.
+%
 % in order to keep all the KDM views synchronized. The intention is to keep the consistency/synchronization among all the KDM's views during a refactoring activities. 
-
+%
 %In order to fulfill the limitation pointed out, we introduce a tool/approach, called Propagation-Aware Refactoring (PARef),  that aims propagating changes throughout all the KDM's levels during a refactoring in order to keep all the views synchronized. The intention is to keep the consistency among all the KDM's views during refactoring activities.
 %
-Figure~\ref{fig:approach} shows the workflow of our approach. As noted it contains three steps, [A], [B], and [C] all contained into the gray box. Outside of our approach there is the \textit{Refactoring Activity}, see the white rectangle. This activity is a normal and conventional model refactoring activity - this activity is out of scope of our approach - is responsibility of the software modernizer to develop or reuse any model refactorings (in ATL, ETL, QVT) and apply them into a KDM model. %In this phase, a number of KDM model elements can be modified, created or removed. 
+Figure~\ref{fig:approach} shows the workflow of our approach. It contains three steps, [A], [B], and [C] all contained into the gray box. Outside of our approach there is the \textit{Refactoring Activity}, see the white rectangle. This activity is a normal and conventional model refactoring activity - this activity is out of scope of our approach - is responsibility of the software modernizer to develop or reuse any model refactorings (in ATL, ETL, QVT, etc) and apply them into a KDM model. %In this phase, a number of KDM model elements can be modified, created or removed. 
 
-After that, the first step, [A] is trigged then a diff between the refactored KDM instance and the original KDM instance (the instance before one applies a KDM refactoring). The output of this diff is a list that contains all KDM model instance involved during the KDM refactoring. %Further our two-steps approach starts.  
+After that, the first step, [A] is trigged then a diff between the refactored KDM instance and the original KDM instance (the instance before one applies a KDM refactoring) is performed. The output of this diff is a list that contains all KDM model instance involved during the KDM refactoring. %Further our two-steps approach starts.  
 
 From this point onward, the step [B], called \textit{Mining Points to Perform the Propagation} gathers all the KDM elements that need to be updated/synchronized as a result of a refactoring. %This step uses the list that was obtained from the diff between the refactored KDM and original KDM instance (step [A]) as input. 
-This step runs a depth-first search algorithm\footnote{From here on in Mining Dependents Identification Algorithm (MDI Algorithm)}. This algorithm uses as input the list that was obtained from the diff between the refactored KDM and original KDM instance (step [A]).
-Then, it also uses the refactored KDM instance to generate as output all KDM instances that possesses dependencies with the elements to be refactored. 
+This step runs a depth-first search algorithm (from here on in \textbf{M}ining \textbf{D}ependents \textbf{I}dentification Algorithm - MDI Algorithm). This algorithm uses as input the list that was obtained from the diff between the refactored KDM and original KDM instance (step [A]).
+It also uses the refactored KDM instance to generate as output all KDM instances that possesses dependencies with the elements to be refactored. 
 
-The third step [C], called \textit{Applying Propagation}, applies all the changes/updates in the KDM model. The inputs for this step are the meta-class instances to be changed (provided by the step [B]) and the output is the refactored KDM model.
+The third step [C], called \textit{Applying Propagation}, applies all the changes/updates in the KDM instance. The inputs for this step are the meta-class instances to be changed (provided in step [B]) and the output is the refactored KDM instance.
 
-An important point is that this three-step sequence is repeated in a cascade way until no more elements need to be updated, which is represented by the dotted line that goes back to the first step or forward to the final state. This cycle is necessary because the refactored KDM model can still require propagations in other elements/views, so, each cycle concentrates just on the next level. The stop condition is when the mining algorithm returns an empty set, indicating that there are no more elements that depend on the modified ones.
+An important point is that this three-step sequence is repeated in a cascade way until no more elements need to be updated, which is represented by the dotted line that goes back to the first step or forward to the final state. This cycle is necessary because the refactored KDM instance can still require propagations in other elements/views, so, each cycle concentrates just on the next level. The stop condition is when the mining algorithm returns an empty set, indicating that there are no more elements that depend on the modified ones.
 
-The step [A], is technically supported by the framework EMF Compare once it provides comparison and merge facility for any kind of model. EMF Compare was reused and extended to compare instances of KDM models. The step [B], is technically supported by an \textit{Identification Engine} whose the core is our MDI Algorithm along with a set of queries that are performed over a KDM model. %The \textit{Identification of the Points To Be Propagated} is easier to be done after the refactoring and the after performing the diff between , because it is possible to detect the already changed elements making a diff between the source and refactored model. %When the identification process should be done before the refactoring application, all the model elements involved in the refactoring need to be extracted and passed as parameters to the Identification Engine. This will require more implementation effort.
+The step [A], is technically supported by the framework EMF Compare as it provides comparison and merge facility for any kind of model. Herein EMF Compare was reused and extended to compare instances of KDM models. The step [B], is technically supported by an \textit{Identification Engine} whose the core is our MDI Algorithm along with a set of queries that are performed over a KDM model. %The \textit{Identification of the Points To Be Propagated} is easier to be done after the refactoring and the after performing the diff between , because it is possible to detect the already changed elements making a diff between the source and refactored model. %When the identification process should be done before the refactoring application, all the model elements involved in the refactoring need to be extracted and passed as parameters to the Identification Engine. This will require more implementation effort.
 
-The step [C] is technically supported by a \textit{Propagation Engine}, whose core is a set of pre-defined transformation rules devised with ATL that works in cascade way. Herein all the transformation rules act as a chain of transformations that are executed together in order to update/propagate all the changes throughout KDM's views. More details on each step are provided in the next sections.
+The step [C] is technically supported by a \textit{Propagation Engine}, whose core is a set of pre-defined transformation rules devised with ATL that works in cascade way. All the transformation rules act as a chain of transformations that are executed together in order to update/propagate all the changes throughout KDM's views. More details on each step are provided in the next sections.
 
 
 %This approach ensures that when a change/refactoring is performed in any KDM's level, it is correctly propagated to the affected KDM's levels and vice versa. So it make certain that the consistency between the KDM's levels when they are refactored. Our approach is called Propagation-Aware Refactoring (PARef) and it is split into three steps, which are depicted by its corresponding letters and tittle in Figure~\ref{fig:approach}. 
@@ -49,7 +48,7 @@ The step [C] is technically supported by a \textit{Propagation Engine}, whose co
 
 %The problem of model diff is intrinsically complex. For instance, if a ClassUnit C is deleted, its transitive parts and attached associations are typically also deleted. So, computing the difference results in a large number of detail changes that might be complex to implement from scratch. 
 
-In this step we have integrated  EMF Compare\footnote{https://www.eclipse.org/emf/compare/} with our plug-ing. We have chosen EMF Compare because it is a framework that can easily reuse and extend to compare instances of any models, in our case KDM models. EMF Compare also was designed with scalability in mind in order to support comparisons of large fragmented models.
+We have integrated  EMF Compare\footnote{https://www.eclipse.org/emf/compare/} with our plug-ing because it is a framework that can easily reuse and extend to compare instances of any models, in our case KDM models. %EMF Compare also was designed with scalability in mind in order to support comparisons of large fragmented models.
 
 To start this step, our plug-ing needs two instance of KDM as input: i) the refactored one (left side), and ii) the original (right side). Our plug-ing analyses, whether the KDM elements are equal or if they present differences (for example, the name of the class has been changed from Class1 to ClassX, or a class has been moved from a Package to another Package, etc). Then, our plug-ing iterates over all of our KDM elements, be they unmatched (only one side has this object), couples (two of the three sides contain this object) and compute any difference that may appear between the sides. 
 For example, a KDM element that is only on one side of the comparison is a KDM element that has been added, or deleted. But a couple might also represent a deletion: during three way comparisons, if we have an KDM element in the common ancestor (origin) and in the left side, but not in the right side, then it has been deleted from the right side version. The output of this step is a list that contains all KDM model elements involved during the KDM refactoring. 
@@ -57,12 +56,12 @@ For example, a KDM element that is only on one side of the comparison is a KDM e
 \subsection{Mining Points to Perform the Propagation} % (fold)
 \label{sub:mine_affected_metaclasses}
 
-The step [B] starts with MDI Algorithm to identify all affected meta-classes along with a set of queries. The MDI Algorithm recognizes all meta-classes and its relationships that use somehow the meta-class(es) that were refactored. As input the our MDI Algorithm uses the list obtained from the Step [A]. For example, in the case of the refactoring \textit{Move Class} the list would contains a Package and a set of ClassUnits that were moved. Further, our MDI Algorithm uses a set of queries that are performed on the KDM's instance to mine all the affected/linked meta-classes. All the queries were created using XPath. We have decided to use XPath because it is a well-know and well-documented language. 
+The step [B] starts with MDI Algorithm to identify all affected meta-classes along with a set of queries. The MDI Algorithm recognizes all meta-classes and its relationships that use somehow the meta-class(es) that were refactored. As input our MDI Algorithm uses the list obtained from the Step [A]. For example, in the case of the refactoring \textit{Move Class} the list would contains a Package and a set of ClassUnits that were moved. Further, our MDI Algorithm uses a set of queries that are performed on the KDM's instance to mine all the affected/linked meta-classes. All the queries were created using XPath. We have decided to use XPath because it is a well-know and well-documented language. 
 
 %Concerning the refactoring \textit{Move Class} the engineer should specify a set of classes that no longer are contained into a package \texttt{View}. These classes should be allocated into the package \texttt{Model}. 
 %Considering the refactoring \textit{Move Class}, three elements (\texttt{Student}, \texttt{Instructor}, and their package) need to be investigated throughout the KDM's instance in order to identify which other metaclasses can be affected. 
 
-Firstly a query must be executed to get the root element in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the meta-class \texttt{Segment}. The returned Segment, as well as all KDM's levels are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our MDI Algorithm as all the the list obtained from the Step [A].
+Firstly a query must be executed to get the root element in KDM. This query is represented as the first statement in Figure~\ref{fig:queriesXPath}, see line 1 - it is used to return an instance of the meta-class \texttt{Segment}. The returned Segment, as well as all KDM's views are gathered by the other queries presented in Figure~\ref{fig:queriesXPath} lines 2 to 5. The returned elements of these queries are used as input in our MDI Algorithm as all the the list obtained from the Step [A].
 
 \begin{figure}[h]
 	\centering
@@ -199,7 +198,7 @@ The only task is to provide for this step all the parameters it needs to conduct
 %
 %
  %all propagations regarding an specific refactoring, e.g., \textit{Move Class}, are implemented. 
-Similarly to the step [A], where the modernizer has to define a set of model transformations rules to perform the model refactoring, here a set of generic and pre-established model transformations (written in ATL) are used. The difference is that in Step [A], the modernizer can either create or reuse a KDM refactoring, otherwise in Step [C] all rules were beforehand defined to perform the propagation of changes (in a cascade way) after the application of a KDM refactoring. In addition, these ATL rules (the propagations) require a set of  \textit{mininum} parameters that should be informed before realize all the propagations. As already mentioned these parameters are the output from Step [B], which is a list containing all KDM affected instances. 
+Differently from step [A], where the modernizer has to define a set of model transformations rules to perform the model refactoring, here a set of generic and pre-established model transformations (written in ATL) are used. More specifically, the difference is that in Step [A], the modernizer can either create or reuse a KDM refactoring, otherwise in Step [C] all rules were beforehand defined to perform the propagation of changes (in a cascade way) after the application of a KDM refactoring. In addition, these ATL rules (the propagations) require a set of  \textit{mininum} parameters that should be informed before realize all the propagations. As already mentioned these parameters are the output from Step [B], which is a list containing all KDM affected instances. 
 
 In order to bound these parameters along with the output of Step [B] our approach performs a static analysis (parsing) of all generic ATL rules and identifies places that must be replaced in with the Step [B]'s output (KDM affected instances), i.e, all the places where parameters are needed. This is particularly necessary in our approach because ATL does not enforce type correctness, hence rules written in ATL may be ill-typed. Moreover, the creation of a suitable propagation %in this step 
 requires precise parameters (meta-classes) informations. It is important to highlight that this static analysis is done totally automatically and transparently by means of our Eclipse plug-in. The aim is having a decouple module of KDM propagation as simple as possible to facilitate the integration with any refactoring defined in ATL in the context of KDM model and also to promote the reuse. Therefore, the software modernizer does not have to worry about devising the propagation of changes, which usually is harder than just the creating of a KDM refactoring. 
@@ -207,30 +206,30 @@ requires precise parameters (meta-classes) informations. It is important to high
 In addition, if the static analysis detect errors, the software modernizer is required to fix and inform the correct parameters, otherwise, all changes are propagated in all KDM levels automatically/transparently  
 
 
-Figure~\ref{fig:ATLPropagation} shows a code snippet written in ATL that is used to propagate the changes. Due space limitation the whole ATL it is not presented. Note that all strings, \textbf{`\#parameter'}, are changed during the static analysis along with the step [B]'s output. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package, respectively. The first rule is responsible to propagate the changes throughout the \texttt{Structure Package}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of a refactoring, i.e, \textit{Move Class}.
+Figure~\ref{fig:ATLPropagation} shows a code snippet written in ATL that is used to propagate the changes. Due space limitation the whole ATL it is not presented. Note that all strings, \textbf{`\#parameter'}, are changed during the static analysis along with the step [B]'s output. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package, respectively. The first rule is responsible to propagate the changes throughout the \texttt{Structure View}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of a refactoring, i.e, \textit{Move Class}.
 
 \begin{figure}[h]	
 	\centering
 	% Requires \usepackage{graphicx}
 	\includegraphics[scale=0.516]{figuras/ATLPRopagationSBESFormatted}
-	\caption{Chunk of code in ATL to perform the propagation after the application of refactoring \textit{Move Class}.}
+	\caption{Snippet of ATL to execute the propagation in cascade.}
 	\label{fig:ATLPropagation}
 \end{figure}
 
-If the \textit{Move Classes} refactoring is applied to transfer the class C1 to package P2, a natural propagation is to transfer the business rule B1 to another scenario. As defined in the second rule (lines 33 to 43) - this rule is used to propagate the changes throughout the \texttt{Conceptual Package}.
+If the \textit{Move Classes} refactoring is applied to transfer the classes to a package to another as illustrated in the Section~\ref{sec:running_example}, a natural propagation is to transfer the business rule related to the moved classes to another scenario that represent the target package. A chunk of propagation is defined in the second rule (lines 33 to 43) - it can be used to propagate the changes throughout the \texttt{Conceptual View}.
 %
 %The rule defined in lines 33 to 43 propagates the changes throughout the \texttt{Conceptual Package}. If the \textit{Move Classes} refactoring is applied to transfer the class C1 to package P2, a natural propagation is to transfer the business rule B1 to another scenario.
 %
 %
 % For instance, Line 36 shows the specific propagation that is ne the \texttt{RuleUnit 1.1} that is associated with \texttt{Instructor} should also be moved to corresponding scenario, i.e, the scenario that is associated with the package that contains now the class \texttt{Instructor} - \texttt{ScenarioUnit 3}. 
 %
- Finally, the rule defined in lines 44 - 65 aims to propagate the change to the \texttt{Data Package}. For each \texttt{ClassUnit}, a \texttt{RelationalTable} instance has to be created - their names have to correspond. The \texttt{itemUnit} %(a collection that contains \texttt{ColumnSet}) 
+ Finally, the rule defined in lines 44 - 65 propagates the change to the \texttt{Data View}. For each new \texttt{ClassUnit} instance a \texttt{RelationalTable} instance has to be created - their names have to correspond. The \texttt{itemUnit} %(a collection that contains \texttt{ColumnSet}) 
 reference set has to contain all \texttt{ColumnSet} that have been created for each \texttt{StorableUnit} (meta-class that represent all the attributes that a class holds) as well as its types.
 
 %In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
 
 %The correctness of our Propagation Engine mainly relies on the compliance of the transformation result, which in turn can be ensured by showing that the transformation produces a consistent KDM model. Thus, it is important to support the consistency among all KDM views. To this end, we consider static consistency checks.
 
-Although we have used a simple refactoring as example, by observing both Figure~\ref{fig:ATLRefactoring} and Figure~\ref{fig:ATLPropagation} one can notice that the refactoring itself usually is less complex/verbose to devise than the Propagation Engine, i.e., a set of rules defined to propagate the changes in KDM levels tend to be more complex/verbose than KDM refactorings. Therefore, providing a module that can be plugged over existing KDM refactorings in order to propagate the changes can assist the software modernizer.
+Although we have used a simple KDM refactoring as example (\textit{Move Class}), by observing both Figure~\ref{fig:ATLRefactoring} and Figure~\ref{fig:ATLPropagation} it is fairly evident that the refactoring itself usually is less complex/verbose to devise than the Propagation Engine, i.e., a set of pre-defined rules to propagate the changes in KDM views tend to be more complex/verbose than KDM refactorings. Therefore, we argue to provide a module that can be plugged over existing KDM refactorings in order to propagate the changes can assist the software modernizer.
 
 % Due space limitation the whole ATL that is used to promote the propagation is not shown - but by observing both ATL that the rules to perform the propagation are much more complex. 
