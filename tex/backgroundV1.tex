@@ -4,8 +4,8 @@
 \begin{figure*}[t]
 	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.78]{figuras/NovoSystem5Preto}
-	\caption{System example.}
+	\includegraphics[scale=0.78]{figuras/NovoSystem6}
+	\caption{Laboratory System (LabSys) depicted as an instance of KDM.}
 	\label{fig:system}
 \end{figure*}
 
@@ -19,49 +19,41 @@ The KDM main goal is to allow a complete representation of systems, ranging from
 
 \section{A Running Example}\label{sec:running_example}
 
-Figure~\ref{fig:system} presents an example that is used throughout this paper. It is shown schematically how KDM can be used for representing four views/abstractions of part of an Academic Management (AM) system : Code View, Architecture View, Data View, and Conceptual View. This figure illustrates a KDM model, i.e., an instance of KDM composed by four KDM views/instances - each of the four big rectangles represents an instance of an internal meta-model. There is an instance of the Code meta-model (middle), an instance of the Structure meta-model (upper part), Data meta-model (lower part), and another one of the Conceptual meta-model (right part). 
+Figure~\ref{fig:system} presents and describes an example that is used throughout this paper. It is shown schematically how KDM can be used for representing four abstractions views: Code View, Architecture View, Data View, and Conceptual View. We have used a real-life legacy information system named Laboratory System (LabSys), which is currently used by Federal University of Tocantins to control the use of laboratories in the entire university. This figure illustrates a KDM model, i.e., an instance of KDM composed by four KDM views/instances - each of the four big rectangles represents an instance of an internal meta-model. There is an instance of the Code meta-model (middle), an instance of the Structure meta-model (upper part), Data meta-model (lower part), and another one of the Conceptual meta-model (right part). 
 
 Besides, each of the smaller internal elements (classes, packages, layers, relationships, etc) also contains instances of KDM meta-classes. Herein we use the pattern \textbf{``instance name: Meta-class name''} in the name of every element so that the name of the meta-class can be seen. As this is an MVC-based system, Code View contains three instances of the Package meta-class: VIEW, CONTROLLER, and MODEL. Each of them involves some ClassUnit instances. The classes are related to each other by means of static (associations, inheritance, interface realizations, etc) or dynamic (calls, object creation, parameter passing, etc) relationships. Each of these relationships is also an instance of specific meta-classes. 
 
-The Architecture View represents the system architecture. In this example each smaller rectangle represents an instance of a meta-class called Layer. The system is organized in three layers:  VIEW, CONTROLLER, and MODEL. Between Layes and Packages there are a set of relationship called \texttt{implementation}, which are represented in Figure~\ref{fig:system} by the symbol \foobarMeu. The intention of this type of relationship is to denote that a specific higher-level abstraction is realized by one or more lower level code elements. In this example, the Layer VIEW is realized in source-code level by the Package VIEW; the Layer MODEL is realized by the Package MODEL and the Layer CONTROLLER by the Package CONTROLLER. The \texttt{implementation} relationship is very important in this work, as it is the main link between meta-models in different abstraction levels. Observe in the figure that the unique route between the views are by means of these relationships.
+The Architecture View represents the system architecture. In this example each smaller rectangle represents an instance of a meta-class called Layer. The system is organized in three layers:  VIEW, CONTROLLER, and MODEL. Between Layers and Packages there are a set of relationship called \texttt{implementation}, which are represented in Figure~\ref{fig:system} by the symbol \foobarMeu. The intention of this type of relationship is to denote that a specific higher-level abstraction is realized by one or more lower level code elements. In this example, the Layer VIEW is realized in source-code level by the Package VIEW; the Layer MODEL is realized by the Package MODEL and the Layer CONTROLLER by the Package CONTROLLER. The \texttt{implementation} relationship is very important in this work, as it is the main link between meta-models in different abstraction levels. Observe in the figure that the unique route between the views are by means of these relationships.
 %
 %KDM also possesses an important relationship type called AggregatedRelationship whose aim is to represent dependencies between architectural elements of the Structure Package. Using this relationship it is possible to put together several primitive relationships in a unique ``channel''. For example, there are thicker relationships between the layers representing the AggregatedRelationship. It is also possible to see that these relationships aggregate some primitive relationships. For example,
 
 The thicker arrow ($\Rightarrow$) relationships between the layers represent an instance of AggregatedRelationship meta-class. The AggregatedRelationship between the Layer VIEW and the Layer CONTROLLER act as a ``channel'' to group primitive relationships, for instance: two Calls, one Creates and one Extends. The number aside the AggregatedRelationship is called ``density'' that represents the amount of primitive relationships exists inside it.
 
-The Conceptual View illustrates the system's  business rules domain. This system owns three ScenarioUnits (SelectPublication, RegisterStaff, and ManagePublication), each of them are associated with a Package from Code View by means of the association \texttt{implementation}. Further, each ScenarioUnit contains a RuleUnit (CheckFreeHours, ManageResearcher, and ValidateHIndex, respectively) associated with a ClassUnit from Code View, again using the association implementation.
+The Conceptual View illustrates the system's  business rules domain. This system owns three ScenarioUnits (ManageLaboratories, ManageReservation, and RegisterStaff), each of them are associated with a Package from Code View by means of the association \texttt{implementation}. Further, each ScenarioUnit contains a RuleUnit (ValidateQTYComputers, CheckCredentials, and isCPFValid, respectively) associated with a ClassUnit from Code View, again using the association implementation.
 
 Finally, the Data View depicts the system's database and its tables. Notice that the depicted system owns a set of Plain Old Java Objects (POJOS), they are: Student, Instructor, Secretary, and Researcher. All of these POJOS are also Object Relational Mapping (ORM), i.e., they are mapped to the Data View using the meta-class RelationalTable and its columns are mapped using the meta-classes UniqueKey and ColumnSet.
 
-An evident problem in this AM system is the presence of the ClassUnits \texttt{Student} and \texttt{Instructor} in the VIEW package. A solution is to apply the \textit{Move Class} KDM refactoring as presented in Figure~\ref{fig:ATLRefactoring}.
+Assuming the system as it is, it is possible to identify some flaws, i.e., classes that should be moved to another package, classes that are doing work that should be done by other class, a class is no longer used by system, etc. More information about these flaws are detailed and solved in the Case Study presented in Section~\ref{sec:case_study}.
 
-\begin{figure}[h]
-	\centering
+%An evident problem in this AM system is the presence of the ClassUnits \texttt{Student} and \texttt{Instructor} in the VIEW package. A solution is to apply the \textit{Move Class} KDM refactoring as presented in Figure~\ref{fig:ATLRefactoring}.
+
+%\begin{figure}[h]
+%	\centering
 	% Requires \usepackage{graphicx}
-	\includegraphics[scale=0.516]{figuras/NovoMoveClassFormatted}
-	\caption{Snippet of ATL to perform the refactoring \textit{Move Class}.}
-	\label{fig:ATLRefactoring}
-\end{figure}
+%	\includegraphics[scale=0.516]{figuras/NovoMoveClassFormatted}
+%	\caption{Snippet of ATL to perform the refactoring \textit{Move Class}.}
+%	\label{fig:ATLRefactoring}
+%\end{figure}
 
 %Lines 14 though 19 the \textit{Move Class} is actually defined. Lines 21 and 22 there is a helper, in ATL helpers are like methods in programing languages. This helper is used to verify if the ClassUnit is the correct class to be moved. 
-Almost all refactorings need some parameters that should be properly informed by the user. For instance, in Figure~\ref{fig:ATLRefactoring} lines 13 and 16 the software modernizer informed three parameters, i.e, he(she) specified the source Package (\texttt{MODEL}) and two ClassUnit's instances (\texttt{Student} and \texttt{Instructor}) to be moved. %that he(she) would like to move.
-After specifying these parameters the ATL is ready to be applied into a KDM instance.
+%Almost all refactorings need some parameters that should be properly informed by the user. For instance, in Figure~\ref{fig:ATLRefactoring} lines 13 and 16 the software modernizer informed three parameters, i.e, he(she) specified the source Package (\texttt{MODEL}) and two ClassUnit's instances (\texttt{Student} and \texttt{Instructor}) to be moved. %that he(she) would like to move. After specifying these parameters the ATL is ready to be applied into a KDM instance.
 
 %Observing the refactoring defined in Figure~\ref{fig:ATLRefactoring} it is fairly evident that both classes \texttt{Student} and \texttt{Instructor} should be moved to the MODEL package.
 %
 %During a refactoring activity, these classes should be moved to the Model package. 
-However, the effect of moving these ClassUnits will turn the KDM instance inconsistent, because the ``density'' value will turn wrong, i.e., AggregationRelationShip between
-the Layer VIEW and the Layer CONTROLLER would
-change from 4 to 2 - once the primitives relationships Creates
-and Extends would no longer exist from the package VIEW
-to the package CONTROLLER. In the same way, the result of \textit{Move Class} refactoring should also update the density between the Layer
-MODEL and CONTROLLER, instead of 2 it should be 4, as
-Creates and Extends were also moved along with its
-ClassUnits, \texttt{Student} and \texttt{Instructor}. Concerning to the
-Conceptual View, the RuleUnit \textit{CheckFreeHours} that is associated with
-\texttt{Instructor} should also be moved to ScenarioUnit \textit{RegisterStaff}.
+%However, the effect of moving these ClassUnits will turn the KDM instance inconsistent, because the ``density'' value will turn wrong, i.e., AggregationRelationShip between the Layer VIEW and the Layer CONTROLLER would change from 4 to 2 - once the primitives relationships Creates and Extends would no longer exist from the package VIEW to the package CONTROLLER. In the same way, the result of \textit{Move Class} refactoring should also update the density between the Layer MODEL and CONTROLLER, instead of 2 it should be 4, as Creates and Extends were also moved along with its ClassUnits, \texttt{Student} and \texttt{Instructor}. Concerning to the Conceptual View, the RuleUnit \textit{CheckFreeHours} that is associated with \texttt{Instructor} should also be moved to ScenarioUnit \textit{RegisterStaff}.
 
-These propagation seen to be easy to apply, however, in a complex system comprising all KDM's packages/views propagate all changes, in a cascade way, after a refactoring is a difficult and error prone task. Even identifying the affected parts of the KDM's packages/views is not an easy and straightforward process. In order to fulfill this limitation and create a plug-in supported KDM-specific approach for updating dependent KDM models/views when specific elements are refactored.
+%These propagation seen to be easy to apply, however, in a complex system comprising all KDM's packages/views propagate all changes, in a cascade way, after a refactoring is a difficult and error prone task. Even identifying the affected parts of the KDM's packages/views is not an easy and straightforward process. In order to fulfill this limitation and create a plug-in supported KDM-specific approach for updating dependent KDM models/views when specific elements are refactored.
 
 %--------------valters background---------------------------------------
 

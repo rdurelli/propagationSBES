@@ -206,7 +206,9 @@ requires precise parameters (meta-classes) informations. It is important to high
 In addition, if the static analysis detect errors, the software modernizer is required to fix and inform the correct parameters, otherwise, all changes are propagated in all KDM levels automatically/transparently  
 
 
-Figure~\ref{fig:ATLPropagation} shows a code snippet written in ATL that is used to propagate the changes. Due space limitation the whole ATL it is not presented. Note that all strings, \textbf{`\#parameter'}, are changed during the static analysis along with the step [B]'s output. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package, respectively. The first rule is responsible to propagate the changes throughout the \texttt{Structure View}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of a refactoring, i.e, \textit{Move Class}.
+Figure~\ref{fig:ATLPropagation} shows a code snippet written in ATL that is used to propagate the changes. ATL language is a hybrid of declarative and imperative that contains a set of transformation rules. Therefore, our pre-defined ATL contains several rules, each one is specific to cope with a kind of change propagation. However, due space limitation the whole ATL it is not presented. As can be seen, there are three rules - each of them is used to propagated the change in a specific KDM package/view, respectively. Note that all strings, \textbf{`\#parameter'}, are changed during the static analysis along with the step [B]'s output
+
+The first rule is responsible to propagate the changes throughout the \texttt{Structure View}, see lines 24 to 32. In line 26 the source pattern of the rules is defined by using OCL guard stating the layers to be matched. After, is defined a target pattern (lines 29 -31) which is used to compute the \texttt{density} of an \texttt{AggregationRelationship} after the application of a refactoring. For instance, if the \textit{Move Classes} refactoring is applied to transfer ClassUnits to a Package to another, a natural propagation in KDM is to transfer the RuleUnit related to the moved classes to another ScenarioUni that represent the target package. A chunk of propagation to deal with this problem is defined in the second rule (lines 33 to 43), i.e., this rule can be used to propagate the changes throughout the \texttt{Conceptual View}.
 
 \begin{figure}[h]	
 	\centering
@@ -216,20 +218,11 @@ Figure~\ref{fig:ATLPropagation} shows a code snippet written in ATL that is used
 	\label{fig:ATLPropagation}
 \end{figure}
 
-If the \textit{Move Classes} refactoring is applied to transfer the classes to a package to another as illustrated in the Section~\ref{sec:running_example}, a natural propagation is to transfer the business rule related to the moved classes to another scenario that represent the target package. A chunk of propagation is defined in the second rule (lines 33 to 43) - it can be used to propagate the changes throughout the \texttt{Conceptual View}.
-%
-%The rule defined in lines 33 to 43 propagates the changes throughout the \texttt{Conceptual Package}. If the \textit{Move Classes} refactoring is applied to transfer the class C1 to package P2, a natural propagation is to transfer the business rule B1 to another scenario.
-%
-%
-% For instance, Line 36 shows the specific propagation that is ne the \texttt{RuleUnit 1.1} that is associated with \texttt{Instructor} should also be moved to corresponding scenario, i.e, the scenario that is associated with the package that contains now the class \texttt{Instructor} - \texttt{ScenarioUnit 3}. 
-%
  Finally, the rule defined in lines 44 - 65 propagates the change to the \texttt{Data View}. For each new \texttt{ClassUnit} instance a \texttt{RelationalTable} instance has to be created - their names have to correspond. The \texttt{itemUnit} %(a collection that contains \texttt{ColumnSet}) 
 reference set has to contain all \texttt{ColumnSet} that have been created for each \texttt{StorableUnit} (meta-class that represent all the attributes that a class holds) as well as its types.
+Although we have presented just a chunk of our pre-defined ATL (change propagation) by observing Figure~\ref{fig:ATLPropagation} it is fairly evident that the Propagation Engine tend to be more complex/verbose than KDM refactorings. Therefore, we argue to provide a module that can be plugged over existing KDM refactorings in order to propagate the changes can assist the software modernizer.
 
-%In the step [C] all the changes, that where resulted by the refactoring  performed in step [b] need be propagate into all KDM's levels/package.  
 
-%The correctness of our Propagation Engine mainly relies on the compliance of the transformation result, which in turn can be ensured by showing that the transformation produces a consistent KDM model. Thus, it is important to support the consistency among all KDM views. To this end, we consider static consistency checks.
-
-Although we have used a simple KDM refactoring as example (\textit{Move Class}), by observing both Figure~\ref{fig:ATLRefactoring} and Figure~\ref{fig:ATLPropagation} it is fairly evident that the refactoring itself usually is less complex/verbose to devise than the Propagation Engine, i.e., a set of pre-defined rules to propagate the changes in KDM views tend to be more complex/verbose than KDM refactorings. Therefore, we argue to provide a module that can be plugged over existing KDM refactorings in order to propagate the changes can assist the software modernizer.
+%refactoring itself usually is less complex/verbose to devise than the Propagation Engine, i.e., a set of pre-defined rules to propagate the changes in KDM views tend to be more complex/verbose than KDM refactorings. Therefore, we argue to provide a module that can be plugged over existing KDM refactorings in order to propagate the changes can assist the software modernizer.
 
 % Due space limitation the whole ATL that is used to promote the propagation is not shown - but by observing both ATL that the rules to perform the propagation are much more complex. 
